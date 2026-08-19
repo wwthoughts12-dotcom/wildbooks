@@ -1800,9 +1800,9 @@ function renderSeries(){
             container.innerHTML += `
 
                 <div
-                    class="series-item"
-                    data-series="${series}"
-                >
+    class="series-item"
+    onclick="openSeries('${series}')"
+>
 
                     <div class="series-name">
                         ${series}
@@ -2514,56 +2514,6 @@ document
 
         }
     );
-
-document
-.querySelectorAll(
-'.nav-btn'
-)
-.forEach(btn=>{
-
-btn.addEventListener(
-'click',
-()=>{
-
-document
-.querySelectorAll(
-'.page'
-)
-.forEach(page=>{
-
-page.classList.remove(
-'active'
-);
-
-});
-
-document
-.querySelectorAll(
-'.nav-btn'
-)
-.forEach(nav=>{
-
-nav.classList.remove(
-'active'
-);
-
-});
-
-document
-.getElementById(
-btn.dataset.page
-)
-.classList.add(
-'active'
-);
-
-btn.classList.add(
-'active'
-);
-
-});
-
-});
 
 if(window.Telegram){
 
