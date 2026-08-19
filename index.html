@@ -2345,6 +2345,64 @@ function backToHome(){
         .classList.add('active');
 
 }
+    function openAnnouncementBook(index){
+
+    const book = newBooks[index];
+
+    if(!book){
+        return;
+    }
+
+    document.getElementById(
+        'bookContent'
+    ).innerHTML = `
+
+        <button
+            class="btn"
+            onclick="
+                document
+                .getElementById('bookModal')
+                .classList.remove('show')
+            "
+        >
+            ← Назад
+        </button>
+
+        <br><br>
+
+        <img
+            src="${book.cover_url || ''}"
+            class="modal-cover"
+        >
+
+        <h2>${book.title || ''}</h2>
+
+        <br>
+
+        <p>
+            <strong>Автор:</strong>
+            ${book.author || '-'}
+        </p>
+
+        <br>
+
+        <p>
+            <strong>Тропы:</strong>
+            ${book.tropes || '-'}
+        </p>
+
+        <br>
+
+        <p>
+            ${book.description || ''}
+        </p>
+
+    `;
+
+    document
+        .getElementById('bookModal')
+        .classList.add('show');
+}
 loadData();
 
 </script>
