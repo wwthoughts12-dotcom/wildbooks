@@ -114,6 +114,65 @@
     text-align:center;
 }
 
+   #seriesPage .book-cover{
+    height:220px;
+    object-fit:cover;
+    border-radius:16px;
+}
+
+#seriesPage .book-cover{
+
+    height:220px;
+
+    object-fit:contain;
+
+    background:#f2eadf;
+
+}
+
+#seriesPage .book-info{
+
+    padding:10px;
+
+}
+
+#seriesPage .book-title{
+
+    font-size:14px;
+
+}
+
+#seriesPage .book-author{
+
+    font-size:12px;
+
+}
+    @media(max-width:600px){
+
+    #seriesPage .book-grid{
+
+        grid-template-columns:
+            repeat(3, minmax(0,1fr));
+
+        gap:10px;
+
+    }
+
+    #seriesPage .book-cover{
+
+        height:140px;
+
+    }
+        .home-featured{
+
+    display:flex;
+
+    gap:20px;
+
+    align-items:flex-start;
+
+}
+
 .home-featured-cover{
 
     width:150px;
@@ -173,7 +232,7 @@
     /* ================================
    НОВИНИКА
 ================================ */
- .new-book-card{
+  .new-book-card{
     display:flex;
     align-items:center;
     gap:24px;
@@ -186,7 +245,6 @@
 
     box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
-
 
 .new-book-cover{
     width:150px;
@@ -201,20 +259,18 @@
     flex-shrink:0;
 }
 
-
 .new-book-info{
     display:flex;
     flex-direction:column;
     justify-content:center;
 }
-    
+
 .new-book-title{
     font-size:28px;
     font-weight:700;
     line-height:1.2;
     margin-bottom:10px;
 }
-
 
 .new-book-author{
     font-size:20px;
@@ -251,125 +307,6 @@
     }
 
 }
-}
-    /* ========================================
-   КНИГИ ВНУТРИ СЕРИИ
-   Квадратные миниатюры в столбик
-======================================== */
-
-#seriesPage #seriesBooksGrid{
-    display:flex;
-    flex-direction:column;
-    gap:24px;
-    padding:0 4px;
-}
-
-#seriesPage #seriesBooksGrid .book-card{
-    width:100%;
-    background:#fffdf8;
-    border-radius:20px;
-    padding:16px;
-
-    box-shadow:
-        0 10px 25px rgba(48,30,18,.16);
-
-    overflow:hidden;
-}
-
-#seriesPage #seriesBooksGrid .cover-wrapper{
-    width:100%;
-    max-width:260px;
-
-    margin:0 auto;
-
-    border-radius:16px;
-    overflow:hidden;
-
-    box-shadow:
-        0 10px 24px rgba(48,30,18,.22);
-}
-
-#seriesPage #seriesBooksGrid .book-cover{
-    width:100%;
-    height:260px;
-
-    display:block;
-
-    object-fit:cover;
-
-    border-radius:16px;
-}
-
-#seriesPage #seriesBooksGrid .book-info{
-    padding:14px 4px 4px;
-
-    text-align:center;
-}
-
-#seriesPage #seriesBooksGrid .book-title{
-    font-family:'Playfair Display',serif;
-
-    font-size:19px;
-    font-weight:600;
-
-    line-height:1.3;
-
-    margin-bottom:5px;
-
-    color:#2d2926;
-}
-
-#seriesPage #seriesBooksGrid .book-author{
-    font-size:13px;
-
-    line-height:1.4;
-
-    color:#7a746d;
-}
-
-
-/* ========================================
-   МОБИЛЬНАЯ ВЕРСИЯ
-======================================== */
-
-@media(max-width:600px){
-
-    #seriesPage #seriesBooksGrid{
-        gap:20px;
-        padding:0;
-    }
-
-    #seriesPage #seriesBooksGrid .book-card{
-        padding:14px;
-        border-radius:18px;
-    }
-
-    #seriesPage #seriesBooksGrid .cover-wrapper{
-        max-width:210px;
-        border-radius:14px;
-    }
-
-    #seriesPage #seriesBooksGrid .book-cover{
-        width:100%;
-        height:210px;
-
-        border-radius:14px;
-
-        object-fit:cover;
-    }
-
-    #seriesPage #seriesBooksGrid .book-info{
-        padding:12px 4px 3px;
-    }
-
-    #seriesPage #seriesBooksGrid .book-title{
-        font-size:17px;
-        line-height:1.3;
-    }
-
-    #seriesPage #seriesBooksGrid .book-author{
-        font-size:12px;
-    }
 
 }
     
@@ -416,17 +353,28 @@
         rgba(201,168,106,.25);
 }
 
+.arts-gallery{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+
+}
+
 .arts-gallery img{
 
     width:100%;
 
-    aspect-ratio:2 / 3;
+    aspect-ratio:4 / 5;
 
     object-fit:cover;
 
     display:block;
 
-    border-radius:20px;
+    border-radius:12px;
 
     box-shadow:
         0 10px 24px rgba(48,30,18,.18);
@@ -435,8 +383,7 @@
         transform .2s ease,
         box-shadow .2s ease;
 }
-
-@media(max-width:600px){
+   @media(max-width:600px){
 
     .arts-gallery{
 
@@ -452,7 +399,35 @@
     }
 
 }
+
 }
+.arts-gallery img:hover{
+
+    transform:scale(1.02);
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.14);
+
+}
+
+@media(max-width:700px){
+
+    .arts-gallery{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap:10px;
+
+    }
+
+    .arts-title{
+
+        font-size:25px;
+
+    }
+
 }
 
 
@@ -2037,35 +2012,26 @@ function renderSeries(){
 
     seriesData.forEach(item => {
 
-        const seriesName =
-            item.series || '';
-
-        const seriesTitle =
-            item.title || seriesName;
-
-        const seriesDescription =
-            item.description || '';
-
         container.innerHTML += `
 
             <div
                 class="series-item"
-                data-series="${encodeURIComponent(seriesName)}"
+                onclick="openSeries('${item.series}')"
             >
 
                 <img
-                    src="${item.image_url || ''}"
+                    src="${item.image_url}"
                     class="series-cover"
                 >
 
                 <div class="series-overlay">
 
                     <div class="series-name">
-                        ${seriesTitle}
+                        ${item.title}
                     </div>
 
                     <div class="series-description">
-                        ${seriesDescription}
+                        ${item.description || ''}
                     </div>
 
                 </div>
@@ -2073,29 +2039,8 @@ function renderSeries(){
             </div>
 
         `;
+
     });
-
-    /* Делаем карточки кликабельными после создания */
-
-    document
-        .querySelectorAll('#seriesContainer .series-item')
-        .forEach(card => {
-
-            card.addEventListener(
-                'click',
-                function(){
-
-                    const series =
-                        decodeURIComponent(
-                            this.dataset.series || ''
-                        );
-
-                    openSeries(series);
-
-                }
-            );
-
-        });
 
 }
     function createBookCard(book){
