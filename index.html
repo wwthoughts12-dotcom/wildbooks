@@ -1,37 +1,33 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Wild Wild Thoughts Library</title>
-
-<meta name="theme-color" content="#F7F2EB">
-
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<title>Wild Wild Thoughts</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
 <style>
 
 :root{
 
---bg:#F7F2EB;
---card:#FFFDF9;
+--bg:#f4ede3;
+--card:#fffdf8;
+--gold:#c9a86a;
+--gold-dark:#b3904e;
+--text:#2d2926;
+--muted:#7a746d;
+--shadow:0 10px 30px rgba(0,0,0,.08);
 
---gold:#B89B72;
---gold-dark:#8E7252;
-
---text:#332B24;
---muted:#8B8178;
-
---shadow:
-0 10px 30px rgba(0,0,0,.08);
-
---radius:24px;
 }
 
 *{
@@ -41,589 +37,637 @@ box-sizing:border-box;
 }
 
 body{
-font-family:'Inter',sans-serif;
+
+font-family:Inter,sans-serif;
 background:var(--bg);
 color:var(--text);
-padding-bottom:95px;
+padding-bottom:90px;
+
 }
 
 h1,h2,h3{
-font-family:'Cormorant Garamond',serif;
+
+font-family:'Playfair Display',serif;
+
 }
 
-.hidden{
-display:none!important;
-}
-
-.page{
-display:none;
-padding:20px;
-animation:fade .3s ease;
-}
-
-.page.active{
-display:block;
-}
-
-@keyframes fade{
-from{
-opacity:0;
-transform:translateY(10px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-.hero{
-background:linear-gradient(
-135deg,
-#FFFDF9,
-#F5EEE6
-);
-
-border-radius:32px;
-
-padding:28px;
-
-box-shadow:var(--shadow);
-
-margin-bottom:20px;
-}
-
-.hero h1{
-font-size:42px;
-margin-bottom:10px;
-}
-
-.hero p{
-line-height:1.6;
-}
-
-.card{
-background:var(--card);
-
-border-radius:var(--radius);
+.container{
 
 padding:18px;
 
-margin-bottom:18px;
+}
 
+.page{
+
+display:none;
+
+}
+
+.page.active{
+
+display:block;
+
+}
+
+.card{
+
+background:var(--card);
+border-radius:24px;
+padding:22px;
+margin-bottom:18px;
 box-shadow:var(--shadow);
+
+}
+
+.hero{
+
+padding:30px;
+
+}
+
+.hero h1{
+
+font-size:42px;
+margin-bottom:15px;
+
+}
+
+.hero p{
+
+line-height:1.7;
+
+}
+
+.stats{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+
+}
+
+.stat{
+
+background:white;
+border-radius:22px;
+padding:25px;
+text-align:center;
+box-shadow:var(--shadow);
+
+}
+
+.stat-number{
+
+font-size:42px;
+font-weight:700;
+color:var(--gold-dark);
+
 }
 
 .section-title{
-font-size:32px;
-margin-bottom:15px;
+
+font-size:28px;
+margin-bottom:18px;
+
 }
 
-.grid{
+.book-grid{
+
 display:grid;
 grid-template-columns:
 repeat(
 auto-fill,
-minmax(150px,1fr)
+minmax(160px,1fr)
 );
 
 gap:16px;
+
 }
 
 .book-card{
+
 background:white;
-
 border-radius:20px;
-
 overflow:hidden;
-
 cursor:pointer;
+box-shadow:var(--shadow);
+transition:.2s;
 
-transition:.25s;
 }
 
 .book-card:hover{
-transform:translateY(-3px);
+
+transform:translateY(-4px);
+
 }
 
 .book-cover{
+
 width:100%;
-height:230px;
+height:250px;
 object-fit:cover;
 display:block;
+
 }
 
 .book-info{
+
 padding:12px;
+
 }
 
 .book-title{
+
 font-weight:600;
-font-size:15px;
+font-size:14px;
 margin-bottom:6px;
+
 }
 
 .book-author{
-font-size:13px;
+
+font-size:12px;
 color:var(--muted);
+
 }
 
 .search{
+
 width:100%;
-
-padding:14px 18px;
-
+padding:14px;
 border:none;
-
-border-radius:18px;
-
-margin-bottom:16px;
-
+border-radius:16px;
+margin-bottom:15px;
 font-size:15px;
+
 }
 
 .filters{
+
 display:flex;
 gap:10px;
-overflow:auto;
-padding-bottom:10px;
+flex-wrap:wrap;
 margin-bottom:15px;
+
 }
 
-.filter-btn{
+.filter{
 
+padding:10px 15px;
 border:none;
-
+border-radius:999px;
+cursor:pointer;
 background:white;
 
-padding:10px 14px;
-
-border-radius:14px;
-
-cursor:pointer;
-
-white-space:nowrap;
 }
 
-.filter-btn.active{
+.filter.active{
+
 background:var(--gold);
 color:white;
+
 }
 
-.stats{
+.series-list{
+
 display:grid;
-grid-template-columns:1fr 1fr;
 gap:12px;
+
 }
 
-.stat-card{
+.series-item{
 
 background:white;
-
-border-radius:20px;
-
 padding:18px;
+border-radius:18px;
+display:flex;
+justify-content:space-between;
+box-shadow:var(--shadow);
 
-text-align:center;
-}
-
-.stat-value{
-font-size:28px;
-font-weight:700;
-}
-
-.stat-label{
-color:var(--muted);
-font-size:13px;
 }
 
 .bottom-nav{
 
 position:fixed;
-
 left:0;
 right:0;
 bottom:0;
+height:74px;
 
 background:white;
 
-height:78px;
-
 display:flex;
-
 justify-content:space-around;
-
 align-items:center;
 
-box-shadow:
-0 -5px 20px rgba(0,0,0,.08);
+box-shadow:0 -5px 25px rgba(0,0,0,.08);
 
-z-index:1000;
+z-index:999;
+
 }
 
 .nav-btn{
 
-background:none;
 border:none;
+background:none;
+cursor:pointer;
 
 display:flex;
 flex-direction:column;
 
-align-items:center;
-
 gap:4px;
 
 font-size:12px;
+color:#666;
 
-color:var(--muted);
-
-cursor:pointer;
 }
 
 .nav-btn.active{
-color:var(--gold);
+
+color:var(--gold-dark);
+
 }
 
 .modal{
 
 position:fixed;
-
 inset:0;
 
-background:
-rgba(0,0,0,.65);
+background:rgba(0,0,0,.75);
 
 display:none;
 
 justify-content:center;
-
 align-items:center;
 
 padding:20px;
 
-z-index:2000;
+z-index:9999;
+
 }
 
 .modal.show{
+
 display:flex;
+
 }
 
-.modal-content{
+.modal-box{
 
 background:white;
-
+max-width:700px;
 width:100%;
-max-width:650px;
 
 max-height:90vh;
-
 overflow:auto;
 
-border-radius:30px;
+border-radius:24px;
+padding:25px;
 
-padding:22px;
 }
 
 .modal-cover{
+
 width:100%;
+max-height:500px;
+object-fit:cover;
 border-radius:20px;
-margin-bottom:15px;
+margin-bottom:20px;
+
 }
 
 .btn{
 
 display:inline-block;
 
-background:var(--gold);
+padding:12px 18px;
 
+background:var(--gold);
 color:white;
 
 text-decoration:none;
-
-padding:12px 18px;
+border:none;
 
 border-radius:14px;
 
-margin-top:10px;
+cursor:pointer;
+
+margin-top:12px;
+
 }
 
 .favorite-btn{
+
 margin-left:10px;
+
 }
 
 .art-image{
 
 width:100%;
-
-border-radius:20px;
-
+border-radius:18px;
+margin-top:10px;
 cursor:pointer;
+
 }
 
 .fullscreen{
 
 position:fixed;
-
 inset:0;
-
 background:black;
 
 display:none;
 
 justify-content:center;
-
 align-items:center;
 
-z-index:9999;
+z-index:99999;
+
 }
 
 .fullscreen img{
+
 max-width:95%;
 max-height:95%;
+
+}
+
+iframe{
+
+border-radius:18px;
+
 }
 
 .loading{
-padding:30px;
+
 text-align:center;
+padding:20px;
+
 }
 
 </style>
+
 </head>
 
 <body>
+    <div class="container">
 
-<div id="loading" class="loading">
-    Загрузка библиотеки...
-</div>
+<div id="about" class="page active">
 
-<!-- О НАС -->
+<div class="card hero">
 
-<section id="aboutPage" class="page active">
+<h1>Wild Wild Thoughts</h1>
 
-    <div class="hero">
-        <h1>Wild Wild Thoughts</h1>
+<p>
+Добро пожаловать в библиотеку Wild Wild Thoughts.
+Здесь собраны переводы современных любовных романов.
+</p>
 
-        <p>
-            Добро пожаловать в библиотеку Wild Wild Thoughts.
-            Здесь собраны переводы современных любовных романов.
-        </p>
+<br>
 
-        <br>
-
-        <strong>Строго 18+</strong>
-    </div>
-
-    <div class="stats">
-
-        <div class="stat-card">
-            <div id="booksCount" class="stat-value">0</div>
-            <div class="stat-label">Книг</div>
-        </div>
-
-        <div class="stat-card">
-            <div id="seriesCount" class="stat-value">0</div>
-            <div class="stat-label">Серий</div>
-        </div>
-
-        <div class="stat-card">
-            <div id="playlistCount" class="stat-value">0</div>
-            <div class="stat-label">Плейлистов</div>
-        </div>
-
-        <div class="stat-card">
-            <div id="artCount" class="stat-value">0</div>
-            <div class="stat-label">Артов</div>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ГЛАВНАЯ -->
-
-<section id="homePage" class="page">
-
-    <div class="hero">
-        <h2>Библиотека Wild Wild Thoughts</h2>
-        <p>Luxury Collection</p>
-    </div>
-
-    <div class="card">
-
-        <h2 class="section-title">
-            Новинка
-        </h2>
-
-        <div id="newBook"></div>
-
-    </div>
-
-    <div class="card">
-
-        <h2 class="section-title">
-            Скоро выйдет
-        </h2>
-
-        <div id="announcementsContainer"></div>
-
-    </div>
-
-    <div class="card">
-
-        <h2 class="section-title">
-            В процессе перевода
-        </h2>
-
-        <div id="translationContainer"></div>
-
-    </div>
-
-    <div class="card">
-
-        <h2 class="section-title">
-            Серии
-        </h2>
-
-        <div id="seriesContainer"></div>
-
-    </div>
-
-</section>
-
-<!-- КАТАЛОГ -->
-
-<section id="catalogPage" class="page">
-
-    <input
-        id="searchInput"
-        class="search"
-        placeholder="🔍 Найти книгу..."
-    >
-
-    <div
-        id="seriesFilters"
-        class="filters"
-    ></div>
-
-    <div
-        id="tropeFilters"
-        class="filters"
-    ></div>
-
-    <div
-        id="catalogGrid"
-        class="grid"
-    ></div>
-
-</section>
-
-<!-- ПЛЕЙЛИСТЫ -->
-
-<section id="playlistsPage" class="page">
-
-    <h2 class="section-title">
-        Плейлисты
-    </h2>
-
-    <div
-        id="playlistGrid"
-        class="grid"
-    ></div>
-
-</section>
-
-<!-- АРТЫ -->
-
-<section id="artsPage" class="page">
-
-    <h2 class="section-title">
-        Арты
-    </h2>
-
-    <div
-        id="artsContainer"
-    ></div>
-
-</section>
-
-<!-- КАРТОЧКА КНИГИ -->
-
-<div id="bookModal" class="modal">
-
-    <div class="modal-content">
-
-        <div id="bookContent"></div>
-
-    </div>
+<h3>Строго 18+</h3>
 
 </div>
 
-<!-- ПОЛНОЭКРАННЫЙ ПРОСМОТР -->
+<div class="stats">
+
+<div class="stat">
+<div class="stat-number" id="booksCount">0</div>
+<div>Книг</div>
+</div>
+
+<div class="stat">
+<div class="stat-number" id="seriesCount">0</div>
+<div>Серий</div>
+</div>
+
+<div class="stat">
+<div class="stat-number" id="playlistCount">0</div>
+<div>Плейлистов</div>
+</div>
+
+<div class="stat">
+<div class="stat-number" id="artCount">0</div>
+<div>Артов</div>
+</div>
+
+</div>
+
+</div>
+
+<div id="home" class="page">
+
+<div class="card">
+
+<h2 class="section-title">
+✨ Новинка
+</h2>
+
+<div id="newBook">
+
+<div class="loading">
+Загрузка...
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2 class="section-title">
+📅 Скоро выйдет
+</h2>
+
+<div id="announcements">
+
+<div class="loading">
+Загрузка...
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2 class="section-title">
+📖 В процессе перевода
+</h2>
+
+<div id="translationBooks"
+class="book-grid">
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2 class="section-title">
+📚 Серии
+</h2>
 
 <div
-    id="fullscreenViewer"
-    class="fullscreen"
->
-
-    <img id="fullscreenImage">
+id="seriesContainer"
+class="series-list">
 
 </div>
 
-<!-- НИЖНЕЕ МЕНЮ -->
+</div>
 
-<nav class="bottom-nav">
+</div>
 
-    <button
-        class="nav-btn active"
-        data-page="aboutPage"
-    >
-        <span>ℹ️</span>
-        <span>О нас</span>
-    </button>
+<div id="catalog" class="page">
 
-    <button
-        class="nav-btn"
-        data-page="homePage"
-    >
-        <span>🏠</span>
-        <span>Главная</span>
-    </button>
+<div class="card">
 
-    <button
-        class="nav-btn"
-        data-page="catalogPage"
-    >
-        <span>📚</span>
-        <span>Каталог</span>
-    </button>
+<input
+type="text"
+id="searchInput"
+class="search"
+placeholder="Поиск книг...">
 
-    <button
-        class="nav-btn"
-        data-page="playlistsPage"
-    >
-        <span>🎧</span>
-        <span>Плейлисты</span>
-    </button>
+<div
+id="seriesFilters"
+class="filters">
 
-    <button
-        class="nav-btn"
-        data-page="artsPage"
-    >
-        <span>🖼</span>
-        <span>Арты</span>
-    </button>
+</div>
 
-</nav>
+<div
+id="tropeFilters"
+class="filters">
+
+</div>
+
+</div>
+
+<div
+id="catalogGrid"
+class="book-grid">
+
+</div>
+
+</div>
+
+<div id="playlists" class="page">
+
+<div class="card">
+
+<h2 class="section-title">
+🎧 Плейлисты
+</h2>
+
+<div
+id="playlistGrid"
+class="book-grid">
+
+</div>
+
+</div>
+
+</div>
+
+<div id="arts" class="page">
+
+<div class="card">
+
+<h2 class="section-title">
+🎨 Арты
+</h2>
+
+<div id="artsContainer">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="bottom-nav">
+
+<button
+class="nav-btn active"
+data-page="about">
+
+📘
+<span>О нас</span>
+
+</button>
+
+<button
+class="nav-btn"
+data-page="home">
+
+🏠
+<span>Главная</span>
+
+</button>
+
+<button
+class="nav-btn"
+data-page="catalog">
+
+📚
+<span>Каталог</span>
+
+</button>
+
+<button
+class="nav-btn"
+data-page="playlists">
+
+🎧
+<span>Плейлисты</span>
+
+</button>
+
+<button
+class="nav-btn"
+data-page="arts">
+
+🖼️
+<span>Арты</span>
+
+</button>
+
+</div>
+
+<div
+id="bookModal"
+class="modal">
+
+<div
+class="modal-box"
+id="bookContent">
+
+</div>
+
+</div>
+
+<div
+id="fullscreenViewer"
+class="fullscreen">
+
+<img
+id="fullscreenImage"
+src="">
+
+</div>
 
 <script>
 
 const BOOKS_URL =
-'https://sheetsjson.onrender.com/v1/fetch?csv_url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2Fe%2F2PACX-1vQI8CHOf1D1itshzP1MtTu4KDz803QihzIa6WXq-anfYkOA_k_OV27sRDET04qVr202wnqCB7X95ogO%2Fpub%3Foutput%3Dcsv';
+'https://docs.google.com/spreadsheets/d/e/2PACX-1vQI8CHOf1D1itshzP1MtTu4KDz803QihzIa6WXq-anfYkOA_k_OV27sRDET04qVr202wnqCB7X95ogO/pub?output=csv';
 
 const ANNOUNCEMENTS_URL =
-'https://sheetsjson.onrender.com/v1/fetch?csv_url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2Fe%2F2PACX-1vTlVHOEmWsc7BjxeB1w0dcqsTuPCstHe7lrA5fIPUNMFaoLmPSjqyzO3LPkoUpxQNY8ShrWCXBXyf_X%2Fpub%3Foutput%3Dcsv';
+'https://docs.google.com/spreadsheets/d/e/2PACX-1vTlVHOEmWsc7BjxeB1w0dcqsTuPCstHe7lrA5fIPUNMFaoLmPSjqyzO3LPkoUpxQNY8ShrWCXBXyf_X/pub?output=csv';
 
 const ARTS_URL =
-'https://sheetsjson.onrender.com/v1/fetch?csv_url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2Fe%2F2PACX-1vSho-xQsv1AtpTa-k_wDgcO968CYzd546FRuxVXAsWHDt1Y8Ey6yYOL_kEJ5cKiNC7VcYeMtfSYboQE%2Fpub%3Foutput%3Dcsv';
+'https://docs.google.com/spreadsheets/d/e/2PACX-1vSho-xQsv1AtpTa-k_wDgcO968CYzd546FRuxVXAsWHDt1Y8Ey6yYOL_kEJ5cKiNC7VcYeMtfSYboQE/pub?output=csv';
 
 let books = [];
 let announcements = [];
@@ -634,809 +678,925 @@ let currentTrope = 'Все';
 
 const favorites =
 JSON.parse(
-localStorage.getItem('favorites') || '[]'
+localStorage.getItem(
+'favorites'
+) || '[]'
 );
-async function loadData() {
+    function loadCSV(url){
 
-    try {
+return new Promise((resolve,reject)=>{
 
-        const [
-            booksResponse,
-            announcementsResponse,
-            artsResponse
-        ] = await Promise.all([
-            fetch(BOOKS_URL),
-            fetch(ANNOUNCEMENTS_URL),
-            fetch(ARTS_URL)
-        ]);
+Papa.parse(url,{
 
-        books = await booksResponse.json();
-        announcements = await announcementsResponse.json();
-        arts = await artsResponse.json();
+download:true,
+header:true,
+skipEmptyLines:true,
 
-        updateStats();
+complete:(result)=>{
 
-        renderHome();
+resolve(result.data);
 
-        renderCatalog();
+},
 
-        renderPlaylists();
+error:(error)=>{
 
-        renderArts();
+reject(error);
 
-        document
-            .getElementById('loading')
-            .style.display = 'none';
+}
 
-    } catch(error){
+});
 
-        console.error(error);
+});
 
-        document.getElementById('loading').innerHTML =
-        'Ошибка загрузки данных';
+}
 
-    }
+async function loadData(){
+
+try{
+
+books =
+await loadCSV(
+BOOKS_URL
+);
+
+announcements =
+await loadCSV(
+ANNOUNCEMENTS_URL
+);
+
+arts =
+await loadCSV(
+ARTS_URL
+);
+
+updateStats();
+
+renderHome();
+
+renderCatalog();
+
+renderPlaylists();
+
+renderArts();
+
+}catch(error){
+
+console.error(error);
+
+alert(
+'Ошибка загрузки Google Sheets'
+);
+
+}
 
 }
 
 function updateStats(){
 
-    document.getElementById('booksCount').textContent =
-    books.length;
+document.getElementById(
+'booksCount'
+).textContent =
+books.length;
 
-    const uniqueSeries =
-    [...new Set(
-        books.map(
-            b => b.series
-        )
-    )];
+const series =
+new Set();
 
-    document.getElementById('seriesCount').textContent =
-    uniqueSeries.length;
+books.forEach(book=>{
 
-    document.getElementById('playlistCount').textContent =
-    books.filter(
-        b => b.spotify_playlist
-    ).length;
+if(book.series){
 
-    let totalArts = 0;
+series.add(
+book.series
+);
 
-    arts.forEach(art => {
+}
 
-        if(!art.arts) return;
+});
 
-        totalArts +=
-        art.arts.split('|').length;
+document.getElementById(
+'seriesCount'
+).textContent =
+series.size;
 
-    });
+document.getElementById(
+'playlistCount'
+).textContent =
+books.filter(
+b=>b.spotify_playlist
+).length;
 
-    document.getElementById('artCount').textContent =
-    totalArts;
+let totalArts = 0;
+
+arts.forEach(item=>{
+
+if(!item.arts) return;
+
+totalArts +=
+item.arts
+.split('|')
+.length;
+
+});
+
+document.getElementById(
+'artCount'
+).textContent =
+totalArts;
 
 }
 
 function renderHome(){
 
-    renderNewBook();
+renderNewBook();
 
-    renderAnnouncements();
+renderAnnouncements();
 
-    renderSeries();
+renderTranslations();
+
+renderSeries();
 
 }
 
 function renderNewBook(){
 
-    const container =
-    document.getElementById('newBook');
+const container =
+document.getElementById(
+'newBook'
+);
 
-    if(!books.length){
+if(!books.length){
 
-        container.innerHTML =
-        'Пока нет книг';
+container.innerHTML =
+'Нет данных';
 
-        return;
-    }
+return;
 
-    const book = books[0];
+}
 
-    container.innerHTML = `
-        <div class="book-card"
-             onclick="openBook('${book.ID}')">
+const newest =
+books[0];
 
-            <img
-                src="${book.cover_url}"
-                class="book-cover"
-            >
+container.innerHTML =
 
-            <div class="book-info">
+createBookCard(
+newest
+);
 
-                <div class="book-title">
-                    ${book.title}
-                </div>
-
-                <div class="book-author">
-                    ${book.author}
-                </div>
-
-            </div>
-
-        </div>
-    `;
 }
 
 function renderAnnouncements(){
 
-    const container =
-    document.getElementById(
-        'announcementsContainer'
-    );
+const container =
+document.getElementById(
+'announcements'
+);
 
-    container.innerHTML = '';
+container.innerHTML = '';
 
-    announcements.forEach(item => {
+announcements.forEach(item=>{
 
-        container.innerHTML += `
-        <div class="card">
+container.innerHTML += `
 
-            <strong>
-                ${item.title}
-            </strong>
+<div class="card">
 
-            <br><br>
+<img
+src="${item.cover_url}"
+class="book-cover">
 
-            ${item.tropes || ''}
+<br>
 
-            <br><br>
+<h3>${item.title}</h3>
 
-            📅 ${item["date active"] || ''}
+<br>
 
-        </div>
-        `;
+<p>
+${item.tropes || ''}
+</p>
 
-    });
+<br>
+
+<strong>
+${item.date_active || ''}
+</strong>
+
+</div>
+
+`;
+
+});
+
+}
+
+function renderTranslations(){
+
+const container =
+document.getElementById(
+'translationBooks'
+);
+
+container.innerHTML = '';
+
+announcements.forEach(item=>{
+
+container.innerHTML += `
+
+<div class="book-card">
+
+<img
+src="${item.cover_url}"
+class="book-cover">
+
+<div class="book-info">
+
+<div class="book-title">
+
+${item.title}
+
+</div>
+
+<div class="book-author">
+
+${item.tropes || ''}
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
 
 }
 
 function renderSeries(){
 
-    const container =
-    document.getElementById(
-        'seriesContainer'
-    );
+const container =
+document.getElementById(
+'seriesContainer'
+);
 
-    const seriesMap = {};
+const map = {};
 
-    books.forEach(book => {
+books.forEach(book=>{
 
-        if(!seriesMap[book.series]){
+if(!map[book.series]){
 
-            seriesMap[book.series] = 0;
+map[book.series] = 0;
 
-        }
+}
 
-        seriesMap[book.series]++;
+map[book.series]++;
 
-    });
+});
 
-    container.innerHTML = '';
+container.innerHTML = '';
 
-    Object.keys(seriesMap)
-        .sort()
-        .forEach(series => {
+Object.keys(map)
+.sort()
+.forEach(series=>{
 
-            container.innerHTML += `
-            <div class="card">
+container.innerHTML += `
 
-                <strong>
-                    ${series}
-                </strong>
+<div class="series-item">
 
-                <br>
+<span>
+${series}
+</span>
 
-                ${seriesMap[series]} книг
+<strong>
+${map[series]}
+</strong>
 
-            </div>
-            `;
+</div>
 
-        });
+`;
+
+});
+
+}
+    function createBookCard(book){
+
+return `
+
+<div
+class="book-card"
+onclick="openBook('${book.ID}')">
+
+<img
+src="${book.cover_url}"
+class="book-cover"
+onerror="this.src='https://placehold.co/400x600/F5EFE5/C9A86A?text=Book'">
+
+<div class="book-info">
+
+<div class="book-title">
+${book.title}
+</div>
+
+<div class="book-author">
+${book.author || ''}
+</div>
+
+</div>
+
+</div>
+
+`;
 
 }
 
 function renderCatalog(){
 
-    buildSeriesFilters();
+buildSeriesFilters();
 
-    buildTropeFilters();
+buildTropeFilters();
 
-    drawCatalog();
+drawCatalog();
 
 }
 
 function buildSeriesFilters(){
 
-    const wrapper =
-    document.getElementById(
-        'seriesFilters'
-    );
+const container =
+document.getElementById(
+'seriesFilters'
+);
 
-    const series =
-    [
-        'Все',
-        ...new Set(
-            books.map(
-                b => b.series
-            )
-        )
-    ];
+const series = [
+'Все',
+...new Set(
+books
+.map(
+b=>b.series
+)
+.filter(Boolean)
+)
+];
 
-    wrapper.innerHTML = '';
+container.innerHTML='';
 
-    series.forEach(item => {
+series.forEach(item=>{
 
-        wrapper.innerHTML += `
-        <button
-            class="filter-btn ${
-                item === currentSeries
-                ? 'active'
-                : ''
-            }"
-            onclick="selectSeries('${item}')">
+container.innerHTML += `
 
-            ${item}
+<button
+class="filter ${
+item===currentSeries
+? 'active'
+: ''
+}"
+onclick="selectSeries('${item}')">
 
-        </button>
-        `;
+${item}
 
-    });
+</button>
+
+`;
+
+});
 
 }
 
 function buildTropeFilters(){
 
-    const wrapper =
-    document.getElementById(
-        'tropeFilters'
-    );
+const container =
+document.getElementById(
+'tropeFilters'
+);
 
-    const tropeSet =
-    new Set();
+const tropes =
+new Set();
 
-    books.forEach(book => {
+books.forEach(book=>{
 
-        if(!book.trops) return;
+if(!book.trops) return;
 
-        book.trops
-            .split(',')
-            .forEach(t => {
+book.trops
+.split(',')
+.forEach(t=>{
 
-                tropeSet.add(
-                    t.trim()
-                );
+tropes.add(
+t.trim()
+);
 
-            });
+});
 
-    });
+});
 
-    const tropes =
-    ['Все', ...tropeSet];
+container.innerHTML='';
 
-    wrapper.innerHTML = '';
+['Все',...tropes]
+.forEach(item=>{
 
-    tropes.forEach(item => {
+container.innerHTML += `
 
-        wrapper.innerHTML += `
-        <button
-            class="filter-btn ${
-                item === currentTrope
-                ? 'active'
-                : ''
-            }"
-            onclick="selectTrope('${item}')">
+<button
+class="filter ${
+item===currentTrope
+? 'active'
+: ''
+}"
+onclick="selectTrope('${item}')">
 
-            ${item}
+${item}
 
-        </button>
-        `;
+</button>
 
-    });
+`;
+
+});
 
 }
 
 function selectSeries(series){
 
-    currentSeries = series;
+currentSeries = series;
 
-    buildSeriesFilters();
-
-    drawCatalog();
+renderCatalog();
 
 }
 
 function selectTrope(trope){
 
-    currentTrope = trope;
+currentTrope = trope;
 
-    buildTropeFilters();
-
-    drawCatalog();
+renderCatalog();
 
 }
 
 function drawCatalog(){
 
-    const grid =
-    document.getElementById(
-        'catalogGrid'
-    );
+const grid =
+document.getElementById(
+'catalogGrid'
+);
 
-    const search =
-    document
-        .getElementById(
-            'searchInput'
-        )
-        .value
-        .toLowerCase();
+const search =
+document
+.getElementById(
+'searchInput'
+)
+.value
+.toLowerCase();
 
-    let filtered =
-    [...books];
+let filtered =
+[...books];
 
-    if(currentSeries !== 'Все'){
+if(currentSeries !== 'Все'){
 
-        filtered =
-        filtered.filter(
-            book =>
-            book.series === currentSeries
-        );
+filtered =
+filtered.filter(
+b=>
+b.series ===
+currentSeries
+);
 
-    }
+}
 
-    if(currentTrope !== 'Все'){
+if(currentTrope !== 'Все'){
 
-        filtered =
-        filtered.filter(
-            book =>
-            (book.trops || '')
-            .includes(currentTrope)
-        );
+filtered =
+filtered.filter(
+b=>
+(b.trops || '')
+.includes(
+currentTrope
+)
+);
 
-    }
+}
 
-    if(search){
+if(search){
 
-        filtered =
-        filtered.filter(book => {
+filtered =
+filtered.filter(book=>{
 
-            return (
-                book.title
-                    .toLowerCase()
-                    .includes(search)
+return (
 
-                ||
+(book.title || '')
+.toLowerCase()
+.includes(search)
 
-                book.author
-                    .toLowerCase()
-                    .includes(search)
+||
 
-                ||
+(book.author || '')
+.toLowerCase()
+.includes(search)
 
-                book.series
-                    .toLowerCase()
-                    .includes(search)
-            );
+||
 
-        });
+(book.series || '')
+.toLowerCase()
+.includes(search)
 
-    }
+);
 
-    grid.innerHTML = '';
+});
 
-    filtered.forEach(book => {
+}
 
-        grid.innerHTML += `
-        <div
-            class="book-card"
-            onclick="openBook('${book.ID}')">
+grid.innerHTML='';
 
-            <img
-                src="${book.cover_url}"
-                class="book-cover"
-            >
+filtered.forEach(book=>{
 
-            <div class="book-info">
+grid.innerHTML +=
+createBookCard(book);
 
-                <div class="book-title">
-                    ${book.title}
-                </div>
-
-                <div class="book-author">
-                    ${book.author}
-                </div>
-
-            </div>
-
-        </div>
-        `;
-
-    });
+});
 
 }
 
 document
-.getElementById('searchInput')
 .addEventListener(
-    'input',
-    drawCatalog
+'input',
+e=>{
+
+if(
+e.target.id ===
+'searchInput'
+){
+
+drawCatalog();
+
+}
+
+}
 );
+
 function openBook(id){
 
-    const book =
-    books.find(
-        b => String(b.ID) === String(id)
-    );
-
-    if(!book) return;
-
-    const modal =
-    document.getElementById(
-        'bookModal'
-    );
-
-    const isFavorite =
-    favorites.includes(
-        String(book.ID)
-    );
-
-    const spotifyEmbed =
-    book.spotify_playlist
-    ?
-    book.spotify_playlist
-        .replace(
-            'open.spotify.com/',
-            'open.spotify.com/embed/'
-        )
-    :
-    '';
-
-    document.getElementById(
-        'bookContent'
-    ).innerHTML = `
-
-        <img
-            src="${book.cover_url}"
-            class="modal-cover"
-        >
-
-        <h2>
-            ${book.title}
-        </h2>
-
-        <br>
-
-        <p>
-            <strong>Автор:</strong>
-            ${book.author}
-        </p>
-
-        <br>
-
-        <p>
-            <strong>Серия:</strong>
-            ${book.series}
-        </p>
-
-        <br>
-
-        <p>
-            <strong>Тропы:</strong>
-            ${book.trops || '-'}
-        </p>
-
-        <br>
-
-        <p>
-            ${book.description || ''}
-        </p>
-
-        ${
-            spotifyEmbed
-            ?
-            `
-            <br>
-
-            <iframe
-                src="${spotifyEmbed}"
-                width="100%"
-                height="352"
-                frameborder="0"
-                allowfullscreen
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen"
-                loading="lazy">
-            </iframe>
-            `
-            :
-            ''
-        }
-
-        <br>
-
-        <a
-            href="${book.file_url}"
-            target="_blank"
-            class="btn">
-            Скачать книгу
-        </a>
-
-        <button
-            class="btn favorite-btn"
-            onclick="toggleFavorite('${book.ID}')">
-
-            ${
-                isFavorite
-                ? '❤️ В избранном'
-                : '🤍 В избранное'
-            }
-
-        </button>
-
-    `;
-
-    modal.classList.add(
-        'show'
-    );
-
-}
-
-function toggleFavorite(id){
-
-    const index =
-    favorites.indexOf(
-        String(id)
-    );
-
-    if(index > -1){
-
-        favorites.splice(
-            index,
-            1
-        );
-
-    } else {
-
-        favorites.push(
-            String(id)
-        );
-
-    }
-
-    localStorage.setItem(
-        'favorites',
-        JSON.stringify(
-            favorites
-        )
-    );
-
-    openBook(id);
-
-}
-
-document
-.getElementById('bookModal')
-.addEventListener(
-    'click',
-    function(e){
-
-        if(
-            e.target.id ===
-            'bookModal'
-        ){
-
-            this.classList.remove(
-                'show'
-            );
-
-        }
-
-    }
+const book =
+books.find(
+b=>
+String(b.ID) ===
+String(id)
 );
 
-function renderPlaylists(){
+if(!book) return;
 
-    const container =
-    document.getElementById(
-        'playlistGrid'
-    );
+const isFavorite =
+favorites.includes(
+String(id)
+);
 
-    container.innerHTML = '';
+let spotify = '';
 
-    books
-    .filter(
-        book =>
-        book.spotify_playlist
-    )
-    .forEach(book => {
+if(book.spotify_playlist){
 
-        container.innerHTML += `
+const embed =
+book.spotify_playlist
+.replace(
+'open.spotify.com/',
+'open.spotify.com/embed/'
+);
 
-        <div
-            class="book-card"
-            onclick="
-            window.open(
-            '${book.spotify_playlist}',
-            '_blank'
-            )">
+spotify = `
 
-            <img
-                src="${book.cover_url}"
-                class="book-cover"
-            >
+<br>
 
-            <div
-                class="book-info">
+<iframe
+src="${embed}"
+width="100%"
+height="352"
+allowfullscreen
+loading="lazy">
 
-                <div
-                    class="book-title">
+</iframe>
 
-                    ${book.title}
-
-                </div>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-function renderArts(){
-
-    const container =
-    document.getElementById(
-        'artsContainer'
-    );
-
-    container.innerHTML = '';
-
-    arts.forEach(item => {
-
-        const images =
-        (item.arts || '')
-        .split('|')
-        .filter(Boolean);
-
-        let gallery = '';
-
-        images.forEach(img => {
-
-            gallery += `
-            <img
-                src="${img}"
-                class="art-image"
-                onclick="
-                openArt(
-                '${img}'
-                )
-                "
-            >
-            <br><br>
-            `;
-
-        });
-
-        container.innerHTML += `
-
-        <div class="card">
-
-            <h3>
-                ${item.title}
-            </h3>
-
-            <br>
-
-            ${gallery}
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-function openArt(src){
-
-    document
-    .getElementById(
-        'fullscreenImage'
-    )
-    .src = src;
-
-    document
-    .getElementById(
-        'fullscreenViewer'
-    )
-    .style.display =
-    'flex';
+`;
 
 }
 
 document
 .getElementById(
-    'fullscreenViewer'
+'bookContent'
+)
+.innerHTML = `
+
+<img
+src="${book.cover_url}"
+class="modal-cover">
+
+<h2>
+${book.title}
+</h2>
+
+<br>
+
+<p>
+<strong>Автор:</strong>
+${book.author || '-'}
+</p>
+
+<br>
+
+<p>
+<strong>Серия:</strong>
+${book.series || '-'}
+</p>
+
+<br>
+
+<p>
+<strong>Тропы:</strong>
+${book.trops || '-'}
+</p>
+
+<br>
+
+<p>
+${book.description || ''}
+</p>
+
+${spotify}
+
+<a
+href="${book.file_url || '#'}"
+target="_blank"
+class="btn">
+
+Скачать книгу
+
+</a>
+
+<button
+class="btn favorite-btn"
+onclick="
+toggleFavorite(
+'${book.ID}'
+)
+">
+
+${
+isFavorite
+? '❤️ Удалить'
+: '🤍 Избранное'
+}
+
+</button>
+
+`;
+
+document
+.getElementById(
+'bookModal'
+)
+.classList.add(
+'show'
+);
+
+}
+
+function toggleFavorite(id){
+
+const index =
+favorites.indexOf(
+String(id)
+);
+
+if(index > -1){
+
+favorites.splice(
+index,
+1
+);
+
+}else{
+
+favorites.push(
+String(id)
+);
+
+}
+
+localStorage.setItem(
+'favorites',
+JSON.stringify(
+favorites
+)
+);
+
+openBook(id);
+
+}
+
+document
+.getElementById(
+'bookModal'
 )
 .addEventListener(
-    'click',
-    function(){
+'click',
+function(e){
 
-        this.style.display =
-        'none';
+if(
+e.target.id ===
+'bookModal'
+){
 
-    }
+this.classList.remove(
+'show'
+);
+
+}
+
+}
+);
+
+function renderPlaylists(){
+
+const grid =
+document.getElementById(
+'playlistGrid'
+);
+
+grid.innerHTML='';
+
+books
+.filter(
+b=>
+b.spotify_playlist
+)
+.forEach(book=>{
+
+grid.innerHTML += `
+
+<div
+class="book-card"
+onclick="
+window.open(
+'${book.spotify_playlist}',
+'_blank'
+)
+">
+
+<img
+src="${book.cover_url}"
+class="book-cover">
+
+<div class="book-info">
+
+<div class="book-title">
+
+${book.title}
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+function renderArts(){
+
+const container =
+document.getElementById(
+'artsContainer'
+);
+
+container.innerHTML='';
+
+arts.forEach(item=>{
+
+const images =
+(item.arts || '')
+.split('|')
+.filter(Boolean);
+
+let gallery='';
+
+images.forEach(img=>{
+
+gallery += `
+
+<img
+src="${img}"
+class="art-image"
+onclick="
+openFullscreen(
+'${img}'
+)
+">
+
+`;
+
+});
+
+container.innerHTML += `
+
+<div class="card">
+
+<h3>
+${item.title}
+</h3>
+
+${gallery}
+
+</div>
+
+`;
+
+});
+
+}
+
+function openFullscreen(src){
+
+document
+.getElementById(
+'fullscreenImage'
+)
+.src = src;
+
+document
+.getElementById(
+'fullscreenViewer'
+)
+.style.display =
+'flex';
+
+}
+
+document
+.getElementById(
+'fullscreenViewer'
+)
+.addEventListener(
+'click',
+function(){
+
+this.style.display =
+'none';
+
+}
 );
 
 document
 .querySelectorAll(
-    '.nav-btn'
+'.nav-btn'
 )
-.forEach(btn => {
+.forEach(btn=>{
 
-    btn.addEventListener(
-        'click',
-        () => {
+btn.addEventListener(
+'click',
+()=>{
 
-            document
-            .querySelectorAll(
-                '.page'
-            )
-            .forEach(page => {
+document
+.querySelectorAll(
+'.page'
+)
+.forEach(page=>{
 
-                page.classList.remove(
-                    'active'
-                );
+page.classList.remove(
+'active'
+);
 
-            });
+});
 
-            document
-            .querySelectorAll(
-                '.nav-btn'
-            )
-            .forEach(nav => {
+document
+.querySelectorAll(
+'.nav-btn'
+)
+.forEach(nav=>{
 
-                nav.classList.remove(
-                    'active'
-                );
+nav.classList.remove(
+'active'
+);
 
-            });
+});
 
-            document
-            .getElementById(
-                btn.dataset.page
-            )
-            .classList.add(
-                'active'
-            );
+document
+.getElementById(
+btn.dataset.page
+)
+.classList.add(
+'active'
+);
 
-            btn.classList.add(
-                'active'
-            );
+btn.classList.add(
+'active'
+);
 
-        }
-    );
+});
 
 });
 
 if(window.Telegram){
 
-    Telegram.WebApp.ready();
-
-    Telegram.WebApp.expand();
+Telegram.WebApp.ready();
+Telegram.WebApp.expand();
 
 }
 
 loadData();
+
+</script>
 
 </body>
 </html>
