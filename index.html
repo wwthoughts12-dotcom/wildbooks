@@ -83,8 +83,44 @@
 }
 
 .series-item:hover{
-    transform:translateY(-2px);
+
+    transform:translateY(-3px);
+
 }
+    .series-cover{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+    .series-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,.72),
+            rgba(0,0,0,.10)
+        );
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    padding:22px;
+
+}
+
+
    #seriesPage .book-grid{
 
     display:grid;
@@ -1040,23 +1076,38 @@ color:white;
 
 }
 
+/* =========================
+   СЕРИИ НА ГЛАВНОЙ
+========================= */
+
 .series-list{
 
     display:grid;
 
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:14px;
+    gap:18px;
 
 }
-    .series-name{
 
-    font-size:18px;
+   .series-name{
+
+    color:white;
+
+    font-size:28px;
 
     font-family:
         'Playfair Display',
         serif;
+
+}
+    .series-description{
+
+    color:white;
+
+    opacity:.9;
+
+    margin-top:8px;
+
+    line-height:1.4;
 
 }
     .series-count{
@@ -1069,27 +1120,23 @@ color:white;
 
 .series-item{
 
-    background:
-        linear-gradient(
-            135deg,
-            #fffdf8,
-            #f8efe1
-        );
+    position:relative;
 
-    border-radius:20px;
+    height:190px;
 
-    padding:18px;
+    border-radius:26px;
 
-    min-height:120px;
+    overflow:hidden;
 
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
+    cursor:pointer;
 
-    border:1px solid
-        rgba(201,168,106,.15);
+    box-shadow:
+        0 15px 35px rgba(97,67,37,.18);
+
+    transition:.25s;
 
 }
+
 
 .bottom-nav{
     position:fixed;
@@ -1552,6 +1599,8 @@ const ANNOUNCEMENTS_URL =
 const ARTS_URL =
 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSho-xQsv1AtpTa-k_wDgcO968CYzd546FRuxVXAsWHDt1Y8Ey6yYOL_kEJ5cKiNC7VcYeMtfSYboQE/pub?output=csv';
 
+    
+
 let books = [];
 let newBooks = [];
 let announcements = [];
@@ -1633,42 +1682,20 @@ async function loadData(){
     try{
 
         const results =
-            await Promise.all([
-
-                loadCSV(
-                    BOOKS_URL,
-                    'КНИГИ'
-                ),
-
-                loadCSV(
-                    NEW_BOOKS_URL,
-                    'НОВИНКА'
-                ),
-
-                loadCSV(
-                    ANNOUNCEMENTS_URL,
-                    'В ПРОЦЕССЕ ПЕРЕВОДА'
-                ),
-
-                loadCSV(
-                    ARTS_URL,
-                    'АРТЫ'
-                )
-
-            ]);
+           await Promise.all([
+    loadCSV(BOOKS_URL,'КНИГИ'),
+    loadCSV(NEW_BOOKS_URL,'НОВИНКА'),
+    loadCSV(ANNOUNCEMENTS_URL,'В ПРОЦЕССЕ'),
+    loadCSV(ARTS_URL,'АРТЫ'),
+    loadCSV(SERIES_URL,'СЕРИИ')
+]);
 
 
-        books =
-            results[0];
-
-        newBooks =
-            results[1];
-
-        announcements =
-            results[2];
-
-        arts =
-            results[3];
+        books = results[0];
+newBooks = results[1];
+announcements = results[2];
+arts = results[3];
+seriesData = results[4];
 
 
         console.log(
@@ -1876,55 +1903,41 @@ function renderSeries(){
             'seriesContainer'
         );
 
-    if(!container){
-        return;
-    }
-
-    const map = {};
-
-    books.forEach(book => {
-
-        const series =
-            (book.series || '').trim();
-
-        if(!series){
-            return;
-        }
-
-        if(!map[series]){
-            map[series] = 0;
-        }
-
-        map[series]++;
-
-    });
+    if(!container) return;
 
     container.innerHTML = '';
 
-    Object.keys(map)
-        .sort()
-        .forEach(series => {
+    seriesData.forEach(item => {
 
-            container.innerHTML += `
+        container.innerHTML += `
 
-                <div
-    class="series-item"
-    onclick="openSeries('${series}')"
->
+            <div
+                class="series-item"
+                onclick="openSeries('${item.series}')"
+            >
+
+                <img
+                    src="${item.image_url}"
+                    class="series-cover"
+                >
+
+                <div class="series-overlay">
 
                     <div class="series-name">
-                        ${series}
+                        ${item.title}
                     </div>
 
-                    <div class="series-count">
-                        ${map[series]} книг
+                    <div class="series-description">
+                        ${item.description || ''}
                     </div>
 
                 </div>
 
-            `;
+            </div>
 
-        });
+        `;
+
+    });
 
 }
     function createBookCard(book){
