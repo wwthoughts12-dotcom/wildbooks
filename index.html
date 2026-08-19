@@ -276,35 +276,123 @@
     font-size:20px;
     color:#777;
 }
-    @media(max-width:600px){
+   /* ========================================
+   НОВИНКА — МОБИЛЬНАЯ ВЕРСИЯ
+======================================== */
 
-    .new-book-card{
+@media (max-width:600px){
+
+    #newBook{
+        width:100%;
+        margin-top:18px;
+    }
+
+    .new-book-wrapper{
+
         display:flex;
+
         flex-direction:row;
+
         align-items:center;
 
-        gap:14px;
-        padding:16px;
+        gap:16px;
+
+        width:100%;
+
+        min-height:165px;
+
+        padding:0;
+
+        background:#fffdf8;
+
+        border-radius:22px;
+
+        box-shadow:
+            0 10px 25px rgba(48,30,18,.15);
+
+        box-sizing:border-box;
+
+        overflow:hidden;
+
+        cursor:pointer;
     }
 
     .new-book-cover{
+
         width:110px;
-        height:160px;
+
+        height:165px;
+
+        min-width:110px;
+
+        object-fit:cover;
+
+        border-radius:0;
+
+        display:block;
+
+        box-shadow:
+            6px 0 15px rgba(48,30,18,.18);
+
         flex-shrink:0;
     }
 
     .new-book-info{
+
         flex:1;
+
+        min-width:0;
+
+        padding:15px 14px 15px 0;
+
+        display:flex;
+
+        flex-direction:column;
+
+        justify-content:center;
+
+        box-sizing:border-box;
     }
 
     .new-book-title{
-        font-size:18px;
+
+        font-family:
+            'Playfair Display',
+            serif;
+
+        font-size:20px;
+
+        font-weight:600;
+
         line-height:1.25;
+
+        margin-bottom:8px;
+
+        color:#2d2926;
+
+        word-break:normal;
+
+        overflow-wrap:break-word;
     }
 
     .new-book-author{
+
+        font-family:
+            'Inter',
+            sans-serif;
+
         font-size:14px;
+
+        line-height:1.4;
+
+        color:#7a746d;
+
+        word-break:normal;
+
+        overflow-wrap:break-word;
     }
+
+}
 
 }
     
