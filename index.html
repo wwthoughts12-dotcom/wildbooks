@@ -2401,8 +2401,28 @@ function openSeries(series){
 
     const seriesBooks =
         books.filter(book =>
-            book.series === series
+
+            (book.series || '')
+                .trim()
+                .toLowerCase()
+
+            ===
+
+            (series || '')
+                .trim()
+                .toLowerCase()
+
         );
+
+    console.log(
+        'Ищем серию:',
+        series
+    );
+
+    console.log(
+        'Найдено книг:',
+        seriesBooks.length
+    );
 
     if(!seriesBooks.length){
 
@@ -2419,7 +2439,8 @@ function openSeries(series){
 
     seriesBooks.forEach(book => {
 
-        grid.innerHTML += createBookCard(book);
+        grid.innerHTML +=
+            createBookCard(book);
 
     });
 
