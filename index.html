@@ -1369,31 +1369,39 @@ padding:20px;
 
 <div class="bottom-nav">
 
-
-<div class="bottom-nav">
-
-    <button class="nav-btn">
+    <button
+        class="nav-btn"
+        onclick="showPage('home')"
+    >
         <span>🏠</span>
         <span>Главная</span>
     </button>
 
-    <button class="nav-btn">
+    <button
+        class="nav-btn"
+        onclick="showPage('catalog')"
+    >
         <span>📚</span>
         <span>Каталог</span>
     </button>
 
-    <button class="nav-btn">
+    <button
+        class="nav-btn"
+        onclick="showPage('playlists')"
+    >
         <span>🎧</span>
         <span>Плейлисты</span>
     </button>
 
-    <button class="nav-btn">
+    <button
+        class="nav-btn"
+        onclick="showPage('arts')"
+    >
         <span>🖼️</span>
         <span>Арты</span>
     </button>
 
 </div>
-
 </nav>
     
 </div>
@@ -2781,6 +2789,21 @@ function backToHome(){
     document
         .getElementById('bookModal')
         .classList.add('show');
+}
+    function showPage(pageId){
+
+    document
+        .querySelectorAll('.page')
+        .forEach(page => {
+
+            page.classList.remove('active');
+
+        });
+
+    document
+        .getElementById(pageId)
+        .classList.add('active');
+
 }
 loadData();
 
