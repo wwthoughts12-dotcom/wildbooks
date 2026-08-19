@@ -2022,46 +2022,8 @@ function closePlaylist(){
         }
     );
 
-async function getYandexImageUrl(publicUrl){
 
-    try{
-
-        const apiUrl =
-            'https://cloud-api.yandex.net/v1/disk/public/resources/download?public_key='
-            + encodeURIComponent(publicUrl);
-
-        const response =
-            await fetch(apiUrl);
-
-        if(!response.ok){
-
-            throw new Error(
-                `Yandex API error: ${response.status}`
-            );
-
-        }
-
-        const data =
-            await response.json();
-
-        return data.href || '';
-
-    }catch(error){
-
-        console.error(
-            'Ошибка получения изображения:',
-            publicUrl,
-            error
-        );
-
-        return '';
-
-    }
-
-}
-
-
-async function renderArts(){
+function renderArts(){
 
     const container =
         document.getElementById(
@@ -2086,7 +2048,7 @@ async function renderArts(){
     }
 
 
-    for(const item of arts){
+    arts.forEach(item => {
 
         const images =
             (item.arts || '')
@@ -2094,57 +2056,50 @@ async function renderArts(){
                 .map(url => url.trim())
                 .filter(Boolean);
 
+
         if(!images.length){
-            continue;
+            return;
         }
 
 
         let gallery = '';
 
 
-        for(let i = 0; i < images.length; i++){
-
-            const originalUrl =
-                images[i];
-
-            const directUrl =
-                await getYandexImageUrl(
-                    originalUrl
-                );
-
-
-            if(!directUrl){
-
-                continue;
-
-            }
-
+        images.forEach((image, index) => {
 
             gallery += `
 
                 <img
-                    src="${directUrl}"
-                    alt="${item.title || 'Арт'}"
+                    src="${image}"
+                    alt="${
+                        item.title ||
+                        'Арт ' + (index + 1)
+                    }"
                     loading="lazy"
 
                     onclick="
                         openFullscreen(
-                            '${directUrl.replace(
+                            '${image.replace(
                                 /'/g,
                                 "\\'"
                             )}'
                         )
                     "
+
+                    onerror="
+                        console.error(
+                            'Не удалось загрузить арт:',
+                            '${image.replace(
+                                /'/g,
+                                "\\'"
+                            )}'
+                        );
+                    "
                 >
 
             `;
 
-        }
-
-
-        if(!gallery){
-            continue;
-        }
+        });
 
 
         container.innerHTML += `
@@ -2165,10 +2120,9 @@ async function renderArts(){
 
         `;
 
-    }
+    });
 
 }
-
 function openFullscreen(src){
 
     const viewer =
