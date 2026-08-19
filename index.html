@@ -275,60 +275,61 @@ transform:translateY(-4px);
 
 }
 
-..book-cover{
-width:100%;
-height:280px;
-object-fit:cover;
-display:block;
-}
-
 .book-grid{
-display:grid;
-grid-template-columns:
-repeat(2, minmax(0, 1fr));
-gap:18px;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:18px;
 }
 
 .book-card{
-background:white;
-border-radius:20px;
-overflow:hidden;
-cursor:pointer;
-box-shadow:var(--shadow);
-transition:transform .2s, box-shadow .2s;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+    transition:transform .2s, box-shadow .2s;
 }
 
 .book-card:hover{
-transform:translateY(-4px);
-box-shadow:0 14px 35px rgba(0,0,0,.12);
-}
-
-.book-info{
-padding:14px;
-}
-
-.book-title{
-font-weight:600;
-font-size:15px;
-line-height:1.3;
-margin-bottom:6px;
-}
-
-.book-author{
-font-size:13px;
-color:var(--muted);
-line-height:1.4;
-@media (max-width:600px){
-
-.book-grid{
-grid-template-columns:repeat(2, minmax(0,1fr));
-gap:12px;
+    transform:translateY(-4px);
+    box-shadow:0 14px 35px rgba(0,0,0,.12);
 }
 
 .book-cover{
-height:230px;
+    width:100%;
+    height:280px;
+    object-fit:cover;
+    display:block;
 }
-    
+
+.book-info{
+    padding:14px;
+}
+
+.book-title{
+    font-weight:600;
+    font-size:15px;
+    line-height:1.3;
+    margin-bottom:6px;
+}
+
+.book-author{
+    font-size:13px;
+    color:var(--muted);
+    line-height:1.4;
+}
+
+@media (max-width:600px){
+
+    .book-grid{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+        gap:12px;
+    }
+
+    .book-cover{
+        height:230px;
+    }
+
 }
 
 .book-info{
@@ -1204,18 +1205,14 @@ function renderHome(){
 
 }
 
-}
-
 function renderNewBook(){
 
     const container =
         document.getElementById('newBook');
 
-
     if(!container){
         return;
     }
-
 
     if(!newBooks.length){
 
@@ -1228,9 +1225,7 @@ function renderNewBook(){
         return;
     }
 
-
     container.innerHTML = '';
-
 
     newBooks.forEach(book => {
 
@@ -1238,26 +1233,6 @@ function renderNewBook(){
             createBookCard(book);
 
     });
-
-}
-
-if(!books.length){
-
-container.innerHTML =
-'Нет данных';
-
-return;
-
-}
-
-const newest =
-books[0];
-
-container.innerHTML =
-
-createBookCard(
-newest
-);
 
 }
 
@@ -1461,68 +1436,10 @@ ${item}
 
 }
 
-function buildTropeFilters(){
-
-const container =
-document.getElementById(
-'tropeFilters'
-);
-
-const tropes =
-new Set();
-
-books.forEach(book=>{
-
-if(!book.trops) return;
-
-book.trops
-.split(',')
-.forEach(t=>{
-
-tropes.add(
-t.trim()
-);
-
-});
-
-});
-
-container.innerHTML='';
-
-['Все',...tropes]
-.forEach(item=>{
-
-container.innerHTML += `
-
-<button
-class="filter ${
-item===currentTrope
-? 'active'
-: ''
-}"
-onclick="selectTrope('${item}')">
-
-${item}
-
-</button>
-
-`;
-
-});
-
-}
 
 function selectSeries(series){
 
 currentSeries = series;
-
-renderCatalog();
-
-}
-
-function selectTrope(trope){
-
-currentTrope = trope;
 
 renderCatalog();
 
@@ -1553,19 +1470,6 @@ filtered.filter(
 b=>
 b.series ===
 currentSeries
-);
-
-}
-
-if(currentTrope !== 'Все'){
-
-filtered =
-filtered.filter(
-b=>
-(b.trops || '')
-.includes(
-currentTrope
-)
 );
 
 }
@@ -1999,7 +1903,6 @@ function closePlaylist(){
 
         }
     );
-}
 
 function renderArts(){
 
