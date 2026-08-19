@@ -408,44 +408,102 @@ box-shadow:var(--shadow);
 }
 
 .bottom-nav{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
 
-position:fixed;
-left:0;
-right:0;
-bottom:0;
-height:74px;
+    height:82px;
 
-background:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
 
-display:flex;
-justify-content:space-around;
-align-items:center;
+    background:rgba(255,253,248,.97);
 
-box-shadow:0 -5px 25px rgba(0,0,0,.08);
+    border-top:1px solid rgba(201,168,106,.25);
 
-z-index:999;
+    box-shadow:
+        0 -8px 30px rgba(0,0,0,.10);
 
+    z-index:9999;
+
+    padding:
+        8px
+        8px
+        calc(8px + env(safe-area-inset-bottom));
+
+    backdrop-filter:blur(14px);
 }
 
 .nav-btn{
+    flex:1;
 
-border:none;
-background:none;
-cursor:pointer;
+    height:62px;
 
-display:flex;
-flex-direction:column;
+    border:0;
+    outline:0;
 
-gap:4px;
+    background:transparent;
 
-font-size:12px;
-color:#666;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 
+    gap:5px;
+
+    color:#8a8177;
+
+    font-family:'Inter',sans-serif;
+    font-size:12px;
+    font-weight:500;
+
+    cursor:pointer;
+
+    border-radius:16px;
+
+    transition:
+        color .2s ease,
+        background .2s ease,
+        transform .2s ease;
+}
+
+.nav-btn span:first-child{
+    font-size:23px;
+    line-height:1;
+}
+
+.nav-btn span:last-child{
+    font-size:12px;
 }
 
 .nav-btn.active{
+    color:var(--gold-dark);
+    background:rgba(201,168,106,.12);
+}
 
-color:var(--gold-dark);
+.nav-btn:active{
+    transform:scale(.95);
+}
+
+@media(max-width:600px){
+
+    .bottom-nav{
+        height:76px;
+    }
+
+    .nav-btn{
+        height:58px;
+    }
+
+    .nav-btn span:first-child{
+        font-size:20px;
+    }
+
+    .nav-btn span:last-child{
+        font-size:10px;
+    }
 
 }
 
@@ -867,27 +925,67 @@ const favorites =
 JSON.parse(
     localStorage.getItem('favorites') || '[]'
 );
-   function loadCSV(url){
+  async function loadCSV(url, name){
 
-    return new Promise((resolve, reject) => {
+    try{
 
-        Papa.parse(url, {
-
-            download: true,
-            header: true,
-            skipEmptyLines: true,
-
-            complete: function(result){
-                resolve(result.data);
-            },
-
-            error: function(error){
-                reject(error);
+        const response = await fetch(
+            url + '&_=' + Date.now(),
+            {
+                cache:'no-store'
             }
+        );
 
-        });
+        if(!response.ok){
 
-    });
+            throw new Error(
+                name + ': HTTP ' +
+                response.status
+            );
+
+        }
+
+        const text =
+            await response.text();
+
+        if(!text.trim()){
+
+            throw new Error(
+                name + ': пустой ответ'
+            );
+
+        }
+
+        const result =
+            Papa.parse(
+                text,
+                {
+                    header:true,
+                    skipEmptyLines:true
+                }
+            );
+
+        if(result.errors?.length){
+
+            console.warn(
+                name,
+                result.errors
+            );
+
+        }
+
+        return result.data || [];
+
+    }catch(error){
+
+        console.error(
+            'Ошибка загрузки ' + name,
+            error
+        );
+
+        return [];
+
+    }
 
 }
 
@@ -896,17 +994,64 @@ async function loadData(){
 
     try{
 
+        const results =
+            await Promise.all([
+
+                loadCSV(
+                    BOOKS_URL,
+                    'КНИГИ'
+                ),
+
+                loadCSV(
+                    NEW_BOOKS_URL,
+                    'НОВИНКА'
+                ),
+
+                loadCSV(
+                    ANNOUNCEMENTS_URL,
+                    'В ПРОЦЕССЕ ПЕРЕВОДА'
+                ),
+
+                loadCSV(
+                    ARTS_URL,
+                    'АРТЫ'
+                )
+
+            ]);
+
+
         books =
-            await loadCSV(BOOKS_URL);
+            results[0];
 
         newBooks =
-            await loadCSV(NEW_BOOKS_URL);
+            results[1];
 
         announcements =
-            await loadCSV(ANNOUNCEMENTS_URL);
+            results[2];
 
         arts =
-            await loadCSV(ARTS_URL);
+            results[3];
+
+
+        console.log(
+            'КНИГИ:',
+            books.length
+        );
+
+        console.log(
+            'НОВИНКА:',
+            newBooks.length
+        );
+
+        console.log(
+            'В ПРОЦЕССЕ:',
+            announcements.length
+        );
+
+        console.log(
+            'АРТЫ:',
+            arts.length
+        );
 
 
         updateStats();
@@ -921,29 +1066,23 @@ async function loadData(){
 
 
         const loading =
-            document.getElementById('loading');
+            document.getElementById(
+                'loading'
+            );
 
         if(loading){
+
             loading.remove();
+
         }
 
 
     }catch(error){
 
         console.error(
-            'Ошибка загрузки Google Sheets:',
+            'Критическая ошибка:',
             error
         );
-
-        const loading =
-            document.getElementById('loading');
-
-        if(loading){
-
-            loading.textContent =
-                'Не удалось загрузить данные';
-
-        }
 
     }
 
@@ -952,8 +1091,33 @@ async function loadData(){
 
 function updateStats(){
 
-    document.getElementById('booksCount').textContent =
-        books.length;
+    const booksElement =
+        document.getElementById(
+            'booksCount'
+        );
+
+    const seriesElement =
+        document.getElementById(
+            'seriesCount'
+        );
+
+    const playlistElement =
+        document.getElementById(
+            'playlistCount'
+        );
+
+    const artElement =
+        document.getElementById(
+            'artCount'
+        );
+
+
+    if(booksElement){
+
+        booksElement.textContent =
+            books.length;
+
+    }
 
 
     const series =
@@ -961,45 +1125,75 @@ function updateStats(){
 
     books.forEach(book => {
 
-        if(book.series){
-            series.add(book.series);
+        if(
+            book.series &&
+            book.series.trim()
+        ){
+
+            series.add(
+                book.series.trim()
+            );
+
         }
 
     });
 
 
-    document.getElementById('seriesCount').textContent =
-        series.size;
+    if(seriesElement){
+
+        seriesElement.textContent =
+            series.size;
+
+    }
 
 
-    document.getElementById('playlistCount').textContent =
-        books.filter(
-            book => book.spotify_playlist
-        ).length;
+    if(playlistElement){
+
+        playlistElement.textContent =
+
+            books.filter(
+                book =>
+                    book.spotify_playlist &&
+                    book.spotify_playlist.trim()
+            ).length;
+
+    }
 
 
     let totalArts = 0;
 
+
     arts.forEach(item => {
 
-        if(!item.arts) return;
+        if(!item.arts){
+
+            return;
+
+        }
 
         totalArts +=
+
             item.arts
                 .split('|')
+                .map(
+                    item =>
+                        item.trim()
+                )
                 .filter(Boolean)
                 .length;
 
     });
 
 
-    document.getElementById('artCount').textContent =
-        totalArts;
+    if(artElement){
+
+        artElement.textContent =
+            totalArts;
+
+    }
 
 }
-
-}
-
+    
 function renderHome(){
 
     renderNewBook();
@@ -1074,7 +1268,6 @@ function renderTranslations(){
             'translationBooks'
         );
 
-
     if(!container){
         return;
     }
@@ -1097,6 +1290,12 @@ function renderTranslations(){
 
 
     announcements.forEach(item => {
+
+        const date =
+            item.date_active ||
+            item['date active'] ||
+            '';
+
 
         container.innerHTML += `
 
@@ -1122,7 +1321,7 @@ function renderTranslations(){
                     </div>
 
                     <div class="book-author">
-                        ${item.date_active || ''}
+                        ${date}
                     </div>
 
                 </div>
@@ -1974,8 +2173,9 @@ btn.classList.add(
 
 if(window.Telegram){
 
-Telegram.WebApp.ready();
-Telegram.WebApp.expand();
+    Telegram.WebApp.ready();
+
+    Telegram.WebApp.expand();
 
 }
 
