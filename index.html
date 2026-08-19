@@ -296,38 +296,6 @@ line-height:1.7;
 
 }
 
-.stats{
-
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-
-}
-
-.stat{
-
-background:white;
-border-radius:22px;
-padding:25px;
-text-align:center;
-box-shadow:var(--shadow);
-
-}
-
-.stat-number{
-
-font-size:42px;
-font-weight:700;
-color:var(--gold-dark);
-
-}
-
-.section-title{
-
-font-size:28px;
-margin-bottom:18px;
-
-}
 
 /* ========================================
    ОБЩИЕ КАРТОЧКИ
@@ -876,30 +844,6 @@ padding:20px;
     <div class="container">
 
 
-<div class="stats">
-
-<div class="stat">
-<div class="stat-number" id="booksCount">0</div>
-<div>Книг</div>
-</div>
-
-<div class="stat">
-<div class="stat-number" id="seriesCount">0</div>
-<div>Серий</div>
-</div>
-
-<div class="stat">
-<div class="stat-number" id="playlistCount">0</div>
-<div>Плейлистов</div>
-</div>
-
-<div class="stat">
-<div class="stat-number" id="artCount">0</div>
-<div>Артов</div>
-</div>
-
-</div>
-
 </div>
 
 <div id="home" class="page">
@@ -1272,8 +1216,6 @@ async function loadData(){
         );
 
 
-        updateStats();
-
         renderHome();
 
         renderCatalog();
@@ -1306,111 +1248,6 @@ async function loadData(){
 
 }
 
-
-function updateStats(){
-
-    const booksElement =
-        document.getElementById(
-            'booksCount'
-        );
-
-    const seriesElement =
-        document.getElementById(
-            'seriesCount'
-        );
-
-    const playlistElement =
-        document.getElementById(
-            'playlistCount'
-        );
-
-    const artElement =
-        document.getElementById(
-            'artCount'
-        );
-
-
-    if(booksElement){
-
-        booksElement.textContent =
-            books.length;
-
-    }
-
-
-    const series =
-        new Set();
-
-    books.forEach(book => {
-
-        if(
-            book.series &&
-            book.series.trim()
-        ){
-
-            series.add(
-                book.series.trim()
-            );
-
-        }
-
-    });
-
-
-    if(seriesElement){
-
-        seriesElement.textContent =
-            series.size;
-
-    }
-
-
-    if(playlistElement){
-
-        playlistElement.textContent =
-
-            books.filter(
-                book =>
-                    book.spotify_playlist &&
-                    book.spotify_playlist.trim()
-            ).length;
-
-    }
-
-
-    let totalArts = 0;
-
-
-    arts.forEach(item => {
-
-        if(!item.arts){
-
-            return;
-
-        }
-
-        totalArts +=
-
-            item.arts
-                .split('|')
-                .map(
-                    item =>
-                        item.trim()
-                )
-                .filter(Boolean)
-                .length;
-
-    });
-
-
-    if(artElement){
-
-        artElement.textContent =
-            totalArts;
-
-    }
-
-}
     
 function renderHome(){
 
