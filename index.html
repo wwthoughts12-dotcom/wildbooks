@@ -85,22 +85,60 @@
 .series-item:hover{
     transform:translateY(-2px);
 }
-    #seriesBooksGrid{
+   #seriesPage .book-grid{
 
     display:grid;
 
     grid-template-columns:
-        repeat(4,minmax(0,1fr));
+        repeat(3, minmax(0,1fr));
 
-    gap:14px;
+    gap:16px;
 
 }
 
-#seriesBooksGrid .book-cover{
+#seriesPage .book-cover{
 
-    height:180px;
+    height:220px;
 
     object-fit:contain;
+
+    background:#f2eadf;
+
+}
+
+#seriesPage .book-info{
+
+    padding:10px;
+
+}
+
+#seriesPage .book-title{
+
+    font-size:14px;
+
+}
+
+#seriesPage .book-author{
+
+    font-size:12px;
+
+}
+    @media(max-width:600px){
+
+    #seriesPage .book-grid{
+
+        grid-template-columns:
+            repeat(3, minmax(0,1fr));
+
+        gap:10px;
+
+    }
+
+    #seriesPage .book-cover{
+
+        height:140px;
+
+    }
 
 }
 :root{
@@ -1059,7 +1097,9 @@ padding:20px;
 
        <div
     id="seriesBooksGrid"
+    class="book-grid"
 ></div>
+        
     </div>
 
 </div>
