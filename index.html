@@ -997,7 +997,6 @@ padding:20px;
 
 </div>
     
-<div id="catalog" class="page">
     <div id="seriesPage" class="page">
 
     <div class="container">
@@ -2284,27 +2283,19 @@ function openSeries(series){
 
     document
         .querySelectorAll('.page')
-        .forEach(page=>{
+        .forEach(page => {
 
-            page.classList.remove(
-                'active'
-            );
+            page.classList.remove('active');
 
         });
 
     document
-        .getElementById(
-            'seriesPage'
-        )
-        .classList.add(
-            'active'
-        );
+        .getElementById('seriesPage')
+        .classList.add('active');
 
     document
-        .getElementById(
-            'seriesPageTitle'
-        )
-        .innerText = series;
+        .getElementById('seriesPageTitle')
+        .textContent = series;
 
     const grid =
         document.getElementById(
@@ -2312,22 +2303,30 @@ function openSeries(series){
         );
 
     const seriesBooks =
-        books.filter(
-            book =>
-                book.series === series
+        books.filter(book =>
+            book.series === series
         );
+
+    if(!seriesBooks.length){
+
+        grid.innerHTML = `
+            <div class="card">
+                Книги не найдены.
+            </div>
+        `;
+
+        return;
+    }
 
     grid.innerHTML = '';
 
-    seriesBooks.forEach(book=>{
+    seriesBooks.forEach(book => {
 
-        grid.innerHTML +=
-            createBookCard(book);
+        grid.innerHTML += createBookCard(book);
 
     });
 
 }
-
 function backToHome(){
 
     document
