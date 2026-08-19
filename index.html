@@ -1576,6 +1576,7 @@ books.forEach(book=>{
 if(!map[book.series]){
 
 map[book.series] = 0;
+    
 
 }
 
@@ -1593,7 +1594,7 @@ container.innerHTML += `
 
 <div
     class="series-item"
-    onclick="openSeries('${series}')"
+    data-series="${series}"
 >
 
     <span>${series}</span>
@@ -1603,6 +1604,20 @@ container.innerHTML += `
 </div>
 
 `;
+
+});
+
+document
+.querySelectorAll('.series-item')
+.forEach(item=>{
+
+    item.onclick = () => {
+
+        openSeries(
+            item.dataset.series
+        );
+
+    };
 
 });
 
