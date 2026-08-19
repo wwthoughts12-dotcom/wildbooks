@@ -1916,32 +1916,41 @@ function renderSeries(){
 }
     function createBookCard(book){
 
-return `
+    return `
 
-<div
-class="book-card"
-onclick="openBook('${book.ID}')">
+        <div
+            class="book-card"
+            onclick="openBook('${book.ID}')"
+        >
 
-<img
-src="${book.cover_url}"
-class="book-cover"
-onerror="this.src='https://placehold.co/400x600/F5EFE5/C9A86A?text=Book'">
+            <div class="cover-wrapper">
 
-<div class="book-info">
+                <img
+                    src="${book.cover_url || ''}"
+                    class="book-cover"
 
-<div class="book-title">
-${book.title}
-</div>
+                    onerror="
+                        this.src='https://placehold.co/400x600/F5EFE5/C9A86A?text=Book'
+                    "
+                >
 
-<div class="book-author">
-${book.author || ''}
-</div>
+            </div>
 
-</div>
+            <div class="book-info">
 
-</div>
+                <div class="book-title">
+                    ${book.title || ''}
+                </div>
 
-`;
+                <div class="book-author">
+                    ${book.author || ''}
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
 
 }
 
