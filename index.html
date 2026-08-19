@@ -2030,7 +2030,46 @@ function closePlaylist(){
         }
     );
 
-function renderArts(){
+async function getYandexImageUrl(publicUrl){
+
+    try{
+
+        const apiUrl =
+            'https://cloud-api.yandex.net/v1/disk/public/resources/download?public_key='
+            + encodeURIComponent(publicUrl);
+
+        const response =
+            await fetch(apiUrl);
+
+        if(!response.ok){
+
+            throw new Error(
+                `Yandex API error: ${response.status}`
+            );
+
+        }
+
+        const data =
+            await response.json();
+
+        return data.href || '';
+
+    }catch(error){
+
+        console.error(
+            'Ошибка получения изображения:',
+            publicUrl,
+            error
+        );
+
+        return '';
+
+    }
+
+}
+
+
+async function renderArts(){
 
     const container =
         document.getElementById(
@@ -2041,75 +2080,79 @@ function renderArts(){
         return;
     }
 
-
     container.innerHTML = '';
-
 
     if(!arts.length){
 
         container.innerHTML = `
-
             <div class="card">
-
                 Пока нет артов.
-
             </div>
-
         `;
 
         return;
-
     }
 
 
-    arts.forEach(item => {
-
-        const rawArts =
-            item.arts || '';
-
+    for(const item of arts){
 
         const images =
-            rawArts
-
+            (item.arts || '')
                 .split('|')
-
-                .map(
-                    url =>
-                        url.trim()
-                )
-
+                .map(url => url.trim())
                 .filter(Boolean);
 
-
         if(!images.length){
-            return;
+            continue;
         }
 
 
         let gallery = '';
 
 
-        images.forEach(
-            (image, index) => {
+        for(let i = 0; i < images.length; i++){
 
-                gallery += `
+            const originalUrl =
+                images[i];
 
-                    <img
-                        src="${image}"
-                        alt="${item.title || 'Арт ' + (index + 1)}"
-                        loading="lazy"
+            const directUrl =
+                await getYandexImageUrl(
+                    originalUrl
+                );
 
-                        onclick="
-                            openFullscreen(
-                                '${image.replace(/'/g,"&#39;")}'
-                            )
-                        "
-                    >
 
-                `;
+            if(!directUrl){
+
+                continue;
 
             }
-        );
+
+
+            gallery += `
+
+                <img
+                    src="${directUrl}"
+                    alt="${item.title || 'Арт'}"
+                    loading="lazy"
+
+                    onclick="
+                        openFullscreen(
+                            '${directUrl.replace(
+                                /'/g,
+                                "\\'"
+                            )}'
+                        )
+                    "
+                >
+
+            `;
+
+        }
+
+
+        if(!gallery){
+            continue;
+        }
 
 
         container.innerHTML += `
@@ -2117,11 +2160,8 @@ function renderArts(){
             <div class="arts-book">
 
                 <h2 class="arts-title">
-
                     ${item.title || 'Без названия'}
-
                 </h2>
-
 
                 <div class="arts-gallery">
 
@@ -2133,7 +2173,7 @@ function renderArts(){
 
         `;
 
-    });
+    }
 
 }
 
@@ -2158,18 +2198,15 @@ function openFullscreen(src){
 }
 
 document
-.getElementById(
-'fullscreenViewer'
-)
-.addEventListener(
-'click',
-function(){
+    .getElementById('fullscreenViewer')
+    .addEventListener(
+        'click',
+        function(){
 
-this.style.display =
-'none';
+            this.classList.remove('show');
 
-}
-);
+        }
+    );
 
 document
 .querySelectorAll(
