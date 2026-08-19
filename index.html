@@ -773,68 +773,46 @@ line-height:1.7;
 
 .translation-books{
     display:flex;
-    gap:16px;
+    gap:14px;
     overflow-x:auto;
-    padding:10px 4px;
-    scroll-snap-type:x mandatory;
+    padding:6px 2px;
+}
+   .translation-books::-webkit-scrollbar{
+    display:none;
 }
 
 .translation-book{
-    flex:0 0 160px;
-    background:#fff;
-    border-radius:22px;
-    padding:12px;
-    box-shadow:0 8px 24px rgba(0,0,0,.08);
-    scroll-snap-align:start;
+    flex:0 0 120px;
 }
 
 .translation-book .book-cover{
-    width:100%;
-    height:220px;
+    width:120px;
+    height:170px;
+
     object-fit:cover;
-    border-radius:16px;
+
+    border-radius:14px;
+
     display:block;
-    margin-bottom:12px;
-    box-shadow:0 8px 20px rgba(0,0,0,.25);
+
+    margin-bottom:8px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
 
 .translation-book h3{
-    font-size:18px;
+    font-size:13px;
     line-height:1.3;
-    margin:0 0 8px;
-    font-weight:700;
-    color:#2b2b2b;
+    font-weight:600;
+    margin-bottom:4px;
 }
 
 .translation-book .tropes{
-    font-size:14px;
-    line-height:1.5;
-    color:#666;
+    font-size:12px;
+    color:#777;
+    line-height:1.35;
 }
 
-/* мобильная версия */
-
-@media(max-width:600px){
-
-    .translation-book{
-        flex:0 0 170px;
-        padding:12px;
-    }
-
-    .translation-book .book-cover{
-        height:240px;
-    }
-
-    .translation-book h3{
-        font-size:17px;
-    }
-
-    .translation-book .tropes{
-        font-size:14px;
-        line-height:1.45;
-    }
-
-}
 
 /* ========================================
    КАТАЛОГ
@@ -1942,29 +1920,29 @@ function renderTranslations(){
     const container =
         document.getElementById('translationBooks');
 
+    if(!container) return;
+
+    container.className = 'translation-books';
+
     container.innerHTML = '';
 
     announcements.forEach(item => {
 
         container.innerHTML += `
 
-            <div class="translation-card">
+            <div class="translation-book">
 
                 <img
-                    src="${item.cover_url}"
-                    class="translation-cover"
+                    src="${item.cover_url || ''}"
+                    class="book-cover"
                 >
 
-                <div class="translation-info">
+                <h3>
+                    ${item.title || ''}
+                </h3>
 
-                    <div class="translation-title">
-                        ${item.title || ''}
-                    </div>
-
-                    <div class="translation-tropes">
-                        ${item.tropes || ''}
-                    </div>
-
+                <div class="tropes">
+                    ${item.tropes || ''}
                 </div>
 
             </div>
