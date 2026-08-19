@@ -27,9 +27,123 @@
 --text:#2d2926;
 --muted:#7a746d;
 --shadow:0 10px 30px rgba(0,0,0,.08);
+    /* ================================
+   АРТЫ
+================================ */
+
+.arts-book{
+    background:var(--card);
+    border-radius:24px;
+    padding:24px;
+    margin-bottom:24px;
+    box-shadow:var(--shadow);
+}
+
+.arts-title{
+    text-align:center;
+    font-family:'Playfair Display',serif;
+    font-size:28px;
+    font-weight:600;
+    color:var(--text);
+    margin-bottom:20px;
+}
+
+.arts-gallery{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:12px;
+}
+
+.arts-gallery img{
+    width:100%;
+    aspect-ratio:1 / 1;
+    object-fit:cover;
+    border-radius:16px;
+    cursor:pointer;
+    display:block;
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.arts-gallery img:hover{
+    transform:scale(1.02);
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+/* полноэкранный просмотр */
+
+.fullscreen{
+    position:fixed;
+    inset:0;
+    background:rgba(20,18,16,.94);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    padding:20px;
+}
+
+.fullscreen.show{
+    display:flex;
+}
+
+.fullscreen img{
+    max-width:96%;
+    max-height:92%;
+    object-fit:contain;
+    border-radius:12px;
+}
+
+@media(max-width:600px){
+
+    .arts-gallery{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .arts-title{
+        font-size:25px;
+    }
 
 }
 
+}
+.playlist-modal-cover{
+    width:180px;
+    height:180px;
+    object-fit:cover;
+    border-radius:20px;
+    display:block;
+    margin:0 auto 20px;
+}
+
+.playlist-modal-title{
+    text-align:center;
+    font-size:28px;
+    margin-bottom:6px;
+}
+
+.playlist-modal-author{
+    text-align:center;
+    color:var(--muted);
+    margin-bottom:22px;
+}
+
+.spotify-player{
+    width:100%;
+    height:352px;
+    border:0;
+    border-radius:18px;
+    display:block;
+}
+
+.close-modal{
+    width:100%;
+    margin-top:15px;
+    background:#f0e8dc;
+    color:var(--text);
+}
 *{
 margin:0;
 padding:0;
@@ -161,13 +275,60 @@ transform:translateY(-4px);
 
 }
 
-.book-cover{
-
+..book-cover{
 width:100%;
-height:250px;
+height:280px;
 object-fit:cover;
 display:block;
+}
 
+.book-grid{
+display:grid;
+grid-template-columns:
+repeat(2, minmax(0, 1fr));
+gap:18px;
+}
+
+.book-card{
+background:white;
+border-radius:20px;
+overflow:hidden;
+cursor:pointer;
+box-shadow:var(--shadow);
+transition:transform .2s, box-shadow .2s;
+}
+
+.book-card:hover{
+transform:translateY(-4px);
+box-shadow:0 14px 35px rgba(0,0,0,.12);
+}
+
+.book-info{
+padding:14px;
+}
+
+.book-title{
+font-weight:600;
+font-size:15px;
+line-height:1.3;
+margin-bottom:6px;
+}
+
+.book-author{
+font-size:13px;
+color:var(--muted);
+line-height:1.4;
+@media (max-width:600px){
+
+.book-grid{
+grid-template-columns:repeat(2, minmax(0,1fr));
+gap:12px;
+}
+
+.book-cover{
+height:230px;
+}
+    
 }
 
 .book-info{
@@ -458,38 +619,49 @@ padding:20px;
 
 <div id="home" class="page">
 
-<div class="card">
+    <div class="card">
 
-<h2 class="section-title">
-✨ Новинка
-</h2>
+        <h2 class="section-title">
+            ✨ Новинка
+        </h2>
 
-<div id="newBook">
+        <div
+            id="newBook"
+            class="book-grid">
+        </div>
 
-<div class="loading">
-Загрузка...
+    </div>
+
+
+    <div class="card">
+
+        <h2 class="section-title">
+            📖 В процессе перевода
+        </h2>
+
+        <div
+            id="translationBooks"
+            class="book-grid">
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2 class="section-title">
+            📚 Серии
+        </h2>
+
+        <div
+            id="seriesContainer"
+            class="series-list">
+        </div>
+
+    </div>
+
 </div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<h2 class="section-title">
-📅 Скоро выйдет
-</h2>
-
-<div id="announcements">
-
-<div class="loading">
-Загрузка...
-</div>
-
-</div>
-
-</div>
-
+    
 <div class="card">
 
 <h2 class="section-title">
@@ -535,12 +707,6 @@ class="filters">
 
 </div>
 
-<div
-id="tropeFilters"
-class="filters">
-
-</div>
-
 </div>
 
 <div
@@ -553,19 +719,26 @@ class="book-grid">
 
 <div id="playlists" class="page">
 
-<div class="card">
+    <div class="card">
 
-<h2 class="section-title">
-🎧 Плейлисты
-</h2>
+        <h2 class="section-title">
+            🎧 Плейлисты
+        </h2>
 
-<div
-id="playlistGrid"
-class="book-grid">
+        <p style="
+            color:var(--muted);
+            margin-bottom:20px;
+            line-height:1.5;
+        ">
+            Выберите книгу, чтобы открыть её плейлист.
+        </p>
 
-</div>
+        <div
+            id="playlistGrid"
+            class="book-grid">
+        </div>
 
-</div>
+    </div>
 
 </div>
 
@@ -647,6 +820,17 @@ id="bookContent">
 </div>
 
 </div>
+    <div
+id="playlistModal"
+class="modal">
+
+    <div
+        class="modal-box"
+        id="playlistContent">
+
+    </div>
+
+</div>
 
 <div
 id="fullscreenViewer"
@@ -663,6 +847,9 @@ src="">
 const BOOKS_URL =
 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQI8CHOf1D1itshzP1MtTu4KDz803QihzIa6WXq-anfYkOA_k_OV27sRDET04qVr202wnqCB7X95ogO/pub?output=csv';
 
+const NEW_BOOKS_URL =
+'https://docs.google.com/spreadsheets/d/e/2PACX-1vQL4lU_qLI1q2TEx45v7_cjaBeixD_QWT2TMjnRn9RNazhyv2NwYTAdRDfe9ggIdjEgRYP_DtCfoXfE/pub?output=csv';
+
 const ANNOUNCEMENTS_URL =
 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTlVHOEmWsc7BjxeB1w0dcqsTuPCstHe7lrA5fIPUNMFaoLmPSjqyzO3LPkoUpxQNY8ShrWCXBXyf_X/pub?output=csv';
 
@@ -670,159 +857,195 @@ const ARTS_URL =
 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSho-xQsv1AtpTa-k_wDgcO968CYzd546FRuxVXAsWHDt1Y8Ey6yYOL_kEJ5cKiNC7VcYeMtfSYboQE/pub?output=csv';
 
 let books = [];
+let newBooks = [];
 let announcements = [];
 let arts = [];
 
 let currentSeries = 'Все';
-let currentTrope = 'Все';
 
 const favorites =
 JSON.parse(
-localStorage.getItem(
-'favorites'
-) || '[]'
+    localStorage.getItem('favorites') || '[]'
 );
-    function loadCSV(url){
+   function loadCSV(url){
 
-return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
 
-Papa.parse(url,{
+        Papa.parse(url, {
 
-download:true,
-header:true,
-skipEmptyLines:true,
+            download: true,
+            header: true,
+            skipEmptyLines: true,
 
-complete:(result)=>{
+            complete: function(result){
+                resolve(result.data);
+            },
 
-resolve(result.data);
+            error: function(error){
+                reject(error);
+            }
 
-},
+        });
 
-error:(error)=>{
-
-reject(error);
-
-}
-
-});
-
-});
+    });
 
 }
+
 
 async function loadData(){
 
-try{
+    try{
 
-books =
-await loadCSV(
-BOOKS_URL
-);
+        books =
+            await loadCSV(BOOKS_URL);
 
-announcements =
-await loadCSV(
-ANNOUNCEMENTS_URL
-);
+        newBooks =
+            await loadCSV(NEW_BOOKS_URL);
 
-arts =
-await loadCSV(
-ARTS_URL
-);
+        announcements =
+            await loadCSV(ANNOUNCEMENTS_URL);
 
-updateStats();
+        arts =
+            await loadCSV(ARTS_URL);
 
-renderHome();
 
-renderCatalog();
+        updateStats();
 
-renderPlaylists();
+        renderHome();
 
-renderArts();
+        renderCatalog();
 
-}catch(error){
+        renderPlaylists();
 
-console.error(error);
+        renderArts();
 
-alert(
-'Ошибка загрузки Google Sheets'
-);
+
+        const loading =
+            document.getElementById('loading');
+
+        if(loading){
+            loading.remove();
+        }
+
+
+    }catch(error){
+
+        console.error(
+            'Ошибка загрузки Google Sheets:',
+            error
+        );
+
+        const loading =
+            document.getElementById('loading');
+
+        if(loading){
+
+            loading.textContent =
+                'Не удалось загрузить данные';
+
+        }
+
+    }
 
 }
 
-}
 
 function updateStats(){
 
-document.getElementById(
-'booksCount'
-).textContent =
-books.length;
+    document.getElementById('booksCount').textContent =
+        books.length;
 
-const series =
-new Set();
 
-books.forEach(book=>{
+    const series =
+        new Set();
 
-if(book.series){
+    books.forEach(book => {
 
-series.add(
-book.series
-);
+        if(book.series){
+            series.add(book.series);
+        }
+
+    });
+
+
+    document.getElementById('seriesCount').textContent =
+        series.size;
+
+
+    document.getElementById('playlistCount').textContent =
+        books.filter(
+            book => book.spotify_playlist
+        ).length;
+
+
+    let totalArts = 0;
+
+    arts.forEach(item => {
+
+        if(!item.arts) return;
+
+        totalArts +=
+            item.arts
+                .split('|')
+                .filter(Boolean)
+                .length;
+
+    });
+
+
+    document.getElementById('artCount').textContent =
+        totalArts;
 
 }
-
-});
-
-document.getElementById(
-'seriesCount'
-).textContent =
-series.size;
-
-document.getElementById(
-'playlistCount'
-).textContent =
-books.filter(
-b=>b.spotify_playlist
-).length;
-
-let totalArts = 0;
-
-arts.forEach(item=>{
-
-if(!item.arts) return;
-
-totalArts +=
-item.arts
-.split('|')
-.length;
-
-});
-
-document.getElementById(
-'artCount'
-).textContent =
-totalArts;
 
 }
 
 function renderHome(){
 
-renderNewBook();
+    renderNewBook();
 
-renderAnnouncements();
+    renderTranslations();
 
-renderTranslations();
+    renderSeries();
 
-renderSeries();
+}
 
 }
 
 function renderNewBook(){
 
-const container =
-document.getElementById(
-'newBook'
-);
+    const container =
+        document.getElementById('newBook');
+
+
+    if(!container){
+        return;
+    }
+
+
+    if(!newBooks.length){
+
+        container.innerHTML = `
+            <div class="card">
+                Пока нет новинок.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    container.innerHTML = '';
+
+
+    newBooks.forEach(book => {
+
+        container.innerHTML +=
+            createBookCard(book);
+
+    });
+
+}
 
 if(!books.length){
 
@@ -844,89 +1067,71 @@ newest
 
 }
 
-function renderAnnouncements(){
-
-const container =
-document.getElementById(
-'announcements'
-);
-
-container.innerHTML = '';
-
-announcements.forEach(item=>{
-
-container.innerHTML += `
-
-<div class="card">
-
-<img
-src="${item.cover_url}"
-class="book-cover">
-
-<br>
-
-<h3>${item.title}</h3>
-
-<br>
-
-<p>
-${item.tropes || ''}
-</p>
-
-<br>
-
-<strong>
-${item.date_active || ''}
-</strong>
-
-</div>
-
-`;
-
-});
-
-}
-
 function renderTranslations(){
 
-const container =
-document.getElementById(
-'translationBooks'
-);
+    const container =
+        document.getElementById(
+            'translationBooks'
+        );
 
-container.innerHTML = '';
 
-announcements.forEach(item=>{
+    if(!container){
+        return;
+    }
 
-container.innerHTML += `
 
-<div class="book-card">
+    container.innerHTML = '';
 
-<img
-src="${item.cover_url}"
-class="book-cover">
 
-<div class="book-info">
+    if(!announcements.length){
 
-<div class="book-title">
+        container.innerHTML = `
+            <div class="card">
+                Пока нет информации
+                о книгах в процессе перевода.
+            </div>
+        `;
 
-${item.title}
+        return;
+    }
 
-</div>
 
-<div class="book-author">
+    announcements.forEach(item => {
 
-${item.tropes || ''}
+        container.innerHTML += `
 
-</div>
+            <div class="book-card">
 
-</div>
+                <img
+                    src="${item.cover_url || ''}"
+                    class="book-cover"
 
-</div>
+                    onerror="
+                        this.style.display='none'
+                    "
+                >
 
-`;
+                <div class="book-info">
 
-});
+                    <div class="book-title">
+                        ${item.title || ''}
+                    </div>
+
+                    <div class="book-author">
+                        ${item.tropes || ''}
+                    </div>
+
+                    <div class="book-author">
+                        ${item.date_active || ''}
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
 
 }
 
@@ -1010,8 +1215,6 @@ ${book.author || ''}
 function renderCatalog(){
 
 buildSeriesFilters();
-
-buildTropeFilters();
 
 drawCatalog();
 
@@ -1406,120 +1609,302 @@ this.classList.remove(
 
 function renderPlaylists(){
 
-const grid =
-document.getElementById(
-'playlistGrid'
-);
+    const grid =
+        document.getElementById(
+            'playlistGrid'
+        );
 
-grid.innerHTML='';
+    if(!grid){
+        return;
+    }
 
-books
-.filter(
-b=>
-b.spotify_playlist
-)
-.forEach(book=>{
+    grid.innerHTML = '';
 
-grid.innerHTML += `
+    const playlistBooks =
+        books.filter(
+            book =>
+                book.spotify_playlist &&
+                book.spotify_playlist.trim() !== ''
+        );
 
-<div
-class="book-card"
-onclick="
-window.open(
-'${book.spotify_playlist}',
-'_blank'
-)
-">
+    if(!playlistBooks.length){
 
-<img
-src="${book.cover_url}"
-class="book-cover">
+        grid.innerHTML = `
+            <div class="card">
+                Пока нет доступных плейлистов.
+            </div>
+        `;
 
-<div class="book-info">
+        return;
+    }
 
-<div class="book-title">
+    playlistBooks.forEach(book => {
 
-${book.title}
+        grid.innerHTML += `
 
-</div>
+            <div
+                class="book-card"
+                onclick="
+                    openPlaylist(
+                        '${book.ID}'
+                    )
+                "
+            >
 
-</div>
+                <img
+                    src="${book.cover_url}"
+                    class="book-cover"
 
-</div>
+                    onerror="
+                        this.src='https://placehold.co/400x600/F5EFE5/C9A86A?text=Book'
+                    "
+                >
 
-`;
+                <div class="book-info">
 
-});
+                    <div class="book-title">
+                        ${book.title || ''}
+                    </div>
 
+                    <div class="book-author">
+                        ${book.author || ''}
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+    function openPlaylist(id){
+
+    const book =
+        books.find(
+            b =>
+                String(b.ID) ===
+                String(id)
+        );
+
+    if(!book || !book.spotify_playlist){
+        return;
+    }
+
+    let spotifyUrl =
+        book.spotify_playlist.trim();
+
+    /*
+       Если ссылка:
+       https://open.spotify.com/playlist/XXXXX
+
+       преобразуем в:
+       https://open.spotify.com/embed/playlist/XXXXX
+    */
+
+    if(
+        spotifyUrl.includes(
+            'open.spotify.com/'
+        )
+    ){
+
+        spotifyUrl =
+            spotifyUrl.replace(
+                'open.spotify.com/',
+                'open.spotify.com/embed/'
+            );
+
+    }
+
+    document.getElementById(
+        'playlistContent'
+    ).innerHTML = `
+
+        <img
+            src="${book.cover_url}"
+            class="playlist-modal-cover"
+
+            onerror="
+                this.style.display='none'
+            "
+        >
+
+        <h2 class="playlist-modal-title">
+            ${book.title || ''}
+        </h2>
+
+        <div class="playlist-modal-author">
+            ${book.author || ''}
+        </div>
+
+        <iframe
+            class="spotify-player"
+            src="${spotifyUrl}"
+            allow="
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                fullscreen;
+                picture-in-picture
+            "
+            loading="lazy"
+        ></iframe>
+
+        <button
+            class="btn close-modal"
+            onclick="closePlaylist()"
+        >
+            Закрыть
+        </button>
+
+    `;
+
+    document
+        .getElementById(
+            'playlistModal'
+        )
+        .classList.add(
+            'show'
+        );
+
+}
+    
+function closePlaylist(){
+
+    document
+        .getElementById(
+            'playlistModal'
+        )
+        .classList.remove(
+            'show'
+        );
+
+}
+    document
+    .getElementById(
+        'playlistModal'
+    )
+    .addEventListener(
+        'click',
+        function(e){
+
+            if(
+                e.target.id ===
+                'playlistModal'
+            ){
+
+                closePlaylist();
+
+            }
+
+        }
+    );
 }
 
 function renderArts(){
 
-const container =
-document.getElementById(
-'artsContainer'
-);
+    const container =
+        document.getElementById(
+            'artsContainer'
+        );
 
-container.innerHTML='';
+    if(!container){
+        return;
+    }
 
-arts.forEach(item=>{
+    container.innerHTML = '';
 
-const images =
-(item.arts || '')
-.split('|')
-.filter(Boolean);
+    if(!arts.length){
 
-let gallery='';
+        container.innerHTML = `
+            <div class="card">
+                Пока нет артов.
+            </div>
+        `;
 
-images.forEach(img=>{
+        return;
+    }
 
-gallery += `
+    arts.forEach(item => {
 
-<img
-src="${img}"
-class="art-image"
-onclick="
-openFullscreen(
-'${img}'
-)
-">
+        const images =
+            (item.arts || '')
+                .split('|')
+                .map(
+                    image => image.trim()
+                )
+                .filter(Boolean);
 
-`;
+        if(!images.length){
+            return;
+        }
 
-});
+        let gallery = '';
 
-container.innerHTML += `
+        images.forEach(image => {
 
-<div class="card">
+            gallery += `
 
-<h3>
-${item.title}
-</h3>
+                <img
+                    src="${image}"
+                    alt="${item.title || 'Арт'}"
+                    loading="lazy"
+                    onclick="
+                        openFullscreen(
+                            '${image.replace(/'/g, "\\'")}'
+                        )
+                    "
+                    onerror="
+                        this.style.display='none'
+                    "
+                >
 
-${gallery}
+            `;
 
-</div>
+        });
 
-`;
+        container.innerHTML += `
 
-});
+            <div class="arts-book">
+
+                <h2 class="arts-title">
+
+                    ${item.title || 'Без названия'}
+
+                </h2>
+
+                <div class="arts-gallery">
+
+                    ${gallery}
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
 
 }
 
 function openFullscreen(src){
 
-document
-.getElementById(
-'fullscreenImage'
-)
-.src = src;
+    const viewer =
+        document.getElementById(
+            'fullscreenViewer'
+        );
 
-document
-.getElementById(
-'fullscreenViewer'
-)
-.style.display =
-'flex';
+    const image =
+        document.getElementById(
+            'fullscreenImage'
+        );
+
+    image.src = src;
+
+    viewer.classList.add(
+        'show'
+    );
 
 }
 
