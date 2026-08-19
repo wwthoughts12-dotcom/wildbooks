@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 
-<meta charset="UTF-8">
+<meta charset="UTF-8">new-book-cover{
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Wild Wild Thoughts</title>
@@ -115,15 +115,10 @@
     padding:16px;
 }
 
-   #seriesPage .book-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0,1fr));
-
-    gap:16px;
-
+   #seriesPage .book-cover{
+    height:220px;
+    object-fit:cover;
+    border-radius:16px;
 }
 
 #seriesPage .book-cover{
@@ -239,18 +234,34 @@
 .new-book-cover{
 
     width:110px;
-    height:160px;
+    height:165px;
 
     object-fit:cover;
 
     border-radius:18px;
 
-    flex-shrink:0;
-
     box-shadow:
-        0 10px 25px rgba(0,0,0,.12);
-}
+        0 12px 25px rgba(40,25,15,.28);
 
+}
+@media(max-width:600px){
+
+    #catalog .book-cover,
+    #seriesPage .book-cover,
+    #home #translationBooks .book-cover{
+
+        height:170px;
+
+    }
+
+    .new-book-cover{
+
+        width:100px;
+        height:150px;
+
+    }
+
+}
 .new-book-info{
 
     flex:1;
@@ -357,23 +368,37 @@
 
     width:100%;
 
-    aspect-ratio:
-        4 / 5;
+    aspect-ratio:2 / 3;
 
     object-fit:cover;
 
     display:block;
 
-    border-radius:16px;
+    border-radius:20px;
 
-    cursor:pointer;
+    box-shadow:
+        0 10px 24px rgba(48,30,18,.18);
 
     transition:
         transform .2s ease,
         box-shadow .2s ease;
+}
+    @media(max-width:600px){
+
+    .arts-gallery{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap:12px;
+    }
+
+    .arts-gallery img{
+
+        aspect-ratio:2 / 3;
+    }
 
 }
-
 .arts-gallery img:hover{
 
     transform:scale(1.02);
@@ -753,14 +778,17 @@ line-height:1.7;
    В ПРОЦЕССЕ ПЕРЕВОДА
 ======================================== */
 
-#home #translationBooks{
+#home #translationBooks .book-cover{
 
-    display:grid;
+    height:170px;
 
-    grid-template-columns:
-        repeat(4, minmax(0,1fr));
+    object-fit:cover;
 
-    gap:14px;
+    border-radius:16px;
+
+    box-shadow:
+        0 10px 22px rgba(40,25,15,.25);
+
 }
 
 #home #translationBooks .book-cover{
@@ -826,15 +854,10 @@ line-height:1.7;
 }
 
 #catalog .book-cover{
-
     width:100%;
-
-    height:250px;
-
+    height:240px;
     object-fit:cover;
-
-    display:block;
-
+    border-radius:18px;
 }
 
 #catalog .book-info{
@@ -885,14 +908,16 @@ line-height:1.7;
 
     #catalog .cover-wrapper{
 
-        border-radius:18px;
-    }
+    border-radius:20px;
 
-    #catalog .book-title{
+    overflow:hidden;
 
-        font-size:13px;
+    background:#fff;
 
-    }
+    box-shadow:
+        0 14px 30px rgba(48,30,18,.22);
+
+}
 
     #catalog .book-author{
 
@@ -943,12 +968,11 @@ line-height:1.7;
     }
 
 
-    #home #translationBooks{
-
-        grid-template-columns:
-            repeat(3, minmax(0,1fr));
-
-    }
+    #home #translationBooks .book-cover{
+    height:170px;
+    object-fit:cover;
+    border-radius:16px;
+}
 
     #home #translationBooks .book-cover{
 
