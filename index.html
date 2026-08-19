@@ -1705,12 +1705,12 @@ let filtered =
 
 if(currentSeries !== 'Все'){
 
-filtered =
-filtered.filter(
-b=>
-b.series ===
-currentSeries
-);
+    filtered =
+    filtered.filter(
+        b =>
+        (b.series || '').trim() ===
+        (currentSeries || '').trim()
+    );
 
 }
 
