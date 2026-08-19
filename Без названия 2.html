@@ -1,0 +1,1469 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="ru"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;title&gt;Wild Wild Thoughts Library&lt;/title&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;meta name="theme-color" content="#F7F2EB"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script src="https://telegram.org/js/telegram-web-app.js"&gt;&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
+<p class="p1">&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">:root{</p>
+<p class="p2"><br></p>
+<p class="p1">--bg:#F7F2EB;</p>
+<p class="p1">--card:#FFFDF9;</p>
+<p class="p2"><br></p>
+<p class="p1">--gold:#B89B72;</p>
+<p class="p1">--gold-dark:#8E7252;</p>
+<p class="p2"><br></p>
+<p class="p1">--text:#332B24;</p>
+<p class="p1">--muted:#8B8178;</p>
+<p class="p2"><br></p>
+<p class="p1">--shadow:</p>
+<p class="p1">0 10px 30px rgba(0,0,0,.08);</p>
+<p class="p2"><br></p>
+<p class="p1">--radius:24px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">*{</p>
+<p class="p1">margin:0;</p>
+<p class="p1">padding:0;</p>
+<p class="p1">box-sizing:border-box;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">body{</p>
+<p class="p1">font-family:'Inter',sans-serif;</p>
+<p class="p1">background:var(--bg);</p>
+<p class="p1">color:var(--text);</p>
+<p class="p1">padding-bottom:95px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">h1,h2,h3{</p>
+<p class="p1">font-family:'Cormorant Garamond',serif;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.hidden{</p>
+<p class="p1">display:none!important;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.page{</p>
+<p class="p1">display:none;</p>
+<p class="p1">padding:20px;</p>
+<p class="p1">animation:fade .3s ease;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.page.active{</p>
+<p class="p1">display:block;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">@keyframes fade{</p>
+<p class="p1">from{</p>
+<p class="p1">opacity:0;</p>
+<p class="p1">transform:translateY(10px);</p>
+<p class="p1">}</p>
+<p class="p1">to{</p>
+<p class="p1">opacity:1;</p>
+<p class="p1">transform:translateY(0);</p>
+<p class="p1">}</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.hero{</p>
+<p class="p1">background:linear-gradient(</p>
+<p class="p1">135deg,</p>
+<p class="p1">#FFFDF9,</p>
+<p class="p1">#F5EEE6</p>
+<p class="p1">);</p>
+<p class="p2"><br></p>
+<p class="p1">border-radius:32px;</p>
+<p class="p2"><br></p>
+<p class="p1">padding:28px;</p>
+<p class="p2"><br></p>
+<p class="p1">box-shadow:var(--shadow);</p>
+<p class="p2"><br></p>
+<p class="p1">margin-bottom:20px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.hero h1{</p>
+<p class="p1">font-size:42px;</p>
+<p class="p1">margin-bottom:10px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.hero p{</p>
+<p class="p1">line-height:1.6;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.card{</p>
+<p class="p1">background:var(--card);</p>
+<p class="p2"><br></p>
+<p class="p1">border-radius:var(--radius);</p>
+<p class="p2"><br></p>
+<p class="p1">padding:18px;</p>
+<p class="p2"><br></p>
+<p class="p1">margin-bottom:18px;</p>
+<p class="p2"><br></p>
+<p class="p1">box-shadow:var(--shadow);</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.section-title{</p>
+<p class="p1">font-size:32px;</p>
+<p class="p1">margin-bottom:15px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.grid{</p>
+<p class="p1">display:grid;</p>
+<p class="p1">grid-template-columns:</p>
+<p class="p1">repeat(</p>
+<p class="p1">auto-fill,</p>
+<p class="p1">minmax(150px,1fr)</p>
+<p class="p1">);</p>
+<p class="p2"><br></p>
+<p class="p1">gap:16px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.book-card{</p>
+<p class="p1">background:white;</p>
+<p class="p2"><br></p>
+<p class="p1">border-radius:20px;</p>
+<p class="p2"><br></p>
+<p class="p1">overflow:hidden;</p>
+<p class="p2"><br></p>
+<p class="p1">cursor:pointer;</p>
+<p class="p2"><br></p>
+<p class="p1">transition:.25s;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.book-card:hover{</p>
+<p class="p1">transform:translateY(-3px);</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.book-cover{</p>
+<p class="p1">width:100%;</p>
+<p class="p1">height:230px;</p>
+<p class="p1">object-fit:cover;</p>
+<p class="p1">display:block;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.book-info{</p>
+<p class="p1">padding:12px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.book-title{</p>
+<p class="p1">font-weight:600;</p>
+<p class="p1">font-size:15px;</p>
+<p class="p1">margin-bottom:6px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.book-author{</p>
+<p class="p1">font-size:13px;</p>
+<p class="p1">color:var(--muted);</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.search{</p>
+<p class="p1">width:100%;</p>
+<p class="p2"><br></p>
+<p class="p1">padding:14px 18px;</p>
+<p class="p2"><br></p>
+<p class="p1">border:none;</p>
+<p class="p2"><br></p>
+<p class="p1">border-radius:18px;</p>
+<p class="p2"><br></p>
+<p class="p1">margin-bottom:16px;</p>
+<p class="p2"><br></p>
+<p class="p1">font-size:15px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.filters{</p>
+<p class="p1">display:flex;</p>
+<p class="p1">gap:10px;</p>
+<p class="p1">overflow:auto;</p>
+<p class="p1">padding-bottom:10px;</p>
+<p class="p1">margin-bottom:15px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.filter-btn{</p>
+<p class="p2"><br></p>
+<p class="p1">border:none;</p>
+<p class="p2"><br></p>
+<p class="p1">background:white;</p>
+<p class="p2"><br></p>
+<p class="p1">padding:10px 14px;</p>
+<p class="p2"><br></p>
+<p class="p1">border-radius:14px;</p>
+<p class="p2"><br></p>
+<p class="p1">cursor:pointer;</p>
+<p class="p2"><br></p>
+<p class="p1">white-space:nowrap;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.filter-btn.active{</p>
+<p class="p1">background:var(--gold);</p>
+<p class="p1">color:white;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.stats{</p>
+<p class="p1">display:grid;</p>
+<p class="p1">grid-template-columns:1fr 1fr;</p>
+<p class="p1">gap:12px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.stat-card{</p>
+<p class="p2"><br></p>
+<p class="p1">background:white;</p>
+<p class="p2"><br></p>
+<p class="p1">border-radius:20px;</p>
+<p class="p2"><br></p>
+<p class="p1">padding:18px;</p>
+<p class="p2"><br></p>
+<p class="p1">text-align:center;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.stat-value{</p>
+<p class="p1">font-size:28px;</p>
+<p class="p1">font-weight:700;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.stat-label{</p>
+<p class="p1">color:var(--muted);</p>
+<p class="p1">font-size:13px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.bottom-nav{</p>
+<p class="p2"><br></p>
+<p class="p1">position:fixed;</p>
+<p class="p2"><br></p>
+<p class="p1">left:0;</p>
+<p class="p1">right:0;</p>
+<p class="p1">bottom:0;</p>
+<p class="p2"><br></p>
+<p class="p1">background:white;</p>
+<p class="p2"><br></p>
+<p class="p1">height:78px;</p>
+<p class="p2"><br></p>
+<p class="p1">display:flex;</p>
+<p class="p2"><br></p>
+<p class="p1">justify-content:space-around;</p>
+<p class="p2"><br></p>
+<p class="p1">align-items:center;</p>
+<p class="p2"><br></p>
+<p class="p1">box-shadow:</p>
+<p class="p1">0 -5px 20px rgba(0,0,0,.08);</p>
+<p class="p2"><br></p>
+<p class="p1">z-index:1000;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.nav-btn{</p>
+<p class="p2"><br></p>
+<p class="p1">background:none;</p>
+<p class="p1">border:none;</p>
+<p class="p2"><br></p>
+<p class="p1">display:flex;</p>
+<p class="p1">flex-direction:column;</p>
+<p class="p2"><br></p>
+<p class="p1">align-items:center;</p>
+<p class="p2"><br></p>
+<p class="p1">gap:4px;</p>
+<p class="p2"><br></p>
+<p class="p1">font-size:12px;</p>
+<p class="p2"><br></p>
+<p class="p1">color:var(--muted);</p>
+<p class="p2"><br></p>
+<p class="p1">cursor:pointer;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.nav-btn.active{</p>
+<p class="p1">color:var(--gold);</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.modal{</p>
+<p class="p2"><br></p>
+<p class="p1">position:fixed;</p>
+<p class="p2"><br></p>
+<p class="p1">inset:0;</p>
+<p class="p2"><br></p>
+<p class="p1">background:</p>
+<p class="p1">rgba(0,0,0,.65);</p>
+<p class="p2"><br></p>
+<p class="p1">display:none;</p>
+<p class="p2"><br></p>
+<p class="p1">justify-content:center;</p>
+<p class="p2"><br></p>
+<p class="p1">align-items:center;</p>
+<p class="p2"><br></p>
+<p class="p1">padding:20px;</p>
+<p class="p2"><br></p>
+<p class="p1">z-index:2000;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.modal.show{</p>
+<p class="p1">display:flex;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.modal-content{</p>
+<p class="p2"><br></p>
+<p class="p1">background:white;</p>
+<p class="p2"><br></p>
+<p class="p1">width:100%;</p>
+<p class="p1">max-width:650px;</p>
+<p class="p2"><br></p>
+<p class="p1">max-height:90vh;</p>
+<p class="p2"><br></p>
+<p class="p1">overflow:auto;</p>
+<p class="p2"><br></p>
+<p class="p1">border-radius:30px;</p>
+<p class="p2"><br></p>
+<p class="p1">padding:22px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.modal-cover{</p>
+<p class="p1">width:100%;</p>
+<p class="p1">border-radius:20px;</p>
+<p class="p1">margin-bottom:15px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.btn{</p>
+<p class="p2"><br></p>
+<p class="p1">display:inline-block;</p>
+<p class="p2"><br></p>
+<p class="p1">background:var(--gold);</p>
+<p class="p2"><br></p>
+<p class="p1">color:white;</p>
+<p class="p2"><br></p>
+<p class="p1">text-decoration:none;</p>
+<p class="p2"><br></p>
+<p class="p1">padding:12px 18px;</p>
+<p class="p2"><br></p>
+<p class="p1">border-radius:14px;</p>
+<p class="p2"><br></p>
+<p class="p1">margin-top:10px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.favorite-btn{</p>
+<p class="p1">margin-left:10px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.art-image{</p>
+<p class="p2"><br></p>
+<p class="p1">width:100%;</p>
+<p class="p2"><br></p>
+<p class="p1">border-radius:20px;</p>
+<p class="p2"><br></p>
+<p class="p1">cursor:pointer;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.fullscreen{</p>
+<p class="p2"><br></p>
+<p class="p1">position:fixed;</p>
+<p class="p2"><br></p>
+<p class="p1">inset:0;</p>
+<p class="p2"><br></p>
+<p class="p1">background:black;</p>
+<p class="p2"><br></p>
+<p class="p1">display:none;</p>
+<p class="p2"><br></p>
+<p class="p1">justify-content:center;</p>
+<p class="p2"><br></p>
+<p class="p1">align-items:center;</p>
+<p class="p2"><br></p>
+<p class="p1">z-index:9999;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.fullscreen img{</p>
+<p class="p1">max-width:95%;</p>
+<p class="p1">max-height:95%;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.loading{</p>
+<p class="p1">padding:30px;</p>
+<p class="p1">text-align:center;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div id="loading" class="loading"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>Загрузка библиотеки...</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- О НАС --&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;section id="aboutPage" class="page active"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="hero"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1&gt;Wild Wild Thoughts&lt;/h1&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Добро пожаловать в библиотеку Wild Wild Thoughts.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Здесь собраны переводы современных любовных романов.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;br&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;Строго 18+&lt;/strong&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="stats"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="booksCount" class="stat-value"&gt;0&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="stat-label"&gt;Книг&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="seriesCount" class="stat-value"&gt;0&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="stat-label"&gt;Серий&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="playlistCount" class="stat-value"&gt;0&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="stat-label"&gt;Плейлистов&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="artCount" class="stat-value"&gt;0&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="stat-label"&gt;Артов&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- ГЛАВНАЯ --&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;section id="homePage" class="page"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="hero"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;Библиотека Wild Wild Thoughts&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;Luxury Collection&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2 class="section-title"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Новинка</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/h2&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="newBook"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2 class="section-title"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Скоро выйдет</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/h2&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="announcementsContainer"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2 class="section-title"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>В процессе перевода</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/h2&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="translationContainer"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2 class="section-title"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Серии</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/h2&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="seriesContainer"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- КАТАЛОГ --&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;section id="catalogPage" class="page"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id="searchInput"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>class="search"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>placeholder="🔍 Найти книгу..."</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id="seriesFilters"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>class="filters"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id="tropeFilters"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>class="filters"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id="catalogGrid"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>class="grid"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- ПЛЕЙЛИСТЫ --&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;section id="playlistsPage" class="page"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2 class="section-title"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>Плейлисты</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/h2&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id="playlistGrid"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>class="grid"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- АРТЫ --&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;section id="artsPage" class="page"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2 class="section-title"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>Арты</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/h2&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id="artsContainer"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- КАРТОЧКА КНИГИ --&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div id="bookModal" class="modal"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="modal-content"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="bookContent"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- ПОЛНОЭКРАННЫЙ ПРОСМОТР --&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">    </span>id="fullscreenViewer"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>class="fullscreen"</p>
+<p class="p1">&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;img id="fullscreenImage"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- НИЖНЕЕ МЕНЮ --&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;nav class="bottom-nav"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">        </span>class="nav-btn active"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>data-page="aboutPage"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;ℹ️&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;О нас&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/button&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">        </span>class="nav-btn"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>data-page="homePage"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;🏠&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;Главная&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/button&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">        </span>class="nav-btn"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>data-page="catalogPage"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;📚&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;Каталог&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/button&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">        </span>class="nav-btn"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>data-page="playlistsPage"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;🎧&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;Плейлисты&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/button&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">        </span>class="nav-btn"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>data-page="artsPage"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;🖼&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;Арты&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/button&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/nav&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">const BOOKS_URL =</p>
+<p class="p1">'https://sheetsjson.onrender.com/v1/fetch?csv_url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2Fe%2F2PACX-1vQI8CHOf1D1itshzP1MtTu4KDz803QihzIa6WXq-anfYkOA_k_OV27sRDET04qVr202wnqCB7X95ogO%2Fpub%3Foutput%3Dcsv';</p>
+<p class="p2"><br></p>
+<p class="p1">const ANNOUNCEMENTS_URL =</p>
+<p class="p1">'https://sheetsjson.onrender.com/v1/fetch?csv_url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2Fe%2F2PACX-1vTlVHOEmWsc7BjxeB1w0dcqsTuPCstHe7lrA5fIPUNMFaoLmPSjqyzO3LPkoUpxQNY8ShrWCXBXyf_X%2Fpub%3Foutput%3Dcsv';</p>
+<p class="p2"><br></p>
+<p class="p1">const ARTS_URL =</p>
+<p class="p1">'https://sheetsjson.onrender.com/v1/fetch?csv_url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2Fe%2F2PACX-1vSho-xQsv1AtpTa-k_wDgcO968CYzd546FRuxVXAsWHDt1Y8Ey6yYOL_kEJ5cKiNC7VcYeMtfSYboQE%2Fpub%3Foutput%3Dcsv';</p>
+<p class="p2"><br></p>
+<p class="p1">let books = [];</p>
+<p class="p1">let announcements = [];</p>
+<p class="p1">let arts = [];</p>
+<p class="p2"><br></p>
+<p class="p1">let currentSeries = 'Все';</p>
+<p class="p1">let currentTrope = 'Все';</p>
+<p class="p2"><br></p>
+<p class="p1">const favorites =</p>
+<p class="p1">JSON.parse(</p>
+<p class="p1">localStorage.getItem('favorites') || '[]'</p>
+<p class="p1">);</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">const favorites =</p>
+<p class="p1">JSON.parse(</p>
+<p class="p1">localStorage.getItem('favorites') || '[]'</p>
+<p class="p1">);</p>
+<p class="p1">async function loadData() {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>try {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const [</p>
+<p class="p1"><span class="Apple-converted-space">            </span>booksResponse,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>announcementsResponse,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>artsResponse</p>
+<p class="p1"><span class="Apple-converted-space">        </span>] = await Promise.all([</p>
+<p class="p1"><span class="Apple-converted-space">            </span>fetch(BOOKS_URL),</p>
+<p class="p1"><span class="Apple-converted-space">            </span>fetch(ANNOUNCEMENTS_URL),</p>
+<p class="p1"><span class="Apple-converted-space">            </span>fetch(ARTS_URL)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>]);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>books = await booksResponse.json();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>announcements = await announcementsResponse.json();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>arts = await artsResponse.json();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>updateStats();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderHome();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderCatalog();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderPlaylists();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderArts();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>document</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.getElementById('loading')</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.style.display = 'none';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>} catch(error){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>console.error(error);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('loading').innerHTML =</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'Ошибка загрузки данных';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function updateStats(){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('booksCount').textContent =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>books.length;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const uniqueSeries =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>[...new Set(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>books.map(</p>
+<p class="p1"><span class="Apple-converted-space">            </span>b =&gt; b.series</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('seriesCount').textContent =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>uniqueSeries.length;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('playlistCount').textContent =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>books.filter(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>b =&gt; b.spotify_playlist</p>
+<p class="p1"><span class="Apple-converted-space">    </span>).length;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let totalArts = 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>arts.forEach(art =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(!art.arts) return;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>totalArts +=</p>
+<p class="p1"><span class="Apple-converted-space">        </span>art.arts.split('|').length;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('artCount').textContent =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>totalArts;</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderHome(){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>renderNewBook();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>renderAnnouncements();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>renderSeries();</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderNewBook(){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const container =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('newBook');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(!books.length){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>container.innerHTML =</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'Пока нет книг';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const book = books[0];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>container.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="book-card"</p>
+<p class="p1"><span class="Apple-converted-space">             </span>onclick="openBook('${book.ID}')"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;img</p>
+<p class="p1"><span class="Apple-converted-space">                </span>src="${book.cover_url}"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>class="book-cover"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="book-info"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="book-title"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>${book.title}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="book-author"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>${book.author}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>`;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderAnnouncements(){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const container =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'announcementsContainer'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>container.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>announcements.forEach(item =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>container.innerHTML += `</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>${item.title}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/strong&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;br&gt;&lt;br&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>${item.tropes || ''}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;br&gt;&lt;br&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>📅 ${item["date active"] || ''}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderSeries(){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const container =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'seriesContainer'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const seriesMap = {};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>books.forEach(book =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(!seriesMap[book.series]){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>seriesMap[book.series] = 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>seriesMap[book.series]++;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>container.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>Object.keys(seriesMap)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sort()</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.forEach(series =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>container.innerHTML += `</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;strong&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>${series}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/strong&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;br&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>${seriesMap[series]} книг</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderCatalog(){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>buildSeriesFilters();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>buildTropeFilters();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>drawCatalog();</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function buildSeriesFilters(){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const wrapper =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'seriesFilters'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const series =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>[</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'Все',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>...new Set(</p>
+<p class="p1"><span class="Apple-converted-space">            </span>books.map(</p>
+<p class="p1"><span class="Apple-converted-space">                </span>b =&gt; b.series</p>
+<p class="p1"><span class="Apple-converted-space">            </span>)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>wrapper.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>series.forEach(item =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>wrapper.innerHTML += `</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">            </span>class="filter-btn ${</p>
+<p class="p1"><span class="Apple-converted-space">                </span>item === currentSeries</p>
+<p class="p1"><span class="Apple-converted-space">                </span>? 'active'</p>
+<p class="p1"><span class="Apple-converted-space">                </span>: ''</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>onclick="selectSeries('${item}')"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>${item}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function buildTropeFilters(){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const wrapper =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'tropeFilters'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const tropeSet =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>new Set();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>books.forEach(book =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(!book.trops) return;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>book.trops</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.split(',')</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.forEach(t =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>tropeSet.add(</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>t.trim()</p>
+<p class="p1"><span class="Apple-converted-space">                </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const tropes =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>['Все', ...tropeSet];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>wrapper.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>tropes.forEach(item =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>wrapper.innerHTML += `</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">            </span>class="filter-btn ${</p>
+<p class="p1"><span class="Apple-converted-space">                </span>item === currentTrope</p>
+<p class="p1"><span class="Apple-converted-space">                </span>? 'active'</p>
+<p class="p1"><span class="Apple-converted-space">                </span>: ''</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>onclick="selectTrope('${item}')"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>${item}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function selectSeries(series){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>currentSeries = series;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>buildSeriesFilters();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>drawCatalog();</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function selectTrope(trope){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>currentTrope = trope;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>buildTropeFilters();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>drawCatalog();</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function drawCatalog(){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const grid =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'catalogGrid'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const search =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.getElementById(</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'searchInput'</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.value</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.toLowerCase();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let filtered =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>[...books];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(currentSeries !== 'Все'){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>filtered =</p>
+<p class="p1"><span class="Apple-converted-space">        </span>filtered.filter(</p>
+<p class="p1"><span class="Apple-converted-space">            </span>book =&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>book.series === currentSeries</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(currentTrope !== 'Все'){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>filtered =</p>
+<p class="p1"><span class="Apple-converted-space">        </span>filtered.filter(</p>
+<p class="p1"><span class="Apple-converted-space">            </span>book =&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>(book.trops || '')</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.includes(currentTrope)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(search){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>filtered =</p>
+<p class="p1"><span class="Apple-converted-space">        </span>filtered.filter(book =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">                </span>book.title</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>.toLowerCase()</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>.includes(search)</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>||</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>book.author</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>.toLowerCase()</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>.includes(search)</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>||</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>book.series</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>.toLowerCase()</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>.includes(search)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>grid.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>filtered.forEach(book =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>grid.innerHTML += `</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">            </span>class="book-card"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>onclick="openBook('${book.ID}')"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;img</p>
+<p class="p1"><span class="Apple-converted-space">                </span>src="${book.cover_url}"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>class="book-cover"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="book-info"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="book-title"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>${book.title}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="book-author"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>${book.author}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">document</p>
+<p class="p1">.getElementById('searchInput')</p>
+<p class="p1">.addEventListener(</p>
+<p class="p1"><span class="Apple-converted-space">    </span>'input',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>drawCatalog</p>
+<p class="p1">);</p>
+<p class="p2"><br></p>
+<p class="p1">function openBook(id){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const book =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>books.find(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>b =&gt; String(b.ID) === String(id)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(!book) return;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const modal =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'bookModal'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const isFavorite =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>favorites.includes(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>String(book.ID)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const spotifyEmbed =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>book.spotify_playlist</p>
+<p class="p1"><span class="Apple-converted-space">    </span>?</p>
+<p class="p1"><span class="Apple-converted-space">    </span>book.spotify_playlist</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.replace(</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'open.spotify.com/',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'open.spotify.com/embed/'</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>:</p>
+<p class="p1"><span class="Apple-converted-space">    </span>'';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'bookContent'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>).innerHTML = `</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;img</p>
+<p class="p1"><span class="Apple-converted-space">            </span>src="${book.cover_url}"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>class="modal-cover"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>${book.title}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/h2&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;br&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Автор:&lt;/strong&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>${book.author}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;br&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Серия:&lt;/strong&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>${book.series}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;br&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Тропы:&lt;/strong&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>${book.trops || '-'}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;br&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>${book.description || ''}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>${</p>
+<p class="p1"><span class="Apple-converted-space">            </span>spotifyEmbed</p>
+<p class="p1"><span class="Apple-converted-space">            </span>?</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;br&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;iframe</p>
+<p class="p1"><span class="Apple-converted-space">                </span>src="${spotifyEmbed}"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>width="100%"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>height="352"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>frameborder="0"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>allowfullscreen</p>
+<p class="p1"><span class="Apple-converted-space">                </span>allow="autoplay; clipboard-write; encrypted-media; fullscreen"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loading="lazy"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/iframe&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`</p>
+<p class="p1"><span class="Apple-converted-space">            </span>:</p>
+<p class="p1"><span class="Apple-converted-space">            </span>''</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;br&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;a</p>
+<p class="p1"><span class="Apple-converted-space">            </span>href="${book.file_url}"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>target="_blank"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>class="btn"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Скачать книгу</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/a&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">            </span>class="btn favorite-btn"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>onclick="toggleFavorite('${book.ID}')"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>${</p>
+<p class="p1"><span class="Apple-converted-space">                </span>isFavorite</p>
+<p class="p1"><span class="Apple-converted-space">                </span>? '❤️ В избранном'</p>
+<p class="p1"><span class="Apple-converted-space">                </span>: '🤍 В избранное'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>modal.classList.add(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'show'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function toggleFavorite(id){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const index =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>favorites.indexOf(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>String(id)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(index &gt; -1){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>favorites.splice(</p>
+<p class="p1"><span class="Apple-converted-space">            </span>index,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>1</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>} else {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>favorites.push(</p>
+<p class="p1"><span class="Apple-converted-space">            </span>String(id)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>localStorage.setItem(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'favorites',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>JSON.stringify(</p>
+<p class="p1"><span class="Apple-converted-space">            </span>favorites</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>openBook(id);</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">document</p>
+<p class="p1">.getElementById('bookModal')</p>
+<p class="p1">.addEventListener(</p>
+<p class="p1"><span class="Apple-converted-space">    </span>'click',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function(e){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(</p>
+<p class="p1"><span class="Apple-converted-space">            </span>e.target.id ===</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'bookModal'</p>
+<p class="p1"><span class="Apple-converted-space">        </span>){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>this.classList.remove(</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'show'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1">);</p>
+<p class="p2"><br></p>
+<p class="p1">function renderPlaylists(){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const container =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'playlistGrid'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>container.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>books</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.filter(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>book =&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>book.spotify_playlist</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.forEach(book =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>container.innerHTML += `</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">            </span>class="book-card"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>onclick="</p>
+<p class="p1"><span class="Apple-converted-space">            </span>window.open(</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'${book.spotify_playlist}',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'_blank'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>)"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;img</p>
+<p class="p1"><span class="Apple-converted-space">                </span>src="${book.cover_url}"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>class="book-cover"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">                </span>class="book-info"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>class="book-title"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>${book.title}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderArts(){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const container =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'artsContainer'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>container.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>arts.forEach(item =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const images =</p>
+<p class="p1"><span class="Apple-converted-space">        </span>(item.arts || '')</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.split('|')</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.filter(Boolean);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>let gallery = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>images.forEach(img =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>gallery += `</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;img</p>
+<p class="p1"><span class="Apple-converted-space">                </span>src="${img}"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>class="art-image"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>onclick="</p>
+<p class="p1"><span class="Apple-converted-space">                </span>openArt(</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'${img}'</p>
+<p class="p1"><span class="Apple-converted-space">                </span>)</p>
+<p class="p1"><span class="Apple-converted-space">                </span>"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;br&gt;&lt;br&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>container.innerHTML += `</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>${item.title}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/h3&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;br&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>${gallery}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function openArt(src){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>document</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.getElementById(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'fullscreenImage'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.src = src;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>document</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.getElementById(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'fullscreenViewer'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.style.display =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>'flex';</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">document</p>
+<p class="p1">.getElementById(</p>
+<p class="p1"><span class="Apple-converted-space">    </span>'fullscreenViewer'</p>
+<p class="p1">)</p>
+<p class="p1">.addEventListener(</p>
+<p class="p1"><span class="Apple-converted-space">    </span>'click',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function(){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>this.style.display =</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'none';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1">);</p>
+<p class="p2"><br></p>
+<p class="p1">document</p>
+<p class="p1">.querySelectorAll(</p>
+<p class="p1"><span class="Apple-converted-space">    </span>'.nav-btn'</p>
+<p class="p1">)</p>
+<p class="p1">.forEach(btn =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>btn.addEventListener(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'click',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>() =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.querySelectorAll(</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'.page'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.forEach(page =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>page.classList.remove(</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'active'</p>
+<p class="p1"><span class="Apple-converted-space">                </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.querySelectorAll(</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'.nav-btn'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.forEach(nav =&gt; {</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>nav.classList.remove(</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'active'</p>
+<p class="p1"><span class="Apple-converted-space">                </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.getElementById(</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.dataset.page</p>
+<p class="p1"><span class="Apple-converted-space">            </span>)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.classList.add(</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'active'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>btn.classList.add(</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'active'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p2"><br></p>
+<p class="p1">});</p>
+<p class="p2"><br></p>
+<p class="p1">if(window.Telegram){</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>Telegram.WebApp.ready();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>Telegram.WebApp.expand();</p>
+<p class="p2"><br></p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">loadData();</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
