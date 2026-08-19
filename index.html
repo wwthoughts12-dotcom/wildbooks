@@ -1931,64 +1931,29 @@ function renderNewBook(){
 function renderTranslations(){
 
     const container =
-        document.getElementById(
-            'translationBooks'
-        );
-
-    if(!container){
-        return;
-    }
-
+        document.getElementById('translationBooks');
 
     container.innerHTML = '';
 
-
-    if(!announcements.length){
-
-        container.innerHTML = `
-            <div class="card">
-                Пока нет информации
-                о книгах в процессе перевода.
-            </div>
-        `;
-
-        return;
-    }
-
-
     announcements.forEach(item => {
-
-        const date =
-            item.date_active ||
-            item['date active'] ||
-            '';
-
 
         container.innerHTML += `
 
-            <div class="book-card">
+            <div class="translation-card">
 
                 <img
-                    src="${item.cover_url || ''}"
-                    class="book-cover"
-
-                    onerror="
-                        this.style.display='none'
-                    "
+                    src="${item.cover_url}"
+                    class="translation-cover"
                 >
 
-                <div class="book-info">
+                <div class="translation-info">
 
-                    <div class="book-title">
+                    <div class="translation-title">
                         ${item.title || ''}
                     </div>
 
-                    <div class="book-author">
+                    <div class="translation-tropes">
                         ${item.tropes || ''}
-                    </div>
-
-                    <div class="book-author">
-                        ${date}
                     </div>
 
                 </div>
