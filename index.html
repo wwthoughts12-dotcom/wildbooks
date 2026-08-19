@@ -1634,48 +1634,45 @@ drawCatalog();
 
 function buildSeriesFilters(){
 
-const container =
-document.getElementById(
-'seriesFilters'
-);
+    const container =
+        document.getElementById(
+            'seriesFilters'
+        );
 
-const series = [
-'Все',
-...new Set(
-books
-.map(
-b=>b.series
-)
-.filter(Boolean)
-)
-];
+    const series = [
+        'Все',
+        ...new Set(
+            books
+                .map(b => b.series)
+                .filter(Boolean)
+        )
+    ];
 
-container.innerHTML='';
+    container.innerHTML = '';
 
-series.forEach(item=>{
+    series.forEach(item => {
 
-    const safeSeries =
-        item.replace(/'/g,"\\'");
+        const button =
+            document.createElement('button');
 
-    container.innerHTML += `
+        button.className =
+            'filter' +
+            (item === currentSeries
+                ? ' active'
+                : '');
 
-    <button
-        class="filter ${
-            item===currentSeries
-            ? 'active'
-            : ''
-        }"
-        onclick="selectSeries('${safeSeries}')">
+        button.textContent = item;
 
-        ${item}
+        button.addEventListener(
+            'click',
+            () => selectSeries(item)
+        );
 
-    </button>
+        container.appendChild(button);
 
-    `;
+    });
 
-});
 }
-
 
 function selectSeries(series){
 
