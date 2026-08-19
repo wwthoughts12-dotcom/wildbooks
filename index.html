@@ -1654,24 +1654,26 @@ container.innerHTML='';
 
 series.forEach(item=>{
 
-container.innerHTML += `
+    const safeSeries =
+        item.replace(/'/g,"\\'");
 
-<button
-class="filter ${
-item===currentSeries
-? 'active'
-: ''
-}"
-onclick="selectSeries('${item}')">
+    container.innerHTML += `
 
-${item}
+    <button
+        class="filter ${
+            item===currentSeries
+            ? 'active'
+            : ''
+        }"
+        onclick="selectSeries('${safeSeries}')">
 
-</button>
+        ${item}
 
-`;
+    </button>
+
+    `;
 
 });
-
 }
 
 
