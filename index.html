@@ -1373,14 +1373,13 @@ function renderNewBook(){
 
     container.innerHTML = '';
 
-    newBooks.forEach(book => {
+    newBooks.forEach((book,index) => {
 
-        container.innerHTML += `
-
-            <div
-                class="book-card"
-                onclick="openAnnouncementBook('${book.ID}')"
-            >
+    container.innerHTML += `
+        <div
+            class="book-card"
+            onclick="openAnnouncementBook(${index})"
+        >
 
                 <img
                     src="${book.cover_url || ''}"
@@ -2271,14 +2270,11 @@ function backToHome(){
         .classList.add('active');
 
 }
-    function openAnnouncementBook(id){
+    function openAnnouncementBook(index){
 
-    const book =
-        newBooks.find(
-            b =>
-                String(b.ID) ===
-                String(id)
-        );
+    const book = newBooks[index];
+
+    if(!book) return;
 
     if(!book) return;
 
