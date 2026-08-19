@@ -78,7 +78,13 @@
         rgba(179,144,78,.25);
 
 }
+.series-item{
+    cursor:pointer;
+}
 
+.series-item:hover{
+    transform:translateY(-2px);
+}
 :root{
 
 --bg:#f4ede3;
@@ -992,6 +998,30 @@ padding:20px;
 </div>
     
 <div id="catalog" class="page">
+    <div id="seriesPage" class="page">
+
+    <div class="container">
+
+        <button
+            class="btn"
+            onclick="backToHome()"
+        >
+            ← Назад
+        </button>
+
+        <h2
+            id="seriesPageTitle"
+            style="margin:20px 0;"
+        ></h2>
+
+        <div
+            id="seriesBooksGrid"
+            class="book-grid"
+        ></div>
+
+    </div>
+
+</div>
 
 <div class="card">
 
@@ -1456,15 +1486,14 @@ Object.keys(map)
 
 container.innerHTML += `
 
-<div class="series-item">
+<div
+    class="series-item"
+    onclick="openSeries('${series}')"
+>
 
-<span>
-${series}
-</span>
+    <span>${series}</span>
 
-<strong>
-${map[series]}
-</strong>
+    <strong>${map[series]}</strong>
 
 </div>
 
@@ -1698,6 +1727,22 @@ document
 'bookContent'
 )
 .innerHTML = `
+<button
+    class="btn"
+    onclick="
+        document
+        .getElementById(
+            'bookModal'
+        )
+        .classList.remove(
+            'show'
+        )
+    "
+>
+    ← Назад
+</button>
+
+<br><br>
 
 <img
 src="${book.cover_url}"
@@ -2211,7 +2256,71 @@ if(window.Telegram){
     Telegram.WebApp.expand();
 
 }
+function openSeries(series){
 
+    document
+        .querySelectorAll('.page')
+        .forEach(page=>{
+
+            page.classList.remove(
+                'active'
+            );
+
+        });
+
+    document
+        .getElementById(
+            'seriesPage'
+        )
+        .classList.add(
+            'active'
+        );
+
+    document
+        .getElementById(
+            'seriesPageTitle'
+        )
+        .innerText = series;
+
+    const grid =
+        document.getElementById(
+            'seriesBooksGrid'
+        );
+
+    const seriesBooks =
+        books.filter(
+            book =>
+                book.series === series
+        );
+
+    grid.innerHTML = '';
+
+    seriesBooks.forEach(book=>{
+
+        grid.innerHTML +=
+            createBookCard(book);
+
+    });
+
+}
+
+function backToHome(){
+
+    document
+        .querySelectorAll('.page')
+        .forEach(page=>{
+
+            page.classList.remove(
+                'active'
+            );
+
+        });
+
+    document
+        .getElementById('home')
+        .classList.add('active');
+
+}
 loadData();
 
 </script>
