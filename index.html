@@ -1375,15 +1375,39 @@ function renderNewBook(){
 
     container.innerHTML = '';
 
-    newBooks.forEach(book => {
+    newBooks.forEach((book,index) => {
 
-        container.innerHTML +=
-            createBookCard(book);
+        container.innerHTML += `
+
+            <div
+                class="book-card"
+                onclick="openAnnouncementBook(${index})"
+            >
+
+                <img
+                    src="${book.cover_url || ''}"
+                    class="book-cover"
+                >
+
+                <div class="book-info">
+
+                    <div class="book-title">
+                        ${book.title || ''}
+                    </div>
+
+                    <div class="book-author">
+                        ${book.author || ''}
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
 
     });
 
 }
-
 function renderTranslations(){
 
     const container =
