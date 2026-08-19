@@ -232,7 +232,7 @@
     /* ================================
    НОВИНИКА
 ================================ */
-    .new-book-card{
+  .new-book-card{
     display:flex;
     align-items:center;
     gap:24px;
@@ -280,116 +280,30 @@
    НОВИНКА — МОБИЛЬНАЯ ВЕРСИЯ
 ======================================== */
 
-@media (max-width:600px){
+@media(max-width:600px){
 
-    #newBook{
-        width:100%;
-        margin-top:18px;
-    }
-
-    .new-book-wrapper{
-
+    .new-book-card{
         display:flex;
-
         flex-direction:row;
 
         align-items:center;
 
-        gap:16px;
+        gap:18px;
 
-        width:100%;
-
-        min-height:165px;
-
-        padding:0;
-
-        background:#fffdf8;
-
-        border-radius:22px;
-
-        box-shadow:
-            0 10px 25px rgba(48,30,18,.15);
-
-        box-sizing:border-box;
-
-        overflow:hidden;
-
-        cursor:pointer;
+        padding:20px;
     }
 
     .new-book-cover{
-
-        width:110px;
-
-        height:165px;
-
-        min-width:110px;
-
-        object-fit:cover;
-
-        border-radius:0;
-
-        display:block;
-
-        box-shadow:
-            6px 0 15px rgba(48,30,18,.18);
-
-        flex-shrink:0;
-    }
-
-    .new-book-info{
-
-        flex:1;
-
-        min-width:0;
-
-        padding:15px 14px 15px 0;
-
-        display:flex;
-
-        flex-direction:column;
-
-        justify-content:center;
-
-        box-sizing:border-box;
+        width:120px;
+        height:180px;
     }
 
     .new-book-title{
-
-        font-family:
-            'Playfair Display',
-            serif;
-
-        font-size:20px;
-
-        font-weight:600;
-
-        line-height:1.25;
-
-        margin-bottom:8px;
-
-        color:#2d2926;
-
-        word-break:normal;
-
-        overflow-wrap:break-word;
+        font-size:22px;
     }
 
     .new-book-author{
-
-        font-family:
-            'Inter',
-            sans-serif;
-
-        font-size:14px;
-
-        line-height:1.4;
-
-        color:#7a746d;
-
-        word-break:normal;
-
-        overflow-wrap:break-word;
+        font-size:16px;
     }
 
 }
@@ -944,91 +858,104 @@ line-height:1.7;
 }
 
 #catalog .cover-wrapper{
-
-    border-radius:24px;
-
-    overflow:hidden;
-
-    background:#f6eee4;
-
-    box-shadow:
-        0 15px 35px rgba(90,57,30,.18),
-        0 4px 12px rgba(90,57,30,.12);
-
-}
-
-#catalog .book-cover{
-    width:100%;
-    height:240px;
-    object-fit:cover;
-    border-radius:18px;
-}
-
-#catalog .book-info{
-
-    padding-top:14px;
-
-}
-
-#catalog .book-title{
-
-    font-size:18px;
-
-    font-weight:600;
-
-    line-height:1.3;
-
-    margin-bottom:5px;
-
-    color:#2d2926;
-
-}
-
-#catalog .book-author{
-
-    font-size:15px;
-
-    color:#7f7468;
-
-}
-    @media(max-width:600px){
-
-    #catalogGrid{
-
-        grid-template-columns:
-            repeat(3,1fr);
-
-        gap:18px 12px;
-
-        padding:14px;
-
-    }
-
-    #catalog .book-cover{
-
-        height:170px;
-
-    }
-
-    #catalog .cover-wrapper{
-
-    border-radius:20px;
-
+    border-radius:12px;
     overflow:hidden;
 
     background:#fff;
 
     box-shadow:
-        0 14px 30px rgba(48,30,18,.22);
+        0 8px 20px rgba(48,30,18,.20);
 
+    width:100%;
 }
+
+#catalog .book-cover{
+    width:100%;
+    height:210px;
+
+    display:block;
+
+    object-fit:cover;
+
+    border-radius:12px;
+}
+
+#catalog .book-info{
+    padding:10px 2px 0;
+}
+
+#catalog .book-title{
+    font-size:15px;
+    line-height:1.3;
+    font-weight:600;
+
+    margin-bottom:4px;
+
+    color:#2d2926;
+}
+
+#catalog .book-author{
+    font-size:12px;
+    line-height:1.3;
+
+    color:#7a746d;
+}
+   /* ========================================
+   МОБИЛЬНАЯ ВЕРСИЯ КАТАЛОГА
+======================================== */
+
+@media(max-width:600px){
+
+    #catalogGrid{
+
+        grid-template-columns:
+            repeat(3, minmax(0,1fr));
+
+        gap:18px 12px;
+
+        padding:14px;
+    }
+
+    #catalog .cover-wrapper{
+
+        border-radius:10px;
+
+        box-shadow:
+            0 7px 16px rgba(48,30,18,.20);
+    }
+#catalog .book-cover{
+
+        width:100%;
+
+        height:155px;
+
+        object-fit:cover;
+
+        border-radius:10px;
+    }
+
+    #catalog .book-info{
+
+        padding:8px 1px 0;
+    }
+
+    #catalog .book-title{
+
+        font-size:12px;
+
+        line-height:1.3;
+
+        margin-bottom:3px;
+    }
 
     #catalog .book-author{
 
-        font-size:11px;
+        font-size:10px;
 
+        line-height:1.3;
     }
 
+}
 }
 
 }
