@@ -18,6 +18,67 @@
 
 <style>
 
+    .about-card{
+    background:
+        linear-gradient(
+            135deg,
+            #fffdf8 0%,
+            #f7efe2 100%
+        );
+
+    border:1px solid
+        rgba(201,168,106,.25);
+
+    position:relative;
+    overflow:hidden;
+}
+
+.about-card::after{
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    right:-60px;
+    top:-60px;
+
+    border:1px solid
+        rgba(201,168,106,.18);
+
+    border-radius:50%;
+}
+
+.age-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    margin-top:22px;
+
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    background:var(--gold);
+
+    color:white;
+
+    font-size:14px;
+    font-weight:600;
+
+    letter-spacing:.5px;
+
+    box-shadow:
+        0 6px 18px
+        rgba(179,144,78,.25);
+
+}
+
 :root{
 
 --bg:#f4ede3;
@@ -31,79 +92,102 @@
    АРТЫ
 ================================ */
 
+/* ================================
+   АРТЫ
+================================ */
+
+.arts-page{
+    padding:26px;
+}
+
 .arts-book{
-    background:var(--card);
+    background:#fffdf8;
     border-radius:24px;
     padding:24px;
     margin-bottom:24px;
     box-shadow:var(--shadow);
+
+    border:1px solid
+        rgba(201,168,106,.14);
 }
 
 .arts-title{
     text-align:center;
-    font-family:'Playfair Display',serif;
-    font-size:28px;
+
+    font-family:
+        'Playfair Display',
+        serif;
+
+    font-size:29px;
     font-weight:600;
+
     color:var(--text);
-    margin-bottom:20px;
+
+    margin-bottom:22px;
+
+    padding-bottom:14px;
+
+    border-bottom:1px solid
+        rgba(201,168,106,.25);
 }
 
 .arts-gallery{
+
     display:grid;
-    grid-template-columns:repeat(3, 1fr);
+
+    grid-template-columns:
+        repeat(3,1fr);
+
     gap:12px;
+
 }
 
 .arts-gallery img{
+
     width:100%;
-    aspect-ratio:1 / 1;
+
+    aspect-ratio:
+        4 / 5;
+
     object-fit:cover;
-    border-radius:16px;
-    cursor:pointer;
+
     display:block;
+
+    border-radius:16px;
+
+    cursor:pointer;
+
     transition:
         transform .2s ease,
         box-shadow .2s ease;
+
 }
 
 .arts-gallery img:hover{
+
     transform:scale(1.02);
-    box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.14);
+
 }
 
-/* полноэкранный просмотр */
-
-.fullscreen{
-    position:fixed;
-    inset:0;
-    background:rgba(20,18,16,.94);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    z-index:99999;
-    padding:20px;
-}
-
-.fullscreen.show{
-    display:flex;
-}
-
-.fullscreen img{
-    max-width:96%;
-    max-height:92%;
-    object-fit:contain;
-    border-radius:12px;
-}
-
-@media(max-width:600px){
+@media(max-width:700px){
 
     .arts-gallery{
-        grid-template-columns:repeat(2,1fr);
+
+        grid-template-columns:
+            repeat(2,1fr);
+
         gap:10px;
+
     }
 
     .arts-title{
+
         font-size:25px;
+
     }
 
 }
@@ -245,114 +329,272 @@ margin-bottom:18px;
 
 }
 
-.book-grid{
-
-display:grid;
-grid-template-columns:
-repeat(
-auto-fill,
-minmax(160px,1fr)
-);
-
-gap:16px;
-
-}
+/* ========================================
+   ОБЩИЕ КАРТОЧКИ
+======================================== */
 
 .book-card{
-
-background:white;
-border-radius:20px;
-overflow:hidden;
-cursor:pointer;
-box-shadow:var(--shadow);
-transition:.2s;
-
-}
-
-.book-card:hover{
-
-transform:translateY(-4px);
-
-}
-
-.book-grid{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:18px;
-}
-
-.book-card{
-    background:white;
-    border-radius:20px;
+    background:#fff;
+    border-radius:18px;
     overflow:hidden;
     cursor:pointer;
+
     box-shadow:var(--shadow);
-    transition:transform .2s, box-shadow .2s;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
 .book-card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 14px 35px rgba(0,0,0,.12);
+    transform:translateY(-3px);
+    box-shadow:
+        0 12px 28px rgba(0,0,0,.10);
 }
 
 .book-cover{
     width:100%;
-    height:280px;
     object-fit:cover;
     display:block;
 }
 
 .book-info{
-    padding:14px;
+    padding:11px 12px 13px;
 }
 
 .book-title{
     font-weight:600;
-    font-size:15px;
+    font-size:14px;
     line-height:1.3;
-    margin-bottom:6px;
+    margin-bottom:4px;
 }
 
 .book-author{
-    font-size:13px;
+    font-size:12px;
     color:var(--muted);
-    line-height:1.4;
+    line-height:1.3;
 }
 
-@media (max-width:600px){
 
-    .book-grid{
-        grid-template-columns:repeat(2, minmax(0,1fr));
+/* ========================================
+   ГЛАВНАЯ
+   Маленькие миниатюры
+======================================== */
+
+#home .book-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0,1fr));
+
+    gap:14px;
+
+}
+
+#home .book-cover{
+
+    height:185px;
+
+}
+
+
+/* ========================================
+   КАТАЛОГ
+   Более крупные карточки
+======================================== */
+
+#catalog .book-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0,1fr));
+
+    gap:18px;
+
+}
+
+#catalog .book-cover{
+
+    height:320px;
+
+}
+
+#catalog .book-info{
+
+    padding:13px 14px 15px;
+
+}
+
+#catalog .book-title{
+
+    font-size:15px;
+
+}
+
+#catalog .book-author{
+
+    font-size:13px;
+
+}
+
+
+/* ========================================
+   ПЛЕЙЛИСТЫ
+======================================== */
+
+#playlists .book-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0,1fr));
+
+    gap:18px;
+
+}
+
+#playlists .book-cover{
+
+    height:280px;
+
+}
+
+
+/* ========================================
+   В ПРОЦЕССЕ ПЕРЕВОДА
+======================================== */
+
+#home #translationBooks{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0,1fr));
+
+    gap:14px;
+
+}
+
+#home #translationBooks .book-cover{
+
+    height:185px;
+
+}
+
+
+/* ========================================
+   ПЛАНШЕТ
+======================================== */
+
+@media(max-width:900px){
+
+    #home .book-grid{
+        grid-template-columns:
+            repeat(3, minmax(0,1fr));
+    }
+
+    #home .book-cover{
+        height:170px;
+    }
+
+    #home #translationBooks{
+        grid-template-columns:
+            repeat(3, minmax(0,1fr));
+    }
+
+    #home #translationBooks .book-cover{
+        height:170px;
+    }
+
+    #catalog .book-grid{
+        grid-template-columns:
+            repeat(3, minmax(0,1fr));
+    }
+
+    #catalog .book-cover{
+        height:270px;
+    }
+
+    #playlists .book-grid{
+        grid-template-columns:
+            repeat(3, minmax(0,1fr));
+    }
+
+    #playlists .book-cover{
+        height:240px;
+    }
+
+}
+
+
+/* ========================================
+   ТЕЛЕФОН
+======================================== */
+
+@media(max-width:600px){
+
+    #home .book-grid{
+        grid-template-columns:
+            repeat(3, minmax(0,1fr));
+
+        gap:10px;
+    }
+
+    #home .book-cover{
+        height:145px;
+    }
+
+    #home .book-info{
+        padding:8px;
+    }
+
+    #home .book-title{
+        font-size:12px;
+    }
+
+    #home .book-author{
+        font-size:11px;
+    }
+
+
+    #home #translationBooks{
+        grid-template-columns:
+            repeat(3, minmax(0,1fr));
+
+        gap:10px;
+    }
+
+    #home #translationBooks .book-cover{
+        height:145px;
+    }
+
+
+    #catalog .book-grid{
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+
         gap:12px;
     }
 
-    .book-cover{
+    #catalog .book-cover{
+        height:250px;
+    }
+
+
+    #playlists .book-grid{
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+
+        gap:12px;
+    }
+
+    #playlists .book-cover{
         height:230px;
     }
 
 }
-
-.book-info{
-
-padding:12px;
-
-}
-
-.book-title{
-
-font-weight:600;
-font-size:14px;
-margin-bottom:6px;
-
-}
-
-.book-author{
-
-font-size:12px;
-color:var(--muted);
-
-}
-
 .search{
 
 width:100%;
@@ -633,22 +875,6 @@ padding:20px;
 <body>
     <div class="container">
 
-<div id="about" class="page active">
-
-<div class="card hero">
-
-<h1>Wild Wild Thoughts</h1>
-
-<p>
-Добро пожаловать в библиотеку Wild Wild Thoughts.
-Здесь собраны переводы современных любовных романов.
-</p>
-
-<br>
-
-<h3>Строго 18+</h3>
-
-</div>
 
 <div class="stats">
 
@@ -678,6 +904,30 @@ padding:20px;
 
 <div id="home" class="page">
 
+    <!-- О НАС -->
+
+    <div class="card hero about-card">
+
+        <h1>
+            Wild Wild Thoughts
+        </h1>
+
+        <p>
+            Добро пожаловать в библиотеку
+            Wild Wild Thoughts.
+            Здесь собраны переводы
+            современных любовных романов.
+        </p>
+
+        <div class="age-badge">
+            18+
+        </div>
+
+    </div>
+
+
+    <!-- НОВИНКА -->
+
     <div class="card">
 
         <h2 class="section-title">
@@ -692,6 +942,8 @@ padding:20px;
     </div>
 
 
+    <!-- В ПРОЦЕССЕ ПЕРЕВОДА -->
+
     <div class="card">
 
         <h2 class="section-title">
@@ -705,6 +957,8 @@ padding:20px;
 
     </div>
 
+
+    <!-- СЕРИИ -->
 
     <div class="card">
 
@@ -721,35 +975,6 @@ padding:20px;
 
 </div>
     
-<div class="card">
-
-<h2 class="section-title">
-📖 В процессе перевода
-</h2>
-
-<div id="translationBooks"
-class="book-grid">
-
-</div>
-
-</div>
-
-<div class="card">
-
-<h2 class="section-title">
-📚 Серии
-</h2>
-
-<div
-id="seriesContainer"
-class="series-list">
-
-</div>
-
-</div>
-
-</div>
-
 <div id="catalog" class="page">
 
 <div class="card">
@@ -803,69 +1028,61 @@ class="book-grid">
 
 <div id="arts" class="page">
 
-<div class="card">
+    <div class="card arts-page">
 
-<h2 class="section-title">
-🎨 Арты
-</h2>
+        <h2 class="section-title">
+            🎨 Арты
+        </h2>
 
-<div id="artsContainer">
+        <div id="artsContainer"></div>
 
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </div>
 
 <div class="bottom-nav">
 
-<button
-class="nav-btn active"
-data-page="about">
 
-📘
-<span>О нас</span>
+<nav class="bottom-nav">
 
-</button>
+    <button
+        class="nav-btn active"
+        data-page="home">
 
-<button
-class="nav-btn"
-data-page="home">
+        <span>🏠</span>
+        <span>Главная</span>
 
-🏠
-<span>Главная</span>
+    </button>
 
-</button>
+    <button
+        class="nav-btn"
+        data-page="catalog">
 
-<button
-class="nav-btn"
-data-page="catalog">
+        <span>📚</span>
+        <span>Каталог</span>
 
-📚
-<span>Каталог</span>
+    </button>
 
-</button>
+    <button
+        class="nav-btn"
+        data-page="playlists">
 
-<button
-class="nav-btn"
-data-page="playlists">
+        <span>🎧</span>
+        <span>Плейлисты</span>
 
-🎧
-<span>Плейлисты</span>
+    </button>
 
-</button>
+    <button
+        class="nav-btn"
+        data-page="arts">
 
-<button
-class="nav-btn"
-data-page="arts">
+        <span>🖼️</span>
+        <span>Арты</span>
 
-🖼️
-<span>Арты</span>
+    </button>
 
-</button>
-
+</nav>
+    
 </div>
 
 <div
@@ -1915,56 +2132,76 @@ function renderArts(){
         return;
     }
 
+
     container.innerHTML = '';
+
 
     if(!arts.length){
 
         container.innerHTML = `
+
             <div class="card">
+
                 Пока нет артов.
+
             </div>
+
         `;
 
         return;
+
     }
+
 
     arts.forEach(item => {
 
+        const rawArts =
+            item.arts || '';
+
+
         const images =
-            (item.arts || '')
+            rawArts
+
                 .split('|')
+
                 .map(
-                    image => image.trim()
+                    url =>
+                        url.trim()
                 )
+
                 .filter(Boolean);
+
 
         if(!images.length){
             return;
         }
 
+
         let gallery = '';
 
-        images.forEach(image => {
 
-            gallery += `
+        images.forEach(
+            (image, index) => {
 
-                <img
-                    src="${image}"
-                    alt="${item.title || 'Арт'}"
-                    loading="lazy"
-                    onclick="
-                        openFullscreen(
-                            '${image.replace(/'/g, "\\'")}'
-                        )
-                    "
-                    onerror="
-                        this.style.display='none'
-                    "
-                >
+                gallery += `
 
-            `;
+                    <img
+                        src="${image}"
+                        alt="${item.title || 'Арт ' + (index + 1)}"
+                        loading="lazy"
 
-        });
+                        onclick="
+                            openFullscreen(
+                                '${image.replace(/'/g,"&#39;")}'
+                            )
+                        "
+                    >
+
+                `;
+
+            }
+        );
+
 
         container.innerHTML += `
 
@@ -1975,6 +2212,7 @@ function renderArts(){
                     ${item.title || 'Без названия'}
 
                 </h2>
+
 
                 <div class="arts-gallery">
 
