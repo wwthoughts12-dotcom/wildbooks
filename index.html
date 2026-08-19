@@ -85,6 +85,24 @@
 .series-item:hover{
     transform:translateY(-2px);
 }
+    #seriesBooksGrid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:14px;
+
+}
+
+#seriesBooksGrid .book-cover{
+
+    height:180px;
+
+    object-fit:contain;
+
+}
 :root{
 
 --bg:#f4ede3;
@@ -1039,11 +1057,9 @@ padding:20px;
             style="margin:20px 0;"
         ></h2>
 
-        <div
-            id="seriesBooksGrid"
-            class="book-grid"
-        ></div>
-
+       <div
+    id="seriesBooksGrid"
+></div>
     </div>
 
 </div>
