@@ -1606,12 +1606,16 @@ const ANNOUNCEMENTS_URL =
 const ARTS_URL =
 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSho-xQsv1AtpTa-k_wDgcO968CYzd546FRuxVXAsWHDt1Y8Ey6yYOL_kEJ5cKiNC7VcYeMtfSYboQE/pub?output=csv';
 
+const SERIES_URL =
+'https://docs.google.com/spreadsheets/d/e/2PACX-1vSicACEOOcuf7wzKPm0tT-5Y1x85YZRDlKalf9gFLpbF6tbpynOQgQufcTJaS-m4uDpJHXxsLWCg_xQ/pub?output=csv';
+
     
 
 let books = [];
 let newBooks = [];
 let announcements = [];
 let arts = [];
+let seriesData = [];
 
 let currentSeries = 'Все';
 
@@ -1703,6 +1707,7 @@ newBooks = results[1];
 announcements = results[2];
 arts = results[3];
 seriesData = results[4];
+console.log("SERIES DATA:", seriesData);
 
 
         console.log(
