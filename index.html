@@ -309,7 +309,7 @@
 
 }
 
-}
+
 .playlist-modal-cover{
     width:180px;
     height:180px;
@@ -776,10 +776,11 @@ line-height:1.7;
 
 
     #catalog .book-grid{
-
-        grid-template-columns:
-            repeat(3, minmax(0,1fr));
-
+    display:grid;
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+    gap:18px;
+}
     }
 
     #catalog .book-cover{
@@ -1195,9 +1196,6 @@ padding:20px;
 </head>
 
 <body>
-    <div class="container">
-
-
 </div>
 
 <div id="home" class="page active">
@@ -1594,6 +1592,8 @@ async function loadData(){
 
         renderArts();
 
+        showPage('home');
+
 
         const loading =
             document.getElementById(
@@ -1815,20 +1815,6 @@ function renderSeries(){
                 </div>
 
             `;
-
-        });
-
-    document
-        .querySelectorAll('.series-item')
-        .forEach(item => {
-
-            item.onclick = () => {
-
-                openSeries(
-                    item.dataset.series
-                );
-
-            };
 
         });
 
@@ -2100,7 +2086,7 @@ ${book.series || '-'}
 
 <p>
 <strong>Тропы:</strong>
-${book.trops || '-'}
+${book.tropes || '-'}
 </p>
 
 <br>
@@ -2796,6 +2782,32 @@ function backToHome(){
     document
         .getElementById(pageId)
         .classList.add('active');
+
+    document
+        .querySelectorAll('.nav-btn')
+        .forEach(btn => {
+
+            btn.classList.remove('active');
+
+        });
+
+    const navMap = {
+        home:0,
+        catalog:1,
+        playlists:2,
+        arts:3
+    };
+
+    const buttons =
+        document.querySelectorAll('.nav-btn');
+
+    if(buttons[navMap[pageId]]){
+
+        buttons[
+            navMap[pageId]
+        ].classList.add('active');
+
+    }
 
 }
     
