@@ -19,23 +19,18 @@
 <style>
 
     .about-card{
+    background:
+        linear-gradient(
+            135deg,
+            #fffdf8 0%,
+            #f7efe2 100%
+        );
 
-background:
+    border:1px solid
+        rgba(201,168,106,.25);
 
-linear-gradient(
-135deg,
-#fffdf9 0%,
-#f8eddc 55%,
-#f3e1bf 100%
-);
-
-border:1px solid
-rgba(212,176,106,.25);
-
-position:relative;
-
-overflow:hidden;
-
+    position:relative;
+    overflow:hidden;
 }
 
 .about-card::after{
@@ -84,58 +79,25 @@ overflow:hidden;
 
 }
 .series-item{
-
-background:
-
-linear-gradient(
-135deg,
-#fffdf8,
-#f6ebd7
-);
-
-padding:24px;
-
-border-radius:22px;
-
-border:1px solid
-rgba(212,176,106,.18);
-
-box-shadow:
-0 10px 30px rgba(0,0,0,.06);
-
-cursor:pointer;
-
-transition:.25s;
-
+    cursor:pointer;
 }
 
 .series-item:hover{
-
-transform:
-translateY(-4px);
-
+    transform:translateY(-2px);
 }
-  
 :root{
 
---bg:#f7f1ea;
+--bg:#f4ede3;
+--card:#fffdf8;
+--gold:#c9a86a;
+--gold-dark:#b3904e;
+--text:#2d2926;
+--muted:#7a746d;
+--shadow:0 10px 30px rgba(0,0,0,.08);
+    /* ================================
+   АРТЫ
+================================ */
 
---card:#fffdf9;
-
---gold:#d4b06a;
-
---gold-dark:#bc9450;
-
---gold-light:#ecd8ae;
-
---text:#352d28;
-
---muted:#857b72;
-
---shadow:
-0 15px 40px rgba(0,0,0,.08);
-
-}
 /* ================================
    АРТЫ
 ================================ */
@@ -281,16 +243,8 @@ box-sizing:border-box;
 body{
 
 font-family:Inter,sans-serif;
-
-background:
-linear-gradient(
-180deg,
-#faf5ee 0%,
-#f4ede3 100%
-);
-
+background:var(--bg);
 color:var(--text);
-
 padding-bottom:90px;
 
 }
@@ -321,28 +275,11 @@ display:block;
 
 .card{
 
-background:
-linear-gradient(
-180deg,
-#fffdf9 0%,
-#fffaf4 100%
-);
-
-border-radius:28px;
-
-padding:24px;
-
-margin-bottom:20px;
-
-box-shadow:
-0 18px 45px rgba(0,0,0,.07);
-
-border:1px solid
-rgba(212,176,106,.15);
-
-position:relative;
-
-overflow:hidden;
+background:var(--card);
+border-radius:24px;
+padding:22px;
+margin-bottom:18px;
+box-shadow:var(--shadow);
 
 }
 
@@ -364,92 +301,34 @@ margin-bottom:15px;
 line-height:1.7;
 
 }
-.hero{
 
-position:relative;
-
-overflow:hidden;
-
-}
-
-.hero::before{
-
-content:"✦";
-
-position:absolute;
-
-top:25px;
-right:30px;
-
-font-size:40px;
-
-color:rgba(212,176,106,.35);
-
-}
-
-.hero::after{
-
-content:"✧";
-
-position:absolute;
-
-top:70px;
-right:80px;
-
-font-size:22px;
-
-color:rgba(212,176,106,.35);
-
-}
 
 /* ========================================
    КАРТОЧКИ КНИГ — ОБЩИЕ
 ======================================== */
 
 .book-card{
+    background:#fff;
 
-background:white;
+    border-radius:18px;
 
-border-radius:22px;
+    overflow:hidden;
 
-overflow:hidden;
+    cursor:pointer;
 
-cursor:pointer;
+    box-shadow:
+        0 8px 24px rgba(0,0,0,.08);
 
-border:1px solid
-rgba(212,176,106,.12);
-
-box-shadow:
-0 10px 30px rgba(0,0,0,.07);
-
-transition:.25s;
-
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
 }
+
 .book-card:hover{
+    transform:translateY(-3px);
 
-transform:
-translateY(-6px);
-
-box-shadow:
-0 20px 45px rgba(0,0,0,.10);
-
-}
-  .section-title{
-
-font-family:
-'Playfair Display',
-serif;
-
-font-size:34px;
-
-font-weight:600;
-
-margin-bottom:20px;
-
-color:var(--text);
-
-position:relative;
-
+    box-shadow:
+        0 12px 28px rgba(0,0,0,.11);
 }
 
 
@@ -844,17 +723,6 @@ box-shadow:var(--shadow);
         calc(8px + env(safe-area-inset-bottom));
 
     backdrop-filter:blur(14px);
-  background:
-
-linear-gradient(
-180deg,
-rgba(255,255,255,.98),
-rgba(248,241,232,.98)
-);
-
-border-top:
-1px solid
-rgba(212,176,106,.2);
 }
 
 .nav-btn{
@@ -980,30 +848,22 @@ margin-bottom:20px;
 
 display:inline-block;
 
-padding:14px 22px;
+padding:12px 18px;
 
-background:
-linear-gradient(
-180deg,
-#d9b877,
-#c89d57
-);
-
+background:var(--gold);
 color:white;
 
+text-decoration:none;
 border:none;
 
-border-radius:16px;
+border-radius:14px;
 
-text-decoration:none;
+cursor:pointer;
 
-font-weight:600;
-
-box-shadow:
-0 8px 20px
-rgba(201,168,106,.35);
+margin-top:12px;
 
 }
+
 .favorite-btn{
 
 margin-left:10px;
@@ -1138,6 +998,7 @@ padding:20px;
 </div>
     
 <div id="catalog" class="page">
+    <div id="seriesPage" class="page">
 
     <div class="container">
 
