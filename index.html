@@ -224,7 +224,71 @@
     margin-bottom:18px;
 
 }
+/* НОВИНКА */
 
+.new-book-card{
+
+    display:flex;
+    align-items:center;
+
+    gap:16px;
+
+    cursor:pointer;
+}
+
+.new-book-cover{
+
+    width:110px;
+    height:160px;
+
+    object-fit:cover;
+
+    border-radius:18px;
+
+    flex-shrink:0;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.12);
+}
+
+.new-book-info{
+
+    flex:1;
+}
+
+.new-book-title{
+
+    font-family:'Playfair Display', serif;
+
+    font-size:24px;
+    font-weight:600;
+
+    line-height:1.2;
+
+    margin-bottom:8px;
+}
+
+.new-book-author{
+
+    color:var(--muted);
+
+    font-size:15px;
+}
+        .new-book-cover{
+
+    width:90px;
+    height:130px;
+}
+
+.new-book-title{
+
+    font-size:18px;
+}
+
+.new-book-author{
+
+    font-size:13px;
+}
 }
 :root{
 
@@ -1761,18 +1825,9 @@ function renderNewBook(){
     const container =
         document.getElementById('newBook');
 
-    if(!container){
-        return;
-    }
-
     if(!newBooks.length){
-
-        container.innerHTML = `
-            <div class="card">
-                Пока нет новинок.
-            </div>
-        `;
-
+        container.innerHTML =
+            '<div class="card">Пока нет новинок.</div>';
         return;
     }
 
@@ -1781,39 +1836,30 @@ function renderNewBook(){
     container.innerHTML = `
 
         <div
-            class="featured-book"
+            class="new-book-card"
             onclick="openAnnouncementBook(0)"
         >
 
             <img
                 src="${book.cover_url || ''}"
-                class="featured-book-cover"
+                class="new-book-cover"
             >
 
-            <div class="featured-book-info">
+            <div class="new-book-info">
 
-                <div class="featured-book-title">
+                <div class="new-book-title">
                     ${book.title || ''}
                 </div>
 
-                <div class="featured-book-author">
+                <div class="new-book-author">
                     ${book.author || ''}
                 </div>
-
-                <div class="featured-book-description">
-                    ${(book.description || '').substring(0,120)}...
-                </div>
-
-                <button class="btn">
-                    Подробнее
-                </button>
 
             </div>
 
         </div>
 
     `;
-
 }
 function renderTranslations(){
 
