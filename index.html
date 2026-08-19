@@ -1564,62 +1564,53 @@ function renderTranslations(){
 
 function renderSeries(){
 
-const container =
-document.getElementById(
-'seriesContainer'
-);
-
-const map = {};
-
-books.forEach(book=>{
-
-if(!map[book.series]){
-
-map[book.series] = 0;
-    
-
-}
-
-map[book.series]++;
-
-});
-
-container.innerHTML = '';
-
-Object.keys(map)
-.sort()
-.forEach(series=>{
-
-container.innerHTML += `
-
-<div
-    class="series-item"
-    data-series="${series}"
->
-
-    <span>${series}</span>
-
-    <strong>${map[series]}</strong>
-
-</div>
-
-`;
-
-});
-
-document
-.querySelectorAll('.series-item')
-.forEach(item=>{
-
-    item.onclick = () => {
-
-        openSeries(
-            item.dataset.series
+    const container =
+        document.getElementById(
+            'seriesContainer'
         );
 
-    };
+    const map = {};
 
-});
+    books.forEach(book => {
+
+        const series =
+            (book.series || '').trim();
+
+        if(!series) return;
+
+        if(!map[series]){
+            map[series] = 0;
+        }
+
+        map[series]++;
+
+    });
+
+    container.innerHTML = '';
+
+    Object.keys(map)
+        .sort()
+        .forEach(series => {
+
+            const div =
+                document.createElement('div');
+
+            div.className =
+                'series-item';
+
+            div.innerHTML = `
+                <span>${series}</span>
+                <strong>${map[series]}</strong>
+            `;
+
+            div.addEventListener(
+                'click',
+                () => openSeries(series)
+            );
+
+            container.appendChild(div);
+
+        });
 
 }
     function createBookCard(book){
@@ -2378,11 +2369,18 @@ if(window.Telegram){
 }
 function openSeries(series){
 
+    console.log(
+        'Открыта серия:',
+        series
+    );
+
     document
         .querySelectorAll('.page')
         .forEach(page => {
 
-            page.classList.remove('active');
+            page.classList.remove(
+                'active'
+            );
 
         });
 
@@ -2391,7 +2389,9 @@ function openSeries(series){
         .classList.add('active');
 
     document
-        .getElementById('seriesPageTitle')
+        .getElementById(
+            'seriesPageTitle'
+        )
         .textContent = series;
 
     const grid =
@@ -2400,24 +2400,15 @@ function openSeries(series){
         );
 
     const seriesBooks =
-        books.filter(book =>
+        books.filter(book => {
 
-            (book.series || '')
-                .trim()
-                .toLowerCase()
+            return (
+                (book.series || '').trim()
+                ===
+                (series || '').trim()
+            );
 
-            ===
-
-            (series || '')
-                .trim()
-                .toLowerCase()
-
-        );
-
-    console.log(
-        'Ищем серию:',
-        series
-    );
+        });
 
     console.log(
         'Найдено книг:',
@@ -2433,6 +2424,7 @@ function openSeries(series){
         `;
 
         return;
+
     }
 
     grid.innerHTML = '';
