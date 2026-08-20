@@ -378,6 +378,8 @@
     box-shadow:
         0 10px 24px rgba(48,30,18,.18);
 
+    cursor:pointer;
+
     transition:
         transform .2s ease,
         box-shadow .2s ease;
@@ -1466,26 +1468,6 @@ z-index:99999;
 
 }
 
-.fullscreen img{
-
-max-width:95%;
-max-height:95%;
-
-}
-
-iframe{
-
-border-radius:18px;
-
-}
-
-.loading{
-
-text-align:center;
-padding:20px;
-
-}
-
 </style>
 
 </head>
@@ -1713,16 +1695,6 @@ class="modal">
     </div>
 
 </div>
-
-<div
-    id="fullscreenViewer"
-    class="fullscreen">
-
-    <img
-        id="fullscreenImage"
-        src=""
-        alt="Увеличенное изображение"
-    >
 
 </div>
 
@@ -2682,14 +2654,12 @@ function renderArts(){
         const artsBook =
             document.createElement('div');
 
-        artsBook.className =
-            'arts-book';
+        artsBook.className = 'arts-book';
 
         const title =
             document.createElement('h2');
 
-        title.className =
-            'arts-title';
+        title.className = 'arts-title';
 
         title.textContent =
             item.title || 'Без названия';
@@ -2699,8 +2669,7 @@ function renderArts(){
         const gallery =
             document.createElement('div');
 
-        gallery.className =
-            'arts-gallery';
+        gallery.className = 'arts-gallery';
 
         images.forEach((image, index) => {
 
@@ -2716,28 +2685,61 @@ function renderArts(){
             img.loading = 'lazy';
 
             /*
-             * КЛИК ПО АРТУ
+             * Открываем изображение
+             * при нажатии
              */
-            img.addEventListener(
-                'click',
-                function(){
+            img.onclick = function(){
 
-                    openFullscreen(image);
+                const overlay =
+                    document.createElement('div');
 
-                }
-            );
+                overlay.style.position = 'fixed';
+                overlay.style.inset = '0';
+                overlay.style.width = '100vw';
+                overlay.style.height = '100vh';
+                overlay.style.background = 'rgba(0,0,0,.92)';
+                overlay.style.display = 'flex';
+                overlay.style.alignItems = 'center';
+                overlay.style.justifyContent = 'center';
+                overlay.style.padding = '20px';
+                overlay.style.boxSizing = 'border-box';
+                overlay.style.zIndex = '999999';
 
-            img.addEventListener(
-                'error',
-                function(){
+                const largeImage =
+                    document.createElement('img');
 
-                    console.error(
-                        'Не удалось загрузить арт:',
-                        image
-                    );
+                largeImage.src = image;
 
-                }
-            );
+                largeImage.style.maxWidth = '95vw';
+                largeImage.style.maxHeight = '95vh';
+                largeImage.style.width = 'auto';
+                largeImage.style.height = 'auto';
+                largeImage.style.objectFit = 'contain';
+                largeImage.style.borderRadius = '0';
+
+                overlay.appendChild(largeImage);
+
+                /*
+                 * Нажатие на затемнённый экран
+                 * закрывает изображение
+                 */
+                overlay.onclick = function(){
+
+                    overlay.remove();
+
+                    document.body.style.overflow = '';
+
+                };
+
+                /*
+                 * Пока картинка открыта,
+                 * запрещаем прокрутку страницы
+                 */
+                document.body.style.overflow = 'hidden';
+
+                document.body.appendChild(overlay);
+
+            };
 
             gallery.appendChild(img);
 
