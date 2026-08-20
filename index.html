@@ -378,8 +378,6 @@
     box-shadow:
         0 10px 24px rgba(48,30,18,.18);
 
-    cursor:pointer;
-
     transition:
         transform .2s ease,
         box-shadow .2s ease;
@@ -1468,6 +1466,26 @@ z-index:99999;
 
 }
 
+.fullscreen img{
+
+max-width:95%;
+max-height:95%;
+
+}
+
+iframe{
+
+border-radius:18px;
+
+}
+
+.loading{
+
+text-align:center;
+padding:20px;
+
+}
+
 </style>
 
 </head>
@@ -1695,6 +1713,14 @@ class="modal">
     </div>
 
 </div>
+
+<div
+id="fullscreenViewer"
+class="fullscreen">
+
+<img
+id="fullscreenImage"
+src="">
 
 </div>
 
@@ -2620,7 +2646,9 @@ function closePlaylist(){
 function renderArts(){
 
     const container =
-        document.getElementById('artsContainer');
+        document.getElementById(
+            'artsContainer'
+        );
 
     if(!container){
         return;
@@ -2639,6 +2667,7 @@ function renderArts(){
         return;
     }
 
+
     arts.forEach(item => {
 
         const images =
@@ -2647,107 +2676,69 @@ function renderArts(){
                 .map(url => url.trim())
                 .filter(Boolean);
 
+
         if(!images.length){
             return;
         }
 
-        const artsBook =
-            document.createElement('div');
 
-        artsBook.className = 'arts-book';
+        let gallery = '';
 
-        const title =
-            document.createElement('h2');
-
-        title.className = 'arts-title';
-
-        title.textContent =
-            item.title || 'Без названия';
-
-        artsBook.appendChild(title);
-
-        const gallery =
-            document.createElement('div');
-
-        gallery.className = 'arts-gallery';
 
         images.forEach((image, index) => {
 
-            const img =
-                document.createElement('img');
+            gallery += `
 
-            img.src = image;
+                <img
+                    src="${image}"
+                    alt="${
+                        item.title ||
+                        'Арт ' + (index + 1)
+                    }"
+                    loading="lazy"
 
-            img.alt =
-                item.title ||
-                'Арт ' + (index + 1);
+                    onclick="
+                        openFullscreen(
+                            '${image.replace(
+                                /'/g,
+                                "\\'"
+                            )}'
+                        )
+                    "
 
-            img.loading = 'lazy';
+                    onerror="
+                        console.error(
+                            'Не удалось загрузить арт:',
+                            '${image.replace(
+                                /'/g,
+                                "\\'"
+                            )}'
+                        );
+                    "
+                >
 
-            /*
-             * Открываем изображение
-             * при нажатии
-             */
-            img.onclick = function(){
-
-                const overlay =
-                    document.createElement('div');
-
-                overlay.style.position = 'fixed';
-                overlay.style.inset = '0';
-                overlay.style.width = '100vw';
-                overlay.style.height = '100vh';
-                overlay.style.background = 'rgba(0,0,0,.92)';
-                overlay.style.display = 'flex';
-                overlay.style.alignItems = 'center';
-                overlay.style.justifyContent = 'center';
-                overlay.style.padding = '20px';
-                overlay.style.boxSizing = 'border-box';
-                overlay.style.zIndex = '999999';
-
-                const largeImage =
-                    document.createElement('img');
-
-                largeImage.src = image;
-
-                largeImage.style.maxWidth = '95vw';
-                largeImage.style.maxHeight = '95vh';
-                largeImage.style.width = 'auto';
-                largeImage.style.height = 'auto';
-                largeImage.style.objectFit = 'contain';
-                largeImage.style.borderRadius = '0';
-
-                overlay.appendChild(largeImage);
-
-                /*
-                 * Нажатие на затемнённый экран
-                 * закрывает изображение
-                 */
-                overlay.onclick = function(){
-
-                    overlay.remove();
-
-                    document.body.style.overflow = '';
-
-                };
-
-                /*
-                 * Пока картинка открыта,
-                 * запрещаем прокрутку страницы
-                 */
-                document.body.style.overflow = 'hidden';
-
-                document.body.appendChild(overlay);
-
-            };
-
-            gallery.appendChild(img);
+            `;
 
         });
 
-        artsBook.appendChild(gallery);
 
-        container.appendChild(artsBook);
+        container.innerHTML += `
+
+            <div class="arts-book">
+
+                <h2 class="arts-title">
+                    ${item.title || 'Без названия'}
+                </h2>
+
+                <div class="arts-gallery">
+
+                    ${gallery}
+
+                </div>
+
+            </div>
+
+        `;
 
     });
 
@@ -2764,21 +2755,15 @@ function openFullscreen(src){
             'fullscreenImage'
         );
 
-    if(!viewer || !image){
-        console.error(
-            'Не найден fullscreenViewer или fullscreenImage'
-        );
-        return;
-    }
-
     image.src = src;
 
-    viewer.classList.add('show');
-
-    document.body.style.overflow = 'hidden';
+    viewer.classList.add(
+        'show'
+    );
 
 }
-  document
+
+document
     .getElementById('fullscreenViewer')
     .addEventListener(
         'click',
@@ -2786,10 +2771,16 @@ function openFullscreen(src){
 
             this.classList.remove('show');
 
-            document.body.style.overflow = '';
-
         }
-    );  
+    );
+
+if(window.Telegram){
+
+    Telegram.WebApp.ready();
+
+    Telegram.WebApp.expand();
+
+}
 function openSeries(series){
 
     console.log(
