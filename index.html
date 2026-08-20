@@ -1756,7 +1756,7 @@ let announcements = [];
 let arts = [];
 let seriesData = [];
 
-let currentSeries = 'Все';
+let currentTrope = 'Все';
 
 const favorites =
 JSON.parse(
@@ -2115,46 +2115,50 @@ function renderSeries(){
 
 function renderCatalog(){
 
-buildSeriesFilters();
+    buildTropeFilters();
 
-drawCatalog();
+    drawCatalog();
 
 }
 
-function buildSeriesFilters(){
+function buildTropeFilters(){
 
     const container =
         document.getElementById(
             'seriesFilters'
         );
 
-    const series = [
+    const tropes = [
         'Все',
         ...new Set(
             books
-                .map(b => b.series)
+                .map(book =>
+                    (book.main_trope || '').trim()
+                )
                 .filter(Boolean)
         )
     ];
 
     container.innerHTML = '';
 
-    series.forEach(item => {
+    tropes.forEach(trope => {
 
         const button =
             document.createElement('button');
 
         button.className =
             'filter' +
-            (item === currentSeries
-                ? ' active'
-                : '');
+            (
+                trope === currentTrope
+                    ? ' active'
+                    : ''
+            );
 
-        button.textContent = item;
+        button.textContent = trope;
 
         button.addEventListener(
             'click',
-            () => selectSeries(item)
+            () => selectTrope(trope)
         );
 
         container.appendChild(button);
@@ -2162,12 +2166,11 @@ function buildSeriesFilters(){
     });
 
 }
+function selectTrope(trope){
 
-function selectSeries(series){
+    currentTrope = trope;
 
-currentSeries = series;
-
-renderCatalog();
+    renderCatalog();
 
 }
 
@@ -2189,13 +2192,13 @@ document
 let filtered =
 [...books];
 
-if(currentSeries !== 'Все'){
+if(currentTrope !== 'Все'){
 
     filtered =
     filtered.filter(
-        b =>
-        (b.series || '').trim() ===
-        (currentSeries || '').trim()
+        book =>
+            (book.main_trope || '').trim() ===
+            (currentTrope || '').trim()
     );
 
 }
