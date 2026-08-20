@@ -1715,12 +1715,14 @@ class="modal">
 </div>
 
 <div
-id="fullscreenViewer"
-class="fullscreen">
+    id="fullscreenViewer"
+    class="fullscreen">
 
-<img
-id="fullscreenImage"
-src="">
+    <img
+        id="fullscreenImage"
+        src=""
+        alt="Увеличенное изображение"
+    >
 
 </div>
 
@@ -2646,9 +2648,7 @@ function closePlaylist(){
 function renderArts(){
 
     const container =
-        document.getElementById(
-            'artsContainer'
-        );
+        document.getElementById('artsContainer');
 
     if(!container){
         return;
@@ -2667,7 +2667,6 @@ function renderArts(){
         return;
     }
 
-
     arts.forEach(item => {
 
         const images =
@@ -2676,69 +2675,77 @@ function renderArts(){
                 .map(url => url.trim())
                 .filter(Boolean);
 
-
         if(!images.length){
             return;
         }
 
+        const artsBook =
+            document.createElement('div');
 
-        let gallery = '';
+        artsBook.className =
+            'arts-book';
 
+        const title =
+            document.createElement('h2');
+
+        title.className =
+            'arts-title';
+
+        title.textContent =
+            item.title || 'Без названия';
+
+        artsBook.appendChild(title);
+
+        const gallery =
+            document.createElement('div');
+
+        gallery.className =
+            'arts-gallery';
 
         images.forEach((image, index) => {
 
-          gallery += `
+            const img =
+                document.createElement('img');
 
-    <img
-        src="${image}"
-        alt="${
-            item.title ||
-            'Арт ' + (index + 1)
-        }"
-        loading="lazy"
+            img.src = image;
 
-        onclick="
-            openFullscreen(
-                '${image.replace(
-                    /'/g,
-                    "\\'"
-                )}'
-            )
-        "
+            img.alt =
+                item.title ||
+                'Арт ' + (index + 1);
 
-        onerror="
-            console.error(
-                'Не удалось загрузить арт:',
-                '${image.replace(
-                    /'/g,
-                    "\\'"
-                )}'
+            img.loading = 'lazy';
+
+            /*
+             * КЛИК ПО АРТУ
+             */
+            img.addEventListener(
+                'click',
+                function(){
+
+                    openFullscreen(image);
+
+                }
             );
-        "
-    >
 
-`;
+            img.addEventListener(
+                'error',
+                function(){
+
+                    console.error(
+                        'Не удалось загрузить арт:',
+                        image
+                    );
+
+                }
+            );
+
+            gallery.appendChild(img);
 
         });
 
+        artsBook.appendChild(gallery);
 
-        container.innerHTML += `
-
-            <div class="arts-book">
-
-                <h2 class="arts-title">
-                    ${item.title || 'Без названия'}
-                </h2>
-
-                <div class="arts-gallery">
-
-                    ${gallery}
-
-                </div>
-
-            </div>
-
-        `;
+        container.appendChild(artsBook);
 
     });
 
@@ -2755,15 +2762,21 @@ function openFullscreen(src){
             'fullscreenImage'
         );
 
+    if(!viewer || !image){
+        console.error(
+            'Не найден fullscreenViewer или fullscreenImage'
+        );
+        return;
+    }
+
     image.src = src;
 
-    viewer.classList.add(
-        'show'
-    );
+    viewer.classList.add('show');
+
+    document.body.style.overflow = 'hidden';
 
 }
-
-document
+  document
     .getElementById('fullscreenViewer')
     .addEventListener(
         'click',
@@ -2771,16 +2784,10 @@ document
 
             this.classList.remove('show');
 
+            document.body.style.overflow = '';
+
         }
-    );
-
-if(window.Telegram){
-
-    Telegram.WebApp.ready();
-
-    Telegram.WebApp.expand();
-
-}
+    );  
 function openSeries(series){
 
     console.log(
