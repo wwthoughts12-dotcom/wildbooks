@@ -2012,26 +2012,35 @@ function renderSeries(){
 
     seriesData.forEach(item => {
 
+        const seriesName =
+            item.series || '';
+
+        const seriesTitle =
+            item.title || seriesName;
+
+        const seriesDescription =
+            item.description || '';
+
         container.innerHTML += `
 
             <div
                 class="series-item"
-                onclick="openSeries('${item.series}')"
+                data-series="${encodeURIComponent(seriesName)}"
             >
 
                 <img
-                    src="${item.image_url}"
+                    src="${item.image_url || ''}"
                     class="series-cover"
                 >
 
                 <div class="series-overlay">
 
                     <div class="series-name">
-                        ${item.title}
+                        ${seriesTitle}
                     </div>
 
                     <div class="series-description">
-                        ${item.description || ''}
+                        ${seriesDescription}
                     </div>
 
                 </div>
@@ -2039,8 +2048,29 @@ function renderSeries(){
             </div>
 
         `;
-
     });
+
+    /* Делаем карточки кликабельными после создания */
+
+    document
+        .querySelectorAll('#seriesContainer .series-item')
+        .forEach(card => {
+
+            card.addEventListener(
+                'click',
+                function(){
+
+                    const series =
+                        decodeURIComponent(
+                            this.dataset.series || ''
+                        );
+
+                    openSeries(series);
+
+                }
+            );
+
+        });
 
 }
     function createBookCard(book){
