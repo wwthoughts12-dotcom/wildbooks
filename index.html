@@ -2687,37 +2687,37 @@ function renderArts(){
 
         images.forEach((image, index) => {
 
-            gallery += `
+          gallery += `
 
-                <img
-                    src="${image}"
-                    alt="${
-                        item.title ||
-                        'Арт ' + (index + 1)
-                    }"
-                    loading="lazy"
+    <img
+        src="${image}"
+        alt="${
+            item.title ||
+            'Арт ' + (index + 1)
+        }"
+        loading="lazy"
 
-                    onclick="
-                        openFullscreen(
-                            '${image.replace(
-                                /'/g,
-                                "\\'"
-                            )}'
-                        )
-                    "
+        onclick="
+            openFullscreen(
+                '${image.replace(
+                    /'/g,
+                    "\\'"
+                )}'
+            )
+        "
 
-                    onerror="
-                        console.error(
-                            'Не удалось загрузить арт:',
-                            '${image.replace(
-                                /'/g,
-                                "\\'"
-                            )}'
-                        );
-                    "
-                >
+        onerror="
+            console.error(
+                'Не удалось загрузить арт:',
+                '${image.replace(
+                    /'/g,
+                    "\\'"
+                )}'
+            );
+        "
+    >
 
-            `;
+`;
 
         });
 
