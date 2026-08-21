@@ -757,6 +757,26 @@ img{
 }
 
 
+/* ========================================
+   В ПРОЦЕССЕ ПЕРЕВОДА
+======================================== */
+
+.translation-books-wrapper{
+
+    position:relative;
+
+    width:100%;
+
+    overflow:hidden;
+
+    padding:
+        4px
+        0
+        8px;
+
+}
+
+
 .translation-books{
 
     display:flex;
@@ -765,20 +785,28 @@ img{
 
     overflow-x:auto;
 
-    padding:6px 2px 16px;
+    padding:
+        6px
+        2px
+        14px;
 
     scrollbar-width:none;
 
     -webkit-overflow-scrolling:touch;
 
+    scroll-behavior:smooth;
+
 }
+
 
 .translation-books::-webkit-scrollbar{
+
     display:none;
+
 }
 
 
-/* Карточка книги */
+/* Книга без внешней подложки */
 
 .translation-book{
 
@@ -786,34 +814,17 @@ img{
 
     width:250px;
 
-    background:#fffdf8;
+    background:transparent;
 
-    border-radius:20px;
+    border:none;
 
-    overflow:hidden;
+    box-shadow:none;
 
-    border:1px solid
-        rgba(201,168,106,.16);
+    border-radius:0;
 
-    box-shadow:
-        0 10px 25px
-        rgba(48,30,18,.15);
+    overflow:visible;
 
     cursor:pointer;
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease;
-
-}
-
-.translation-book:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 15px 30px
-        rgba(48,30,18,.20);
 
 }
 
@@ -835,6 +846,10 @@ img{
     border-radius:
         20px 20px 0 0;
 
+    box-shadow:
+        0 10px 24px
+        rgba(48,30,18,.18);
+
 }
 
 
@@ -844,8 +859,8 @@ img{
 
     padding:
         13px
-        15px
-        16px;
+        4px
+        10px;
 
 }
 
@@ -885,7 +900,7 @@ img{
 
     color:#7a746d;
 
-    margin-bottom:11px;
+    margin-bottom:10px;
 
 }
 
@@ -896,7 +911,9 @@ img{
 
     display:inline-block;
 
-    padding:6px 10px;
+    padding:
+        6px
+        10px;
 
     border-radius:999px;
 
@@ -911,6 +928,74 @@ img{
     line-height:1;
 
 }
+
+
+/* ========================================
+   СТРЕЛКИ
+======================================== */
+
+.translation-arrow{
+
+    position:absolute;
+
+    top:42%;
+
+    transform:translateY(-50%);
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        rgba(255,253,248,.95);
+
+    color:#b3904e;
+
+    font-size:24px;
+
+    line-height:1;
+
+    cursor:pointer;
+
+    z-index:10;
+
+    box-shadow:
+        0 6px 16px
+        rgba(48,30,18,.15);
+
+}
+
+
+.translation-arrow:hover{
+
+    background:#f3e5d3;
+
+}
+
+
+.translation-arrow-left{
+
+    left:5px;
+
+}
+
+
+.translation-arrow-right{
+
+    right:5px;
+
+}
+
 
 /* ========================================
    СЕРИИ
@@ -2180,6 +2265,18 @@ iframe{
     }
 
 
+    @media(max-width:600px){
+
+    .translation-books-wrapper{
+
+        padding:
+            2px
+            0
+            4px;
+
+    }
+
+
     .translation-books{
 
         gap:12px;
@@ -2187,17 +2284,16 @@ iframe{
         padding:
             4px
             2px
-            14px;
+            12px;
 
     }
+
 
     .translation-book{
 
         flex:0 0 180px;
 
         width:180px;
-
-        border-radius:17px;
 
     }
 
@@ -2213,14 +2309,16 @@ iframe{
 
     }
 
+
     .translation-book-info{
 
         padding:
             10px
-            11px
-            13px;
+            3px
+            10px;
 
     }
+
 
     .translation-book-title{
 
@@ -2228,24 +2326,52 @@ iframe{
 
     }
 
+
     .translation-book-tropes{
 
         font-size:11px;
 
         line-height:1.4;
 
-        margin-bottom:9px;
-
     }
+
 
     .translation-book-date{
 
         font-size:10px;
 
-        padding:5px 8px;
+        padding:
+            5px
+            8px;
 
     }
 
+
+    .translation-arrow{
+
+        width:34px;
+
+        height:34px;
+
+        font-size:19px;
+
+    }
+
+
+    .translation-arrow-left{
+
+        left:2px;
+
+    }
+
+
+    .translation-arrow-right{
+
+        right:2px;
+
+    }
+
+}
 }
 
 
