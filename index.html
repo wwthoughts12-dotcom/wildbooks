@@ -479,14 +479,11 @@
 
     }
 
-    .channel-icon{
+     .channel-icon svg{
 
-        width:46px;
-        height:46px;
+        width:24px;
 
-        border-radius:14px;
-
-        font-size:22px;
+        height:24px;
 
     }
 
@@ -1539,22 +1536,19 @@ line-height:1.7;
 
     width:170px;
 
-    background:#fffdf8;
+    background:transparent;
 
-    border-radius:18px;
+    border-radius:0;
 
-    overflow:hidden;
+    overflow:visible;
 
-    box-shadow:
-        0 10px 25px rgba(48,30,18,.14);
+    box-shadow:none;
 
-    border:1px solid
-        rgba(201,168,106,.14);
+    border:none;
 
     cursor:pointer;
 
 }
-
 
 /* Обложка */
 
@@ -2882,9 +2876,14 @@ function renderNewBook(){
     const container =
         document.getElementById('newBook');
 
-    if(!container) return;
+    if(!container){
+        return;
+    }
 
     if(!newBooks.length){
+
+        container.className =
+            'new-books-carousel single-page';
 
         container.innerHTML = `
             <div class="card">
@@ -2895,35 +2894,347 @@ function renderNewBook(){
         return;
     }
 
-    const book = newBooks[0];
+    const showCarousel =
+        newBooks.length > 2;
+
+    const visibleSlides = 2;
+
+    const maxIndex =
+        showCarousel
+            ? Math.max(
+                0,
+                newBooks.length -
+                visibleSlides
+            )
+            : 0;
+
+    let currentIndex = 0;
+
+    let slidesHTML = '';
+
+    newBooks.forEach(
+        (book, index) => {
+
+            const tropeList =
+                (book.tropes || '')
+                    .split(',')
+                    .map(
+                        trope =>
+                            trope.trim()
+                    )
+                    .filter(Boolean)
+                    .slice(0, 3);
+
+            let tropesHTML = '';
+
+            tropeList.forEach(
+                trope => {
+
+                    tropesHTML += `
+                        <span class="new-trope">
+                            ${trope}
+                        </span>
+                    `;
+
+                }
+            );
+
+            slidesHTML += `
+
+                <div
+                    class="new-slide"
+                    onclick="openAnnouncementBook(${index})"
+                >
+
+                    <img
+                        src="${book.cover_url || ''}"
+                        class="new-slide-cover"
+
+                        onerror="
+                            this.src='https://placehold.co/500x700/F5EFE5/C9A86A?text=Book'
+                        "
+                    >
+
+                    <div class="new-slide-info">
+
+                        <div class="new-slide-title">
+                            ${book.title || ''}
+                        </div>
+
+                        <div class="new-slide-author">
+                            ${book.author || ''}
+                        </div>
+
+                        ${
+                            tropesHTML
+                            ? `
+                                <div class="new-slide-tropes">
+                                    ${tropesHTML}
+                                </div>
+                            `
+                            : ''
+                        }
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+    container.className =
+        showCarousel
+            ? 'new-books-carousel'
+            : 'new-books-carousel single-page';
 
     container.innerHTML = `
 
         <div
-    class="new-book-card"
-    onclick="openAnnouncementBook(0)"
->
-
-            <img
-                src="${book.cover_url || ''}"
-                class="new-book-cover"
-            >
-
-            <div class="new-book-info">
-
-                <div class="new-book-title">
-                    ${book.title || ''}
-                </div>
-
-                <div class="new-book-author">
-                    ${book.author || ''}
-                </div>
-
-            </div>
-
+            class="new-books-track"
+            id="newBooksTrack"
+        >
+            ${slidesHTML}
         </div>
 
+        ${
+            showCarousel
+            ? `
+                <button
+                    type="button"
+                    class="new-arrow new-arrow-left"
+                    id="newArrowLeft"
+                >
+                    ←
+                </button>
+
+                <button
+                    type="button"
+                    class="new-arrow new-arrow-right"
+                    id="newArrowRight"
+                >
+                    →
+                </button>
+
+                <div
+                    class="new-dots"
+                    id="newDots"
+                ></div>
+            `
+            : ''
+        }
+
     `;
+
+    if(!showCarousel){
+        return;
+    }
+
+    const track =
+        document.getElementById(
+            'newBooksTrack'
+        );
+
+    const dots =
+        document.getElementById(
+            'newDots'
+        );
+
+    const arrowLeft =
+        document.getElementById(
+            'newArrowLeft'
+        );
+
+    const arrowRight =
+        document.getElementById(
+            'newArrowRight'
+        );
+
+    for(
+        let i = 0;
+        i <= maxIndex;
+        i++
+    ){
+
+        const dot =
+            document.createElement(
+                'button'
+            );
+
+        dot.type = 'button';
+
+        dot.className =
+            'new-dot' +
+            (
+                i === 0
+                    ? ' active'
+                    : ''
+            );
+
+        dot.addEventListener(
+            'click',
+            function(e){
+
+                e.stopPropagation();
+
+                currentIndex = i;
+
+                updateCarousel();
+
+            }
+        );
+
+        dots.appendChild(dot);
+
+    }
+
+    function updateCarousel(){
+
+        const slides =
+            track.querySelectorAll(
+                '.new-slide'
+            );
+
+        if(!slides.length){
+            return;
+        }
+
+        const slideWidth =
+            slides[0].offsetWidth;
+
+        const gap =
+            window.innerWidth <= 600
+                ? 12
+                : 18;
+
+        const offset =
+            currentIndex *
+            (slideWidth + gap);
+
+        track.style.transform =
+            `translateX(-${offset}px)`;
+
+        dots
+            .querySelectorAll('.new-dot')
+            .forEach(
+                (dot, index) => {
+
+                    dot.classList.toggle(
+                        'active',
+                        index === currentIndex
+                    );
+
+                }
+            );
+
+    }
+
+    arrowLeft.addEventListener(
+        'click',
+        function(e){
+
+            e.stopPropagation();
+
+            currentIndex--;
+
+            if(currentIndex < 0){
+
+                currentIndex = maxIndex;
+
+            }
+
+            updateCarousel();
+
+        }
+    );
+
+    arrowRight.addEventListener(
+        'click',
+        function(e){
+
+            e.stopPropagation();
+
+            currentIndex++;
+
+            if(currentIndex > maxIndex){
+
+                currentIndex = 0;
+
+            }
+
+            updateCarousel();
+
+        }
+    );
+
+    let startX = 0;
+
+    track.addEventListener(
+        'touchstart',
+        function(e){
+
+            startX =
+                e.touches[0].clientX;
+
+        },
+        {
+            passive:true
+        }
+    );
+
+    track.addEventListener(
+        'touchend',
+        function(e){
+
+            const endX =
+                e.changedTouches[0].clientX;
+
+            const difference =
+                startX - endX;
+
+            if(
+                Math.abs(difference) < 50
+            ){
+                return;
+            }
+
+            if(difference > 0){
+
+                currentIndex++;
+
+                if(
+                    currentIndex > maxIndex
+                ){
+
+                    currentIndex = 0;
+
+                }
+
+            }else{
+
+                currentIndex--;
+
+                if(
+                    currentIndex < 0
+                ){
+
+                    currentIndex = maxIndex;
+
+                }
+
+            }
+
+            updateCarousel();
+
+        },
+        {
+            passive:true
+        }
+    );
+
+    updateCarousel();
+
 }
 function renderTranslations(){
 
