@@ -405,24 +405,7 @@ img{
    НОВИНКА
 ======================================== */
 
-#home .new-section{
-
-    background:
-        linear-gradient(
-            135deg,
-            #fffdf8 0%,
-            #f7eee1 45%,
-            #e8d4bb 100%
-        );
-
-    border:1px solid
-        rgba(201,168,106,.22);
-
-    box-shadow:
-        0 10px 30px
-        rgba(92,61,34,.12);
-
-}
+#home .new-section
 
 
 .new-section-header{
@@ -759,17 +742,17 @@ img{
     background:
         linear-gradient(
             135deg,
-            #fffdf8 0%,
-            #f3e6d6 45%,
-            #dcc4a4 100%
+            #fffdf9 0%,
+            #f7f1e8 55%,
+            #eee5d8 100%
         );
 
     border:1px solid
-        rgba(201,168,106,.22);
+        rgba(210,196,177,.35);
 
     box-shadow:
-        0 10px 30px
-        rgba(92,61,34,.12);
+        0 8px 24px
+        rgba(92,72,50,.08);
 
 }
 
@@ -778,14 +761,11 @@ img{
 
     display:flex;
 
-    gap:16px;
+    gap:18px;
 
     overflow-x:auto;
 
-    padding:
-        8px
-        2px
-        14px;
+    padding:6px 2px 16px;
 
     scrollbar-width:none;
 
@@ -793,64 +773,84 @@ img{
 
 }
 
-
 .translation-books::-webkit-scrollbar{
-
     display:none;
-
 }
 
+
+/* Карточка книги */
 
 .translation-book{
 
-    flex:0 0 170px;
+    flex:0 0 250px;
 
-    width:170px;
+    width:250px;
 
-    background:transparent;
+    background:#fffdf8;
 
-    border:none;
+    border-radius:20px;
 
-    box-shadow:none;
+    overflow:hidden;
 
-    border-radius:0;
+    border:1px solid
+        rgba(201,168,106,.16);
 
-    overflow:visible;
+    box-shadow:
+        0 10px 25px
+        rgba(48,30,18,.15);
 
     cursor:pointer;
 
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+
 }
 
+.translation-book:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 15px 30px
+        rgba(48,30,18,.20);
+
+}
+
+
+/* Обложка */
 
 .translation-book .translation-cover{
 
+    display:block;
+
     width:100%;
 
-    height:245px;
-
-    display:block;
+    height:330px;
 
     object-fit:cover;
 
-    border-radius:
-        18px 18px 0 0;
+    object-position:center;
 
-    box-shadow:
-        0 8px 20px
-        rgba(48,30,18,.18);
+    border-radius:
+        20px 20px 0 0;
 
 }
 
+
+/* Информация */
 
 .translation-book-info{
 
     padding:
-        12px
         13px
-        14px;
+        15px
+        16px;
 
 }
 
+
+/* Название */
 
 .translation-book-title{
 
@@ -858,11 +858,11 @@ img{
         'Playfair Display',
         serif;
 
-    font-size:17px;
+    font-size:18px;
 
     font-weight:600;
 
-    line-height:1.25;
+    line-height:1.28;
 
     color:#2d2926;
 
@@ -871,33 +871,46 @@ img{
 }
 
 
+/* Тропы */
+
 .translation-book-tropes{
 
-    font-size:12px;
+    font-family:
+        'Inter',
+        sans-serif;
+
+    font-size:13px;
 
     line-height:1.45;
 
-    color:#706860;
+    color:#7a746d;
 
-    margin-bottom:10px;
+    margin-bottom:11px;
 
 }
 
+
+/* Дата */
 
 .translation-book-date{
 
-    font-size:12px;
+    display:inline-block;
 
-    line-height:1.3;
+    padding:6px 10px;
+
+    border-radius:999px;
+
+    background:#f1e3d0;
+
+    color:#a27638;
+
+    font-size:12px;
 
     font-weight:700;
 
-    color:#a87933;
-
-    margin-top:4px;
+    line-height:1;
 
 }
-
 
 /* ========================================
    СЕРИИ
@@ -908,17 +921,17 @@ img{
     background:
         linear-gradient(
             135deg,
-            #fffdf8 0%,
-            #f1e2ce 45%,
-            #d5b691 100%
+            #fffdf9 0%,
+            #f6f0e7 55%,
+            #ece2d5 100%
         );
 
     border:1px solid
-        rgba(201,168,106,.22);
+        rgba(210,196,177,.35);
 
     box-shadow:
-        0 10px 30px
-        rgba(92,61,34,.12);
+        0 8px 24px
+        rgba(92,72,50,.08);
 
 }
 
@@ -2047,24 +2060,17 @@ iframe{
 
     /* Новинка */
 
-    #home .new-section{
+   #home .new-section{
 
         background:
             linear-gradient(
                 135deg,
-                #fffdf8 0%,
-                #f5e8d8 50%,
-                #e4ccb0 100%
+                #fffdf9 0%,
+                #f8f2e9 55%,
+                #eee5d9 100%
             );
 
     }
-
-    .new-section .section-title{
-
-        font-size:27px;
-
-    }
-
 
     .new-section-header{
 
@@ -2161,14 +2167,14 @@ iframe{
 
     /* В процессе */
 
-   #home .translation-section{
+    #home .translation-section{
 
         background:
             linear-gradient(
                 135deg,
-                #fffdf8 0%,
-                #f1e1d0 50%,
-                #d9bb98 100%
+                #fffdf9 0%,
+                #f7f0e7 55%,
+                #ede4d8 100%
             );
 
     }
@@ -2179,43 +2185,42 @@ iframe{
         gap:12px;
 
         padding:
-            6px
+            4px
             2px
-            12px;
+            14px;
 
     }
 
-
     .translation-book{
 
-        flex:0 0 145px;
+        flex:0 0 180px;
 
-        width:145px;
+        width:180px;
+
+        border-radius:17px;
 
     }
 
 
     .translation-book .translation-cover{
 
-        width:145px;
+        width:180px;
 
-        height:210px;
+        height:245px;
 
         border-radius:
-            16px 16px 0 0;
+            17px 17px 0 0;
 
     }
-
 
     .translation-book-info{
 
         padding:
             10px
             11px
-            12px;
+            13px;
 
     }
-
 
     .translation-book-title{
 
@@ -2223,19 +2228,25 @@ iframe{
 
     }
 
-
     .translation-book-tropes{
 
         font-size:11px;
 
-    }
+        line-height:1.4;
 
+        margin-bottom:9px;
+
+    }
 
     .translation-book-date{
 
-        font-size:11px;
+        font-size:10px;
+
+        padding:5px 8px;
 
     }
+
+}
 
 
     /* Серии */
@@ -2245,12 +2256,13 @@ iframe{
         background:
             linear-gradient(
                 135deg,
-                #fffdf8 0%,
-                #efe0cc 50%,
-                #d2af87 100%
+                #fffdf9 0%,
+                #f6efe6 55%,
+                #ece2d5 100%
             );
 
     }
+
 
 
     .series-list{
