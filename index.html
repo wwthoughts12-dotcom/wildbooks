@@ -227,6 +227,310 @@
 --text:#2d2926;
 --muted:#7a746d;
 --shadow:0 10px 30px rgba(0,0,0,.08);
+
+    /* ========================================
+   ГЛАВНАЯ — ВЕРХНИЕ КАРТОЧКИ
+======================================== */
+
+/* КАРТИНКА ВМЕСТО "О НАС" */
+
+.about-image-card{
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffdf8 0%,
+            #f5eadb 45%,
+            #e4d0b8 100%
+        );
+
+    border-radius:24px;
+
+    padding:12px;
+
+    margin-bottom:18px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(97,67,37,.12);
+
+    border:1px solid
+        rgba(201,168,106,.20);
+
+    overflow:hidden;
+
+}
+
+.about-image-card img{
+
+    width:100%;
+
+    display:block;
+
+    border-radius:18px;
+
+    object-fit:cover;
+
+}
+
+
+/* ========================================
+   КАРТОЧКА "ПЕРЕЙТИ НА КАНАЛ"
+======================================== */
+
+.channel-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    width:100%;
+
+    padding:20px;
+
+    margin-bottom:18px;
+
+    text-decoration:none;
+
+    color:var(--text);
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffdf8 0%,
+            #f3e5d3 50%,
+            #dcc2a2 100%
+        );
+
+    border:1px solid
+        rgba(201,168,106,.22);
+
+    border-radius:24px;
+
+    box-shadow:
+        0 10px 28px
+        rgba(97,67,37,.13);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+
+}
+
+.channel-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 14px 32px
+        rgba(97,67,37,.18);
+
+}
+
+.channel-icon{
+
+    width:52px;
+    height:52px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:16px;
+
+    background:
+        rgba(255,255,255,.65);
+
+    font-size:25px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(97,67,37,.10);
+
+}
+
+.channel-info{
+
+    flex:1;
+
+}
+
+.channel-title{
+
+    font-family:
+        'Playfair Display',
+        serif;
+
+    font-size:21px;
+
+    font-weight:600;
+
+    margin-bottom:4px;
+
+}
+
+.channel-description{
+
+    font-size:13px;
+
+    color:var(--muted);
+
+}
+
+.channel-arrow{
+
+    font-size:27px;
+
+    color:var(--gold-dark);
+
+    flex-shrink:0;
+
+}
+
+
+/* ========================================
+   КАРТОЧКА "ВАЖНО"
+======================================== */
+
+.important-card{
+
+    padding:22px;
+
+    margin-bottom:22px;
+
+    border-radius:24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fdf9f2 0%,
+            #f1e2cf 50%,
+            #d9bea0 100%
+        );
+
+    border:1px solid
+        rgba(201,168,106,.25);
+
+    box-shadow:
+        0 10px 30px
+        rgba(97,67,37,.13);
+
+}
+
+.important-title{
+
+    font-family:
+        'Playfair Display',
+        serif;
+
+    font-size:20px;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+
+    color:#5b4533;
+
+}
+
+.important-text{
+
+    font-size:13px;
+
+    line-height:1.65;
+
+    color:#5e554d;
+
+}
+
+
+/* ========================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+======================================== */
+
+@media(max-width:600px){
+
+    .about-image-card{
+
+        padding:8px;
+
+        border-radius:20px;
+
+    }
+
+    .about-image-card img{
+
+        border-radius:15px;
+
+    }
+
+    .channel-card{
+
+        padding:17px;
+
+        gap:13px;
+
+        border-radius:20px;
+
+    }
+
+    .channel-icon{
+
+        width:46px;
+        height:46px;
+
+        border-radius:14px;
+
+        font-size:22px;
+
+    }
+
+    .channel-title{
+
+        font-size:19px;
+
+    }
+
+    .channel-description{
+
+        font-size:12px;
+
+    }
+
+    .channel-arrow{
+
+        font-size:24px;
+
+    }
+
+    .important-card{
+
+        padding:18px;
+
+        border-radius:20px;
+
+    }
+
+    .important-title{
+
+        font-size:19px;
+
+    }
+
+    .important-text{
+
+        font-size:12px;
+
+        line-height:1.6;
+
+    }
+
+}
     
     /* ================================
    НОВИНИКА
@@ -1502,23 +1806,56 @@ padding:20px;
 
 <div class="card hero about-card">
 
-    <h1>
-        Wild Wild Thoughts
-    </h1>
+    <div class="about-image-card">
 
-    <p>
-        Добро пожаловать в библиотеку
-        Wild Wild Thoughts.
-        Здесь собраны переводы
-        современных любовных романов.
-    </p>
+    <img
+        src="https://wwthoughts12-dotcom.github.io/wildbooks/figures/cover.png"
+        alt="Wild Wild Thoughts"
+    >
+        <a
+    href="https://t.me/my_wwt"
+    target="_blank"
+    class="channel-card"
+>
 
-    <div class="age-badge">
-        18+
+    <div class="channel-icon">
+        ✈️
+    </div>
+
+    <div class="channel-info">
+
+        <div class="channel-title">
+            Перейти на канал
+        </div>
+
+        <div class="channel-description">
+            Wild Wild Thoughts в Telegram
+        </div>
+
+    </div>
+
+    <div class="channel-arrow">
+        →
+    </div>
+
+</a>
+        <div class="important-card">
+
+    <div class="important-title">
+        ⚠️ ВАЖНО!
+    </div>
+
+    <div class="important-text">
+        Данный перевод выполнен исключительно как фанатский проект!
+        Все авторские права на оригинальный текст принадлежат его
+        законному правообладателю. Мы не претендуем на авторство
+        оригинального произведения и не получаем никакой финансовой
+        выгоды от публикации перевода!
     </div>
 
 </div>
 
+</div>
     <!-- НОВИНКА -->
 
     <div class="card">
