@@ -3784,6 +3784,7 @@ function renderNewBook(){
     updateCarousel();
 
 }
+    
 function renderTranslations(){
 
     const container =
@@ -3814,85 +3815,6 @@ function renderTranslations(){
     }
 
 
-   
-
-
-    /* ========================================
-       СТРЕЛКИ
-    ======================================== */
-
-    const leftArrow =
-        document.getElementById(
-            'translationArrowLeft'
-        );
-
-    const rightArrow =
-        document.getElementById(
-            'translationArrowRight'
-        );
-
-
-    if(!leftArrow || !rightArrow){
-        return;
-    }
-
-
-    const getScrollAmount = () => {
-
-        const card =
-            container.querySelector(
-                '.translation-book'
-            );
-
-        if(!card){
-            return 250;
-        }
-
-
-        const cardWidth =
-            card.offsetWidth;
-
-        const gap =
-            window.innerWidth <= 600
-                ? 12
-                : 18;
-
-
-        return cardWidth + gap;
-
-    };
-
-
-    leftArrow.onclick = () => {
-
-        container.scrollBy({
-
-            left:
-                -getScrollAmount(),
-
-            behavior:'smooth'
-
-        });
-
-    };
-
-
-    rightArrow.onclick = () => {
-
-        container.scrollBy({
-
-            left:
-                getScrollAmount(),
-
-            behavior:'smooth'
-
-        });
-
-    };
-
-}
-
-
     announcements.forEach(item => {
 
         const date =
@@ -3903,9 +3825,7 @@ function renderTranslations(){
 
         container.innerHTML += `
 
-            <div
-                class="translation-book"
-            >
+            <div class="translation-book">
 
                 <img
                     src="${item.cover_url || ''}"
@@ -3916,31 +3836,20 @@ function renderTranslations(){
                     "
                 >
 
+                <div class="translation-book-info">
 
-                <div
-                    class="translation-book-info"
-                >
-
-                    <div
-                        class="translation-book-title"
-                    >
+                    <div class="translation-book-title">
                         ${item.title || ''}
                     </div>
 
-
-                    <div
-                        class="translation-book-tropes"
-                    >
+                    <div class="translation-book-tropes">
                         ${item.tropes || ''}
                     </div>
-
 
                     ${
                         date
                         ? `
-                            <div
-                                class="translation-book-date"
-                            >
+                            <div class="translation-book-date">
                                 ${date}
                             </div>
                         `
@@ -3950,13 +3859,11 @@ function renderTranslations(){
                 </div>
 
             </div>
-
         `;
 
     });
 
 }
-
 function renderSeries(){
 
     const container =
