@@ -2949,6 +2949,7 @@ iframe{
         id="newBook"
         class="new-books-carousel">
     </div>
+      </div>
 
 <div class="card translation-section">
 
@@ -3813,67 +3814,7 @@ function renderTranslations(){
     }
 
 
-    announcements.forEach(item => {
-
-        const date =
-            item['date active'] ||
-            item.date_active ||
-            '';
-
-
-        container.innerHTML += `
-
-            <div
-                class="translation-book"
-            >
-
-                <img
-                    src="${item.cover_url || ''}"
-                    class="translation-cover"
-
-                    onerror="
-                        this.src='https://placehold.co/400x600/F5EFE5/C9A86A?text=Book'
-                    "
-                >
-
-
-                <div
-                    class="translation-book-info"
-                >
-
-                    <div
-                        class="translation-book-title"
-                    >
-                        ${item.title || ''}
-                    </div>
-
-
-                    <div
-                        class="translation-book-tropes"
-                    >
-                        ${item.tropes || ''}
-                    </div>
-
-
-                    ${
-                        date
-                        ? `
-                            <div
-                                class="translation-book-date"
-                            >
-                                ${date}
-                            </div>
-                        `
-                        : ''
-                    }
-
-                </div>
-
-            </div>
-
-        `;
-
-    });
+   
 
 
     /* ========================================
