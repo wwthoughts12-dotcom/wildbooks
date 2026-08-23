@@ -2525,7 +2525,320 @@ iframe{
     }
 
 }
+        /* ========================================
+   ОБЩИЕ СТРЕЛКИ КАРУСЕЛИ
+======================================== */
 
+.carousel-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:16px;
+
+}
+
+
+.carousel-wrapper{
+
+    position:relative;
+
+    width:100%;
+
+    overflow:hidden;
+
+}
+
+
+.carousel-arrow{
+
+    position:absolute;
+
+    top:42%;
+
+    transform:translateY(-50%);
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        rgba(255,253,248,.96);
+
+    color:#b3904e;
+
+    font-size:23px;
+
+    line-height:1;
+
+    cursor:pointer;
+
+    z-index:20;
+
+    box-shadow:
+        0 6px 16px
+        rgba(48,30,18,.16);
+
+    transition:
+        transform .15s ease,
+        background .15s ease;
+
+}
+
+
+.carousel-arrow:hover{
+
+    background:#f1e3d0;
+
+}
+
+
+.carousel-arrow:active{
+
+    transform:
+        translateY(-50%)
+        scale(.94);
+
+}
+
+
+.carousel-arrow-left{
+
+    left:5px;
+
+}
+
+
+.carousel-arrow-right{
+
+    right:5px;
+
+}
+
+
+/* немного места под стрелки */
+
+.translation-books{
+
+    padding-left:8px;
+
+    padding-right:8px;
+
+    scroll-behavior:smooth;
+
+}
+
+
+/* ========================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+======================================== */
+
+@media(max-width:600px){
+
+    .carousel-arrow{
+
+        width:34px;
+
+        height:34px;
+
+        font-size:19px;
+
+    }
+
+    .carousel-arrow-left{
+
+        left:2px;
+
+    }
+
+    .carousel-arrow-right{
+
+        right:2px;
+
+    }
+
+}
+/* ========================================
+   СЕРИИ — ЗАГОЛОВОК
+======================================== */
+
+.series-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+    margin-bottom:16px;
+
+}
+
+
+.series-header .section-title{
+
+    margin:0;
+
+}
+
+
+/* Кнопка */
+
+.view-all-series{
+
+    flex-shrink:0;
+
+    border:none;
+
+    background:
+        rgba(255,255,255,.72);
+
+    color:#a27638;
+
+    padding:
+        8px
+        14px;
+
+    border-radius:999px;
+
+    font-family:
+        'Inter',
+        sans-serif;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 4px 12px
+        rgba(48,30,18,.08);
+
+}
+
+
+.view-all-series:hover{
+
+    background:#fffdf8;
+
+}
+
+
+/* ========================================
+   КАРУСЕЛЬ СЕРИЙ
+======================================== */
+
+.series-carousel-wrapper{
+
+    position:relative;
+
+    width:100%;
+
+    overflow:hidden;
+
+}
+
+
+.series-carousel-wrapper .series-list{
+
+    padding-left:8px;
+
+    padding-right:8px;
+
+    scroll-behavior:smooth;
+
+}
+
+
+/* ========================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+======================================== */
+
+@media(max-width:600px){
+
+    .series-header{
+
+        align-items:center;
+
+    }
+
+    .view-all-series{
+
+        font-size:10px;
+
+        padding:
+            7px
+            11px;
+
+    }
+    /* ========================================
+   ВСЕ СЕРИИ
+======================================== */
+
+.all-series-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:20px;
+
+}
+
+
+.all-series-grid .series-item{
+
+    width:100%;
+
+    flex:none;
+
+}
+
+
+/* ========================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+======================================== */
+
+@media(max-width:600px){
+
+    .all-series-grid{
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+        gap:14px;
+
+    }
+
+
+    .all-series-grid .series-item{
+
+        width:100%;
+
+        height:220px;
+
+    }
+
+}
+
+}
     </style>
 
 </head>
@@ -2637,38 +2950,98 @@ iframe{
         class="new-books-carousel">
     </div>
 
-</div>
+<div class="card translation-section">
 
-    <!-- В ПРОЦЕССЕ ПЕРЕВОДА -->
+    <div class="carousel-header">
 
-    <div class="card translation-section">
-
-    <h2 class="section-title">
-        📖 В процессе перевода
-    </h2>
-
-        <div
-            id="translationBooks"
-            class="book-grid">
-        </div>
+        <h2 class="section-title">
+            📖 В процессе перевода
+        </h2>
 
     </div>
 
+    <div class="carousel-wrapper">
+
+        <button
+            type="button"
+            class="carousel-arrow carousel-arrow-left"
+            id="translationArrowLeft"
+            aria-label="Предыдущие книги"
+        >
+            ←
+        </button>
+
+        <div
+            id="translationBooks"
+            class="translation-books"
+        >
+        </div>
+
+        <button
+            type="button"
+            class="carousel-arrow carousel-arrow-right"
+            id="translationArrowRight"
+            aria-label="Следующие книги"
+        >
+            →
+        </button>
+
+    </div>
+
+</div>
 
     <!-- СЕРИИ -->
 
     <div class="card series-section">
 
-    <h2 class="section-title">
-        📚 Серии
-    </h2>
+    <div class="series-header">
+
+        <h2 class="section-title">
+            📚 Серии
+        </h2>
+
+        <button
+            type="button"
+            class="view-all-series"
+            onclick="openAllSeries()"
+        >
+            Смотреть все
+        </button>
+
+    </div>
+
+
+    <div class="series-carousel-wrapper">
+
+        <button
+            type="button"
+            class="carousel-arrow carousel-arrow-left"
+            id="seriesArrowLeft"
+            aria-label="Предыдущие серии"
+        >
+            ←
+        </button>
+
 
         <div
             id="seriesContainer"
-            class="series-list">
+            class="series-list"
+        >
         </div>
 
+
+        <button
+            type="button"
+            class="carousel-arrow carousel-arrow-right"
+            id="seriesArrowRight"
+            aria-label="Следующие серии"
+        >
+            →
+        </button>
+
     </div>
+
+</div>
 
 </div>
   <div id="catalog" class="page">
@@ -2697,6 +3070,36 @@ iframe{
 </div>
 
 <!-- ОТДЕЛЬНАЯ СТРАНИЦА СЕРИИ -->
+    <!-- ВСЕ СЕРИИ -->
+
+<div id="allSeriesPage" class="page">
+
+    <div class="container">
+
+        <button
+            class="btn"
+            onclick="backToHome()"
+        >
+            ← Назад
+        </button>
+
+
+        <h2
+            style="margin:20px 0;"
+        >
+            📚 Все серии
+        </h2>
+
+
+        <div
+            id="allSeriesGrid"
+            class="all-series-grid"
+        >
+        </div>
+
+    </div>
+
+</div>
 
 <div id="seriesPage" class="page">
 
@@ -3472,16 +3875,173 @@ function renderTranslations(){
 
     });
 
+
+    /* ========================================
+       СТРЕЛКИ
+    ======================================== */
+
+    const leftArrow =
+        document.getElementById(
+            'translationArrowLeft'
+        );
+
+    const rightArrow =
+        document.getElementById(
+            'translationArrowRight'
+        );
+
+
+    if(!leftArrow || !rightArrow){
+        return;
+    }
+
+
+    const getScrollAmount = () => {
+
+        const card =
+            container.querySelector(
+                '.translation-book'
+            );
+
+        if(!card){
+            return 250;
+        }
+
+
+        const cardWidth =
+            card.offsetWidth;
+
+        const gap =
+            window.innerWidth <= 600
+                ? 12
+                : 18;
+
+
+        return cardWidth + gap;
+
+    };
+
+
+    leftArrow.onclick = () => {
+
+        container.scrollBy({
+
+            left:
+                -getScrollAmount(),
+
+            behavior:'smooth'
+
+        });
+
+    };
+
+
+    rightArrow.onclick = () => {
+
+        container.scrollBy({
+
+            left:
+                getScrollAmount(),
+
+            behavior:'smooth'
+
+        });
+
+    };
+
+}
+
+
+    announcements.forEach(item => {
+
+        const date =
+            item['date active'] ||
+            item.date_active ||
+            '';
+
+
+        container.innerHTML += `
+
+            <div
+                class="translation-book"
+            >
+
+                <img
+                    src="${item.cover_url || ''}"
+                    class="translation-cover"
+
+                    onerror="
+                        this.src='https://placehold.co/400x600/F5EFE5/C9A86A?text=Book'
+                    "
+                >
+
+
+                <div
+                    class="translation-book-info"
+                >
+
+                    <div
+                        class="translation-book-title"
+                    >
+                        ${item.title || ''}
+                    </div>
+
+
+                    <div
+                        class="translation-book-tropes"
+                    >
+                        ${item.tropes || ''}
+                    </div>
+
+
+                    ${
+                        date
+                        ? `
+                            <div
+                                class="translation-book-date"
+                            >
+                                ${date}
+                            </div>
+                        `
+                        : ''
+                    }
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
 }
 
 function renderSeries(){
 
     const container =
-        document.getElementById('seriesContainer');
+        document.getElementById(
+            'seriesContainer'
+        );
 
-    if(!container) return;
+    if(!container){
+        return;
+    }
+
 
     container.innerHTML = '';
+
+
+    if(!seriesData.length){
+
+        container.innerHTML = `
+            <div class="card">
+                Пока нет серий.
+            </div>
+        `;
+
+        return;
+    }
+
 
     seriesData.forEach(item => {
 
@@ -3489,16 +4049,20 @@ function renderSeries(){
             item.series || '';
 
         const seriesTitle =
-            item.title || seriesName;
+            item.title ||
+            seriesName;
 
         const seriesDescription =
             item.description || '';
+
 
         container.innerHTML += `
 
             <div
                 class="series-item"
-                data-series="${encodeURIComponent(seriesName)}"
+                data-series="${encodeURIComponent(
+                    seriesName
+                )}"
             >
 
                 <img
@@ -3521,12 +4085,18 @@ function renderSeries(){
             </div>
 
         `;
+
     });
 
-    /* Делаем карточки кликабельными после создания */
+
+    /* ========================================
+       КЛИКАБЕЛЬНОСТЬ СЕРИЙ
+    ======================================== */
 
     document
-        .querySelectorAll('#seriesContainer .series-item')
+        .querySelectorAll(
+            '#seriesContainer .series-item'
+        )
         .forEach(card => {
 
             card.addEventListener(
@@ -3544,6 +4114,80 @@ function renderSeries(){
             );
 
         });
+
+
+    /* ========================================
+       СТРЕЛКИ
+    ======================================== */
+
+    const leftArrow =
+        document.getElementById(
+            'seriesArrowLeft'
+        );
+
+    const rightArrow =
+        document.getElementById(
+            'seriesArrowRight'
+        );
+
+
+    if(!leftArrow || !rightArrow){
+        return;
+    }
+
+
+    const getScrollAmount = () => {
+
+        const card =
+            container.querySelector(
+                '.series-item'
+            );
+
+        if(!card){
+            return 190;
+        }
+
+
+        const cardWidth =
+            card.offsetWidth;
+
+        const gap =
+            window.innerWidth <= 600
+                ? 12
+                : 16;
+
+
+        return cardWidth + gap;
+
+    };
+
+
+    leftArrow.onclick = () => {
+
+        container.scrollBy({
+
+            left:
+                -getScrollAmount(),
+
+            behavior:'smooth'
+
+        });
+
+    };
+
+
+    rightArrow.onclick = () => {
+
+        container.scrollBy({
+
+            left:
+                getScrollAmount(),
+
+            behavior:'smooth'
+
+        });
+
+    };
 
 }
     function createBookCard(book){
@@ -4457,6 +5101,126 @@ function backToHome(){
     document
         .getElementById('bookModal')
         .classList.add('show');
+}
+    function openAllSeries(){
+
+    document
+        .querySelectorAll('.page')
+        .forEach(page => {
+
+            page.classList.remove(
+                'active'
+            );
+
+        });
+
+
+    const page =
+        document.getElementById(
+            'allSeriesPage'
+        );
+
+    if(!page){
+        return;
+    }
+
+
+    page.classList.add('active');
+
+
+    const grid =
+        document.getElementById(
+            'allSeriesGrid'
+        );
+
+    if(!grid){
+        return;
+    }
+
+
+    grid.innerHTML = '';
+
+
+    if(!seriesData.length){
+
+        grid.innerHTML = `
+            <div class="card">
+                Пока нет серий.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    seriesData.forEach(item => {
+
+        const seriesName =
+            item.series || '';
+
+        const seriesTitle =
+            item.title ||
+            seriesName;
+
+        const seriesDescription =
+            item.description || '';
+
+
+        grid.innerHTML += `
+
+            <div
+                class="series-item"
+                data-series="${encodeURIComponent(
+                    seriesName
+                )}"
+            >
+
+                <img
+                    src="${item.image_url || ''}"
+                    class="series-cover"
+                >
+
+                <div class="series-overlay">
+
+                    <div class="series-name">
+                        ${seriesTitle}
+                    </div>
+
+                    <div class="series-description">
+                        ${seriesDescription}
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    /* Делаем все серии кликабельными */
+
+    grid
+        .querySelectorAll('.series-item')
+        .forEach(card => {
+
+            card.addEventListener(
+                'click',
+                function(){
+
+                    const series =
+                        decodeURIComponent(
+                            this.dataset.series || ''
+                        );
+
+                    openSeries(series);
+
+                }
+            );
+
+        });
+
 }
     function showPage(pageId){
 
