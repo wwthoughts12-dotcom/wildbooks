@@ -1942,7 +1942,263 @@ iframe{
 
 }
 
+/* ========================================
+   АРТЫ — АККОРДЕОН ПО КНИГАМ
+======================================== */
 
+.arts-book{
+
+    background:#fffdf8;
+
+    border-radius:22px;
+
+    margin-bottom:16px;
+
+    box-shadow:
+        0 8px 24px
+        rgba(48,30,18,.10);
+
+    border:1px solid
+        rgba(201,168,106,.14);
+
+    overflow:hidden;
+
+}
+
+
+/* Заголовок книги */
+
+.arts-accordion-header{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+    padding:18px 20px;
+
+    border:none;
+
+    background:transparent;
+
+    color:var(--text);
+
+    font-family:
+        'Playfair Display',
+        serif;
+
+    font-size:20px;
+
+    font-weight:600;
+
+    text-align:left;
+
+    cursor:pointer;
+
+}
+
+
+/* Название */
+
+.arts-accordion-title{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+
+/* Стрелка */
+
+.arts-accordion-arrow{
+
+    width:30px;
+
+    height:30px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#f1e3d0;
+
+    color:#a27638;
+
+    font-family:
+        'Inter',
+        sans-serif;
+
+    font-size:17px;
+
+    line-height:1;
+
+    transition:
+        transform .25s ease,
+        background .25s ease;
+
+}
+
+
+/* Поворот стрелки */
+
+.arts-book.open
+.arts-accordion-arrow{
+
+    transform:rotate(180deg);
+
+    background:#e8d5bd;
+
+}
+
+
+/* Содержимое */
+
+.arts-accordion-content{
+
+    display:none;
+
+    padding:
+        0 20px 20px;
+
+}
+
+
+/* Открытый блок */
+
+.arts-book.open
+.arts-accordion-content{
+
+    display:block;
+
+}
+
+
+/* Галерея */
+
+.arts-gallery{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+
+}
+
+
+.arts-gallery img{
+
+    width:100%;
+
+    aspect-ratio:2 / 3;
+
+    object-fit:cover;
+
+    display:block;
+
+    border-radius:0;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 24px
+        rgba(48,30,18,.18);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+
+}
+
+
+.arts-gallery img:hover{
+
+    transform:scale(1.02);
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.14);
+
+}
+
+
+/* ========================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+======================================== */
+
+@media(max-width:600px){
+
+    .arts-book{
+
+        border-radius:18px;
+
+        margin-bottom:12px;
+
+    }
+
+
+    .arts-accordion-header{
+
+        padding:
+            15px
+            16px;
+
+        font-size:17px;
+
+    }
+
+
+    .arts-accordion-content{
+
+        padding:
+            0 16px 16px;
+
+    }
+
+
+    .arts-accordion-arrow{
+
+        width:28px;
+
+        height:28px;
+
+        font-size:15px;
+
+    }
+
+
+    .arts-gallery{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap:10px;
+
+    }
+
+
+    .arts-gallery img{
+
+        aspect-ratio:2 / 3;
+
+        border-radius:0;
+
+    }
+
+}
 /* ========================================
    МОБИЛЬНАЯ ВЕРСИЯ
 ======================================== */
@@ -4628,6 +4884,7 @@ function renderArts(){
 
     container.innerHTML = '';
 
+
     if(!arts.length){
 
         container.innerHTML = `
@@ -4640,12 +4897,15 @@ function renderArts(){
     }
 
 
-    arts.forEach(item => {
+    arts.forEach((item, itemIndex) => {
 
         const images =
             (item.arts || '')
                 .split('|')
-                .map(url => url.trim())
+                .map(
+                    url =>
+                        url.trim()
+                )
                 .filter(Boolean);
 
 
@@ -4657,54 +4917,99 @@ function renderArts(){
         let gallery = '';
 
 
-        images.forEach((image, index) => {
+        images.forEach(
+            (image, index) => {
 
-            gallery += `
+                const safeImage =
+                    image.replace(
+                        /'/g,
+                        "\\'"
+                    );
 
-                <img
-                    src="${image}"
-                    alt="${
-                        item.title ||
-                        'Арт ' + (index + 1)
-                    }"
-                    loading="lazy"
 
-                    onclick="
-                        openFullscreen(
-                            '${image.replace(
-                                /'/g,
-                                "\\'"
-                            )}'
-                        )
-                    "
+                gallery += `
 
-                    onerror="
-                        console.error(
-                            'Не удалось загрузить арт:',
-                            '${image.replace(
-                                /'/g,
-                                "\\'"
-                            )}'
-                        );
-                    "
-                >
+                    <img
+                        src="${image}"
 
-            `;
+                        alt="${
+                            item.title ||
+                            'Арт ' +
+                            (index + 1)
+                        }"
 
-        });
+                        loading="lazy"
+
+                        onclick="
+                            openFullscreen(
+                                '${safeImage}'
+                            )
+                        "
+
+                        onerror="
+                            console.error(
+                                'Не удалось загрузить арт:',
+                                '${safeImage}'
+                            );
+                        "
+                    >
+
+                `;
+
+            }
+        );
+
+
+        const uniqueId =
+            'artsSection_' +
+            itemIndex;
 
 
         container.innerHTML += `
 
-            <div class="arts-book">
+            <div
+                class="arts-book"
+                id="${uniqueId}"
+            >
 
-                <h2 class="arts-title">
-                    ${item.title || 'Без названия'}
-                </h2>
+                <button
+                    type="button"
+                    class="arts-accordion-header"
 
-                <div class="arts-gallery">
+                    onclick="
+                        toggleArtsSection(
+                            '${uniqueId}'
+                        )
+                    "
+                >
 
-                    ${gallery}
+                    <span
+                        class="arts-accordion-title"
+                    >
+                        ${item.title || 'Без названия'}
+                    </span>
+
+
+                    <span
+                        class="arts-accordion-arrow"
+                    >
+                        ↓
+                    </span>
+
+                </button>
+
+
+                <div
+                    class="arts-accordion-content"
+                >
+
+                    <div
+                        class="arts-gallery"
+                    >
+
+                        ${gallery}
+
+                    </div>
 
                 </div>
 
@@ -4713,6 +5018,23 @@ function renderArts(){
         `;
 
     });
+
+}
+    function toggleArtsSection(sectionId){
+
+    const section =
+        document.getElementById(
+            sectionId
+        );
+
+    if(!section){
+        return;
+    }
+
+
+    section.classList.toggle(
+        'open'
+    );
 
 }
 function openFullscreen(src){
